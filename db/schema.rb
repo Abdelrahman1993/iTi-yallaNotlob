@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_185222) do
+ActiveRecord::Schema.define(version: 2019_03_20_163400) do
+
+  create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "friend_id"
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -28,6 +35,35 @@ ActiveRecord::Schema.define(version: 2019_03_19_185222) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "user_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
+  end
+
+  create_table "user_order_invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_user_order_invitations_on_order_id"
+    t.index ["user_id"], name: "index_user_order_invitations_on_user_id"
+  end
+
+  create_table "user_order_participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.string "item"
+    t.text "comment"
+    t.float "price"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_user_order_participations_on_order_id"
+    t.index ["user_id"], name: "index_user_order_participations_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "password"
@@ -37,6 +73,14 @@ ActiveRecord::Schema.define(version: 2019_03_19_185222) do
     t.text "google"
   end
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "groups", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
+  add_foreign_key "user_order_invitations", "orders"
+  add_foreign_key "user_order_invitations", "users"
+  add_foreign_key "user_order_participations", "orders"
+  add_foreign_key "user_order_participations", "users"
 end
