@@ -1,0 +1,16 @@
+------------------to update database settings--------------------
+go to config/database.yml
+change username
+change password
+~:$ rails db:create
+
+------------------to run the project-----------------------------
+open terminal in the prroject directory
+~:$ rails server
+
+------------------to create controller-----------------------------
+~:$ rails generate controller Orders
+
+------------------to see the available routes-----------------------------
+~:$ rails routes
+
