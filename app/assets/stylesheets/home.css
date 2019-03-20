@@ -1,0 +1,19 @@
+.block{
+    margin: 10% 0;
+    padding: 0;
+    border-radius: 10px;
+    min-height: 400px;
+    background: rgba(0, 225, 255, 0.082)
+}
+.title{
+    border-radius: 10px 10px 0 0;
+    display: table;
+    width: 100%;
+    min-height: 50px;
+    background: rgba(0, 225, 255, 0.534)
+}
+.titleText{
+    display: table-cell;
+    vertical-align: middle;
+    color: black;
+}

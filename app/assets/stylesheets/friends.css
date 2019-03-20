@@ -1,0 +1,15 @@
+#friends{
+    overflow-y: auto;
+    min-height: 400px;
+    max-height: 400px;
+    background: rgba(185, 227, 255, 0.2);
+}
+
+.user{
+    margin: 10px auto;
+    padding: 10px;
+    width: 100px !important;
+    min-height: 200px;
+    border-radius: 5px;
+    background-color: rgba(185, 227, 255, 0.4);
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,103 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../assets/stylesheets/friends.css">
 
 </head>
+
 <body>
-    <label for="addFriends">Write your friends email</label>
-    <input type="text" placeholder="Enter your friend's email" id="addFriends">
-    <button>Add</button>
+    <div class="container">
+        <h3 class="">Friends</h3>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="User's Email" aria-label="Recipient's username"
+                aria-describedby="basic-addon">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Add</button>
+            </div>
+        </div>
+
+
+        <div id="friends">
+            <div class="container">
+                <div class="row justify-content-around">
+                    <div class="user col-3 text-center">
+                          <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                            <h5>User1</h5>
+                            <button class="btn btn-danger">remove</button>
+                    </div>
+                    <div class="user col-3 text-center">
+                          <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                            <h5>User1</h5>
+                            <button class="btn btn-danger">remove</button>
+                    </div>
+                    <div class="user col-3 text-center">
+                          <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                            <h5>User1</h5>
+                            <button class="btn btn-danger">remove</button>
+                    </div>
+
+                </div>
+                <div class="row justify-content-around">
+                        <div class="user col-3 text-center">
+                              <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                                <h5>User1</h5>
+                                <button class="btn btn-danger">remove</button>
+                        </div>
+                        <div class="user col-3 text-center">
+                              <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                                <h5>User1</h5>
+                                <button class="btn btn-danger">remove</button>
+                        </div>
+                        <div class="user col-3 text-center">
+                              <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                                <h5>User1</h5>
+                                <button class="btn btn-danger">remove</button>
+                        </div>
+    
+                    </div>
+                    <div class="row justify-content-around">
+                            <div class="user col-3 text-center">
+                                  <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                                    <h5>User1</h5>
+                                    <button class="btn btn-danger">remove</button>
+                            </div>
+                            <div class="user col-3 text-center">
+                                  <img height="100px" class="profile m-auto" src="<%=asset_path('user.png') %>">
+                                    <h5>User1</h5>
+                                    <button class="btn btn-danger">remove</button>
+                            </div>
+
+        
+                        </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="../../assets/javascripts/friends.js"></script>
 </body>
+
 </html>
