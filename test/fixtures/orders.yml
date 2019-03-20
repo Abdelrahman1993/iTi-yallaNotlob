@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resturant: MyString
+  category: MyString
+  menu: MyText
+  status: 1
+  date: 2019-03-19 20:52:22
+
+two:
+  resturant: MyString
+  category: MyString
+  menu: MyText
+  status: 1
+  date: 2019-03-19 20:52:22
