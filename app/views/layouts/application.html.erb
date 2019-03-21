@@ -14,10 +14,10 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-
 </head>
 
 <body>
+
 
   <%= yield %>
 
@@ -28,13 +28,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     
-    <% if controller_name == "orders" && action_name == "show" %>
+    <% if controller_name == "ordeers" && action_name == "show" %>
       <%= stylesheet_link_tag "orderDetails" %>
       <%= javascript_include_tag "orderDetails" %>
     <% end %>
-<% if controller_name == "orders" && action_name == "add" %>
-      <%= stylesheet_link_tag "order" %>
-      <%= javascript_include_tag "addOrder" %>
+    
+    <% if controller_name == "ordeers" && action_name == "new" %>
+          <%= stylesheet_link_tag "order" %>
+          <%= javascript_include_tag "addOrder" %>
+    <% end %>
+
+    <% if controller_name == "users" && action_name == "signin" %>
+          <%= stylesheet_link_tag "signin" %>
+    <% end %>
+
+    <% if controller_name == "users" && action_name == "signup" %>
+          <%= stylesheet_link_tag "signup" %>
+    <% end %>
+
+    <% if controller_name == "home" && action_name == "home" %>
+          <%= stylesheet_link_tag "home" %>
+    <% end %>
+
+    <% if controller_name == "friends" && action_name == "view" %>
+          <%= stylesheet_link_tag "friends" %>
+          <%= javascript_include_tag "friends" %>
     <% end %>
     
 </body>

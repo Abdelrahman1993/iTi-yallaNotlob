@@ -1,23 +1,21 @@
-class OrdersController < ApplicationController
+class OrdeersController < ApplicationController
    
  
    
-    def index
-    end
-        
-    def add
-    end
-
-    # def new
-
+    # def index
     # end
+
+    def new
+        # render plain: params.inspect
+
+    end
 
     # def create
     
     # end
 
     def show
-
+       
     end
 
     # def edit
