@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ruby</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../assets/stylesheets/style-groups.css">
+</head>	
+<body>
+
+<div class="jumbotron py-5 m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                    <h2>Groups</h2>
+            </div>
+            <div class="col-8">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-4 pr-3">
+                <input type="text" class="form-control" id="grpName" name="grpName" placeholder="Group name">
+            </div>
+            <div class="col-4 pl-0">
+                <button type="button" class="btn btn-light" onclick="addGroup()">Add Group</button>
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-4 pt-3 tablesList text-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Group Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myGroups">
+                        <tr>
+                            <td><h5 class="groupName" onclick="displayGroup('grp1')">grp1</h5></td>
+                            <td class="pr-0">
+                                <i class="fas fa-user-plus fa-lg pr-4" onclick="displayGroup('grp1')"></i>
+                                <i class="fas fa-user-times fa-lg"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+            </div>
+            <div class="col-7" id="singleGroup">
+                <div class="row mt-3">
+                    <div class="col">
+                        <h3 id="groupTitle">.</h3>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="friendToGroup" name="friendToGroup" placeholder="Please enter your friend's name">
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-light">Add</button>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-4 mt-2">
+                        <div class="row">
+                            <div class="col-4">
+                                <img width="50" src="iconfinder_user_male4_172628.png" rel="userImage"/>
+                            </div>
+                            <div class="col-8">
+                                <a href="#" class="d-block">User 1</a>
+                                <a href="#" class="rmUserFromGroup">remove user</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../../assets/stylesheets/main-groups.js"></script>
+
+</body>
+</html>
