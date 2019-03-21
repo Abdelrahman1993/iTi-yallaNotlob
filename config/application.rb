@@ -19,4 +19,4 @@ module YallaNotlob
 end
 
 Rails.application.config.assets.precompile += ['orderDetails.js', 'orderDetails.css']
-
+Rails.application.config.assets.precompile += ['addOrder.js', 'order.css']

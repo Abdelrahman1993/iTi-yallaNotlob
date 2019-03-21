@@ -1,0 +1,54 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Order</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../assets/stylesheets/home_order.css" />
+</head>
+
+<body>
+    <div>
+        <div class="row">
+            <div class="col-lg-4">
+                <form>
+                    <h1>Add Order</h1>
+
+                    <select class="browser-default custom-select">
+                        <option value="1">Breakfast</option>
+                        <option value="2">Launch</option>
+                    </select>
+                    <h4> Write the restaurant name</h4>
+                    <label for="restaurantName">From : </label>
+                    <input class="form-control" type="text" name="restaurantName" value="" /><br>
+
+                    <h4> you can write frind name or group </h4>
+                    <label for="friendName"> Friends : </label>
+                    <input class="form-control" id="friendInvite" type="text" name="friendName" value="" />
+                    <input type="button" id="addFriend" class="btn btn-primary" value="Add"><br>
+                    <span id="errorMsg"></span> <br>
+                    <label for="menuImg"> Menu Image : </label>
+                    <input class="form-control" type="file" name="menuImg" value="" /> <br>
+                    <input class="btn btn-primary" type="submit" value="Publish" />
+                </form>
+            </div>
+
+            <div class="col-lg-6 form-group" style="margin-top: 2%">
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend"> Friends invited :</legend>
+
+                </fieldset>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

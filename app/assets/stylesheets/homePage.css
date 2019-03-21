@@ -1,0 +1,22 @@
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 10px;
+    border: 1px solid #e0e0e0;
+    font-family: cursive;
+    font-size: 20px;
+
+}
+.the-fieldset {
+    border: 1px solid #e0e0e0;
+    width: 40%;
+    float: left;
+    margin-top: 2%;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
