@@ -5,13 +5,53 @@
             <div class="col-5 block">
                 <div class="title">
                     <h5 class="titleText">Latest Orders</h5>
+
                 </div>
+              <div >
+                <%
+                  userId=1;
+                  flag=0;
+                %>
+
+                <% @orders.each do |order| %>
+                  <%if order.user_id === userId && flag < 3 %>
+
+                  <p><%= order.category %> on <%= order.date %> </p>
+                  <%flag = flag+1; %>
+                  <% end %>
+                <% end %>
+
+              </div>
             </div>
             <div class="col-5 block">
                 <div class=" title">
                         <h5 class="titleText">Friends Activities</h5>
-
                 </div>
+              <div>
+                <%
+                  flagFrined=0;
+                %>
+                <% @friends.each do |friend| %>
+                  <% @orders.each do |order|%>
+                    <%
+                    if order.user_id === friend.friend_id && friend.user_id === userId && flagFrined < 5 %>
+                      <p>
+                        <%friendName = User.find(friend.friend_id) %>
+                        <%#= friendName %>
+                        <%= friendName.name %>
+                          has created anorder for
+                        <%= order.category %>
+                          from
+                        <%= order.resturant %>
+                      </p>
+                    <%
+                      flagFrined = flagFrined + 1;
+                    end
+                  end
+                end
+
+                  %>
+              </div>
             </div>
         </div>
     </div>
