@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :ordeers
+  devise_for :users
+  resources :orders
   resources :groups
 
 
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
   get 'friends', to: 'friends#view'
 
   get 'friends/add'
-
-
 
 
 
