@@ -18,6 +18,7 @@ default: &default
   socket:   /opt/lampp/var/mysql/mysql.sock
   #
 #  /var/run/mysqld/mysqld.sock
+# 
 
 development:
   <<: *default
