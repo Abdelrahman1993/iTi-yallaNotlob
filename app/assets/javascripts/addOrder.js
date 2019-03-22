@@ -48,7 +48,5 @@ addFriend.addEventListener("click", () => {
             console.log(friendsArr);
             event.target.parentElement.parentElement.remove();
         });
-
     }
-
 });

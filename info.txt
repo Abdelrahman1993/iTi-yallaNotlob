@@ -11,6 +11,34 @@ open terminal in the prroject directory
 ------------------to create controller-----------------------------
 ~:$ rails generate controller Orders
 
+then create the action, and the view
+
 ------------------to see the available routes-----------------------------
 ~:$ rails routes
+
+------------------to create Model-----------------------------
+~:$ rails generate model --Order-- attribute:type attribute:type
+
+
+------------------to create Model depend on another-----------------------------
+~:$ rails generate model -subModelName- attribute:type attribute:type order:reference
+this model will be belongs to Order and will be addded forien key to it automatticaly
+add in Order model <<belongs-to :subModelName>>
+
+------------------to run the migration-----------------------------
+~:$ rails db:migrate
+~:$ rails db:migrate:status
+
+------------------to install gem-----------------------------
+~:$ bundle install
+
+
+
+
+
+
+
+---------------------------references-------------------------
+https://www.ralfebert.de/snippets/ruby-rails/models-tables-migrations-cheat-sheet/
+
 

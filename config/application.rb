@@ -20,3 +20,7 @@ end
 
 Rails.application.config.assets.precompile += ['orderDetails.js', 'orderDetails.css']
 Rails.application.config.assets.precompile += ['addOrder.js', 'order.css']
+Rails.application.config.assets.precompile += ['signin.css']
+Rails.application.config.assets.precompile += ['signup.css', 'home.css', 'friends.css', 'friends.js']
+
+

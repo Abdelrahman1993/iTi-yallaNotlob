@@ -17,6 +17,7 @@ default: &default
   password: 
   socket: /opt/lampp/var/mysql/mysql.sock
 
+
 development:
   <<: *default
   database: yallaNotlob_development
