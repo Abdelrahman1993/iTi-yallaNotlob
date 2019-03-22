@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :ordeers
+  resources :orders
   resources :groups
 
 

@@ -30,12 +30,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     
-    <% if controller_name == "ordeers" && action_name == "show" %>
+    <% if controller_name == "orders" && action_name == "show" %>
       <%= stylesheet_link_tag "orderDetails" %>
       <%= javascript_include_tag "orderDetails" %>
     <% end %>
     
-    <% if controller_name == "ordeers" && action_name == "new" %>
+    <% if controller_name == "orders" && action_name == "new" %>
           <%= stylesheet_link_tag "order" %>
           <%= javascript_include_tag "addOrder" %>
     <% end %>
