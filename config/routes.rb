@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'friends', to: 'friends#view'
 
   get 'friends/add'
-
+  
 
 
 

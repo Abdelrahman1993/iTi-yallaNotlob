@@ -3,21 +3,26 @@ class GroupsController < ApplicationController
  
    
     def index
-        
+        @groups =Group.all
     end
 
-    # def new
-    #     # render plain: params.inspect
+    def new 
+        @group = Group.new
+    end
 
-    # end
+    def create
 
-    # def create
-    
-    # end
+        @user_id=1;
+        @group = Group.new(group_params)
+        @group.user_id=@user_id
+        @group.save
+        render plain: params.inspect
+        # redirect_to groups_path
+    end
 
-    # def show
-       
-    # end
+    def show
+      @group = Group.find(params[:id])       
+    end
 
     # def edit
 
@@ -27,7 +32,16 @@ class GroupsController < ApplicationController
 
     # end
 
-    # def destroy
+    def destroy
+      @group = Group.find(params[:id])
+      @group.destroy
+      redirect_to groups_path
+    end
 
-    # end
+
+    private 
+        def group_params
+            params.require(:group).permit(:name,:user_id)
+        end
+
 end
