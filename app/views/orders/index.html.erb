@@ -1,1 +1,43 @@
-<h4>this is orders page</h4>
+<%= render 'navbar' %>
+<div class="container-fluid">
+    <table class="table table-hover text-center">
+        <thead>
+            <tr>
+                <th scope="col">Order</th>
+                <th scope="col">Resturant</th>
+                <th scope="col">Invited</th>
+                <th scope="col">Joined</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+                <td><%=order.category%></td>
+                <td><%=order.resturant%></td>
+                <td><%= @invited.where(order_id: order.id).count %></td>
+                <td><%= @joined.where(order_id: order.id).count %></td>
+                <td><%=order.status%></td>
+                <td>
+                    <button class=""><i class="far fa-eye"></i> view </button>
+                    <%if order.status == "waiting" %>
+                    <%= button_to order_path(order), 
+                method: :put,
+                data: { confirm: 'Are you sure?' } , form: {style: 'display:inline-block;margin:0'} do %>
+                    <i class='fas fa-trash'></i>Done
+                    <% end %>
+
+                    <%= button_to order_path(order), 
+                method: :delete,
+                data: { confirm: 'Are you sure?' } , form: {style: 'display:inline; margin:0'} do %>
+                    <i class='fas fa-trash'></i>Cancel
+                    <% end %>
+                    ,
+                    <% end %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
