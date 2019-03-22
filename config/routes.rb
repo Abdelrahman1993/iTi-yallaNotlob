@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :ordeers
   resources :groups
+  resources :friends
 
 
   get 'signup' , to:"users#signup"
@@ -9,11 +10,7 @@ Rails.application.routes.draw do
 
   root 'home#home'
   
-  get 'friends', to: 'friends#view'
-
-  get 'friends/add'
-
-
+  
 
 
 
