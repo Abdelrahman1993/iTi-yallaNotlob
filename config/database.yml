@@ -19,7 +19,6 @@ default: &default
 #  socket:  /var/run/mysqld/mysqld.sock
   # /opt/lampp/var/mysql/mysql.sock
 
-
 development:
   <<: *default
   database: yallaNotlob_development
