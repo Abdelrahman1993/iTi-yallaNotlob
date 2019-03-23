@@ -1,0 +1,15 @@
+
+<%= form_for @group do |f| %>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4 pr-3">
+          <%= f.text_field :name , id: 'grpName', class: 'form-control', placeholder: 'Enter the name of group' %>
+        </div>
+        <div class="col-4 pl-0">
+          
+       <%= f.submit "Add Group" , class:"btn btn-light", onclick: "addGroup();" %>
+        </div>
+    </div>
+   <% end %>

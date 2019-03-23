@@ -9,17 +9,25 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-4">
+ 
+      
+<%= form_with modal: @group  do |f| %>
+    <div class="row">
+        <div class="col-4">
 
-            </div>
-            <div class="col-4 pr-3">
-                <input type="text" class="form-control" id="grpName" name="grpName" placeholder="Group name">
-            </div>
-            <div class="col-4 pl-0">
-                <button type="button" class="btn btn-light" onclick="addGroup()">Add Group</button>
-            </div>
         </div>
+        <div class="col-4 pr-3">
+          <%= f.text_field :name , id: 'grpName', class: 'form-control', value: 'Enter' %>
+        </div>
+        <div class="col-4 pl-0">
+          
+       <%= f.submit "Add Group" , class:"btn btn-light" , onclick: "addGroup();" %>
+        </div>
+    </div>
+   <% end %>
+
+          
+
         <div class="row pt-5">
             <div class="col-4 pt-3 tablesList text-center">
                 <table class="table">
@@ -30,13 +38,20 @@
                         </tr>
                     </thead>
                     <tbody id="myGroups">
+
+                    <% @groups.each do |group| %>
                         <tr>
-                            <td><h5 class="groupName" onclick="displayGroup('grp1')">grp1</h5></td>
+                            <td><h5 class="groupName" onclick="displayGroup('<%= group.name %>')"><%= group.name %></h5></td>
                             <td class="pr-0">
-                                <i class="fas fa-user-plus fa-lg pr-4" onclick="displayGroup('grp1')"></i>
-                                <i class="fas fa-user-times fa-lg"></i>
+                                <i class="fas fa-user-plus fa-lg pr-4" onclick="displayGroup('<%= group.name %>')"></i>
+                              
+                                <%= link_to group_path(group) , method: :delete, data: { confirm: 'Are you sure?' }, class: group_path(group) do %>
+                                    <i class="fas fa-user-times fa-lg"></i>
+                                <% end %>
+
                             </td>
                         </tr>
+                   <% end %>
                     </tbody>
                     </table>
             </div>
@@ -46,24 +61,32 @@
                         <h3 id="groupTitle">.</h3>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <input type="text" class="form-control" id="friendToGroup" name="friendToGroup" placeholder="Please enter your friend's name">
+
+
+
+                <%= form_for @group do |f| %>
+                    <div class="row mt-3">
+                            <div class="col-6">
+                            <%= f.text_field :name , id: 'friendToGroup', class: 'form-control', placeholder: 'Please enter your friend\'s name' %>
+                            </div>
+                            <div class="col-6">
+                         
+                            <%= f.submit "Add", :type => 'button', class:"btn btn-light" %>
+                            </div>
                     </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-light">Add</button>
-                    </div>
-                </div>
+                <% end %>
+
+
+
                 <div class="row py-3">
                     <div class="col-4 mt-2">
                         <div class="row">
                             <div class="col-4">
                                 <img width="50" src="iconfinder_user_male4_172628.png" rel="userImage"/>
                             </div>
-                            <div class="col-8">
-                                <a href="#" class="d-block">User 1</a>
-                                <a href="#" class="rmUserFromGroup">remove user</a>
-                            </div>
+                             
+                         <%= render :template => "usergroups/index" %> 
+                        
                         </div>
                     </div>
                 </div>
