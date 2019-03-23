@@ -1,1 +1,12 @@
- 
+
+<%= form_with(model: [ @usergroup, @usergroup.user.build ]) do |f| %>
+        <div class="row mt-3">
+                <div class="col-6">
+                <%= f.text_field :name , id: 'friendToGroup', class: 'form-control', placeholder: 'Please enter your friend\'s name' %>
+                </div>
+                <div class="col-6">
+                
+                <%= f.submit "Add", :type => 'button', class:"btn btn-light" %>
+                </div>
+        </div>
+    <% end %>

@@ -11,23 +11,22 @@
         </div>
  
       
-<%= form_for @group  do |f| %>
-    <div class="row">
-        <div class="col-4">
+        <%= form_for @group  do |f| %>
+            <div class="row">
+                <div class="col-4">
 
-        </div>
-        <div class="col-4 pr-3">
-          <%= f.text_field :name , id: 'grpName', class: 'form-control', placeholder: 'Enter group\'s Name:' %>
-        </div>
-        <div class="col-4 pl-0">
+                </div>
+                <div class="col-4 pr-3">
+                <%= f.text_field :name , id: 'grpName', class: 'form-control', placeholder: 'Enter group\'s Name:' %>
+                </div>
+                <div class="col-4 pl-0">
+                
+                <%= f.submit "Add Group" , class:"btn btn-light" %>
+                </div>
+            </div>
+        <% end %>
+
           
-       <%= f.submit "Add Group" , class:"btn btn-light"  %>
-        </div>
-    </div>
-   <% end %>
-
-          
-
         <div class="row pt-5">
             <div class="col-4 pt-3 tablesList text-center">
                 <table class="table">
@@ -64,7 +63,28 @@
 
 
 
-  <%= render  'usergroups/userForm' %>
+   <!-- <%= form_for @user do |f| %>
+            <div class="row mt-3">
+                    <div class="col-6">
+                    <%= f.text_field :name , id: 'friendToGroup', class: 'form-control', placeholder: 'Please enter your friend\'s name' %>
+                    </div>
+                    <div class="col-6">              
+                    <%= f.submit "Add", :type => 'button', class:"btn btn-light" %>
+                    </div>
+            </div>
+        <% end %>
+-->
+
+        <%= form_tag({controller: "groups", action: "addUserGroup"}, method: "post") do %>
+     <div class="row mt-3">
+                    <div class="col-6">
+            <%= text_field_tag(:name) %>
+           </div>
+                    <div class="col-6">  
+            <%= submit_tag("Add", :type => 'submit', class:"btn btn-light") %>
+            </div>
+            </div>
+        <% end %>
 
 
                 <div class="row py-3">
