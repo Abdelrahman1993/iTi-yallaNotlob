@@ -10,13 +10,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/config/*
 !/log/.keep
 !/tmp/.keep
 
 # Ignore uploaded files in development
 /storage/*
-/config/*
+/config/database.yml
 !/storage/.keep
 
 /node_modules
