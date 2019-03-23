@@ -9,22 +9,26 @@
 
             </div>
         </div>
- 
-      
-<%= form_with modal: @group  do |f| %>
+
+
+      <%= form_for @group, url: {action: "create"} do |f| %>
     <div class="row">
         <div class="col-4">
 
         </div>
         <div class="col-4 pr-3">
-          <%= f.text_field :name , id: 'grpName', class: 'form-control', value: 'Enter' %>
+          <%= f.text_field :name , id: 'grpName', class: 'form-control', placeholder: 'Enter group name' %>
         </div>
         <div class="col-4 pl-0">
-          
-       <%= f.submit "Add Group" , class:"btn btn-light" , onclick: "addGroup();" %>
+
+       <%= f.submit "Add Group" , class:"btn btn-light"  %>
         </div>
     </div>
    <% end %>
+
+
+        <%#= f.submit "Create" %>
+      <%# end %>
 
           
 
