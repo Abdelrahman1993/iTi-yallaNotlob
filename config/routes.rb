@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
   resources :ordeers
-  resources :groups
 
+  resources :users
+  
+  resources :groups do
+    resources :users
+  end
+
+  
 
   get 'signup' , to:"users#signup"
   get 'signin' , to:"users#signin"

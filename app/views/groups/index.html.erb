@@ -10,7 +10,22 @@
             </div>
         </div>
  
-       <%= render :template => "groups/new" %>
+      
+<%= form_with modal: @group  do |f| %>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4 pr-3">
+          <%= f.text_field :name , id: 'grpName', class: 'form-control', value: 'Enter' %>
+        </div>
+        <div class="col-4 pl-0">
+          
+       <%= f.submit "Add Group" , class:"btn btn-light" , onclick: "addGroup();" %>
+        </div>
+    </div>
+   <% end %>
+
           
 
         <div class="row pt-5">
@@ -49,14 +64,14 @@
 
 
 
-                <%= form_for Group.new do |f| %>
+                <%= form_for @group do |f| %>
                     <div class="row mt-3">
                             <div class="col-6">
                             <%= f.text_field :name , id: 'friendToGroup', class: 'form-control', placeholder: 'Please enter your friend\'s name' %>
                             </div>
                             <div class="col-6">
                          
-                            <%= f.submit "Add", :type => 'button', class:"btn btn-light", :onclick => 'groups#saveInUserGroup' %>
+                            <%= f.submit "Add", :type => 'button', class:"btn btn-light" %>
                             </div>
                     </div>
                 <% end %>
@@ -69,8 +84,9 @@
                             <div class="col-4">
                                 <img width="50" src="iconfinder_user_male4_172628.png" rel="userImage"/>
                             </div>
+                             
                          <%= render :template => "usergroups/index" %> 
-
+                        
                         </div>
                     </div>
                 </div>

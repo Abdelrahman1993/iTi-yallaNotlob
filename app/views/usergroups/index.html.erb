@@ -1,7 +1,7 @@
  
  
     <div class="col-8">
-   <%= @group_id = groups_path(:id)%>
+  
     
       <%= @groupUsers = UserGroup.where(group_id: 11) %>
      <%= @groupUsers.each do |groupUser| %>  
