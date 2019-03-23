@@ -7,13 +7,14 @@
                 </div>
               <div >
                       <%
-                        @orders.each do |order|
+                        @lastOrder.each do |order|
                       %>
                       <%
                           if order.user_id === current_user.id
                       %>
                   <p>
-                          <%= link_to order.category, orders_path %>
+                          <%= link_to order.category, order_path(order) %>
+
                           on
                           <%= order.date %>
                   </p>
@@ -30,7 +31,7 @@
                     </h5>
                 </div>
               <div>
-                        <% @order.each do |order|%>
+                        <% @orderFriend.each do |order|%>
                       <p>
                               <%= User.find_by_id(order.user_id).name %>
                                 has created anorder for

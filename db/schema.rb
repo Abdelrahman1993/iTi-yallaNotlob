@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_165627) do
+ActiveRecord::Schema.define(version: 2019_03_22_195918) do
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 2019_03_22_165627) do
   add_foreign_key "orders", "users"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
-  add_foreign_key "user_order_invitations", "orders"
+  add_foreign_key "user_order_invitations", "orders", on_delete: :cascade
   add_foreign_key "user_order_invitations", "users"
-  add_foreign_key "user_order_participations", "orders"
+  add_foreign_key "user_order_participations", "orders", on_delete: :cascade
   add_foreign_key "user_order_participations", "users"
 end
