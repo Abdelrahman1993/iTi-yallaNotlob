@@ -7,19 +7,34 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
         <%= link_to "Home",  root_path, :class => 'nav-link' %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "Friends",  friends_path, :class => 'nav-link' %>
-        </li>
-        <li class="nav-item">
+      </li>
+      <li class="nav-item">
+        <%= link_to "Friends",  user_friends_path(current_user.id), :class => 'nav-link' %>
+      </li>
+      <li class="nav-item">
         <%= link_to "Groups",  groups_path, :class => 'nav-link' %>
-          </li>
-          <li class="nav-item">
-          <%= link_to "Orders",  groups_path, :class => 'nav-link' %>
-            </li>
-      </ul>
-    </div>
-  </nav>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Orders",  orders_path, :class => 'nav-link' %>
+      </li>
+    </ul>
 
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to "notification",  orders_path, :class => 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "photo",  orders_path, :class => 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><%= current_user.name %></a>
+      </li>
 
+      <li class="nav-item">
+          <%= link_to "Log out", destroy_user_session_path, method: "delete", :class=> 'nav-link btn btn-success' %>
+      </li>
+      
+    </ul>
 
+  </div>
+</nav>

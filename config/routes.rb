@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
 
-  resources :ordeers
+  devise_for :users
+  resources :orders
   resources :groups
+  
   resources :friends
 
+
+  resources :users do
+    resources :friends
+  end
+
+# namespace :users do
+#   resources :friends
+# end
 
   get 'signup' , to:"users#signup"
   get 'signin' , to:"users#signin"
@@ -11,8 +21,6 @@ Rails.application.routes.draw do
   root 'home#home'
   
   
-
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

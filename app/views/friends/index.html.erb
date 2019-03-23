@@ -3,19 +3,29 @@
     <div class="container">
         <h3 class="">Friends</h3>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="User's Email" aria-label="Recipient's username"
-                aria-describedby="basic-addon">
+        <%= form_for @friend ,url: {controller: "friends", action: "create"} do |f| %>
+            <%= f.label :id %>
+            <%= f.text_field :friend_id , id:'fID' , class: 'form-control' %>
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Add</button>
+            <%= f.submit "Add friend" , class:"btn btn-light" %>
+            <% end %>
             </div>
         </div>
 
         <div id="friends">
             <div class="container">
                 <div class="row ">
+                
+                   
 
+                    
+                    
+                    
+                    
 
-                <% @friends.each do |friend| %>
+                
+                  
+                <% current_user.friends.each do |friend| %>
                     <div class="user col-3 text-center m-0">
                     <% if friend.friend.pic %>
                           <img height=70 class="profile m-auto" src="<%= asset_path(friend.friend.pic) if friend.friend.pic  %>">
@@ -27,10 +37,13 @@
                             <button class="btn btn-danger">
                         <%= link_to 'Remove', friend_path(friend),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %>
+              data: { confirm: 'Are you sure?' } ,:class => 'text-light'%>
               </button>
                     </div>
                   <% end %>
+
+
+            
                 </div>
                
         </div>
