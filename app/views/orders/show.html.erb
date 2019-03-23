@@ -19,15 +19,20 @@
         </tr>
         </thead>
         <tbody id="table_body">
+        <%
+          @orderParticipation.each do |order|
+        %>
         <tr>
-          <th scope="row"><%= @order.user.name %></th>
-          <td><%= @order.item %></td>
-          <td><%= @order.amount %></td>
-          <td><%= @order.price %></td>
-          <td><%= @order.comment %></td>
+          <th scope="row"><%= order.user.name %></th>
+<!--          <td><%#= orderPar.user.name %></td>-->
+          <td><%= order.item %></td>
+          <td><%= order.amount %></td>
+          <td><%= order.price %></td>
+          <td><%= order.comment %></td>
           <td><button type="button" class="btn btn-outline-danger btn-sm remove-item" onclick="return this.parentNode.parentNode.remove();">Remove</button></td>
         </tr>
         </tbody>
+          <% end %>
       </table>
     </div>
 
@@ -141,25 +146,25 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-sm-12">
-      <form id="add_item_form">
+      <% form_for  @addOrder do |f| %>
         <div class="form-row">
           <div class="col-sm-3">
-            <input type="text" id="item_name" class="form-control" placeholder="Item" required>
+            <%= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
           </div>
           <div class="col-sm-2">
-            <input type="number" id="item_amount" class="form-control" placeholder="Amount" required>
+            <%= f.input :amount, :as => "number" , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
           </div>
           <div class="col-sm-2">
-            <input type="number" id="item_price" class="form-control" placeholder="Price" required>
+            <%= f.input :price, :as => "number" , id: 'item_price', class: 'form-control', placeholder: 'Price' %>
           </div>
           <div class="col-sm-3">
-            <input type="text" id="item_comment" class="form-control" placeholder="Comment">
+            <%= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
           </div>
           <div class="col-sm-1">
-            <button type="submit" id="item_submit" class="btn btn-primary mb-2">Add</button>
+            <%= f.submit "Add" , class:"btn btn-primary mb-2"  %>
           </div>
         </div>
-      </form>
+        <% end %>
     </div>
   </div>
 </div> <!--  end of container -->

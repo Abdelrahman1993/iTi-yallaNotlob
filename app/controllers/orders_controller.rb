@@ -5,12 +5,22 @@
       @orders = Order.where(user_id: current_user.id) # this will be replaced by logged in user id
       @joined = UserOrderParticipation
       @invited = UserOrderInvitation
+
     end
 
     def show
-      # params.require(:order).permit(:resturant, :category, :menu, :status, :user_id)
-      # @order = Order.find(params[:id])
-      @order = UserOrderParticipation.find(params[:id])
+      @orderParticipation = UserOrderParticipation.where(order_id: params[:id])
+      @addOrder = UserOrderParticipation.new
+
+
+    end
+
+    def create
+      @addOrder = UserOrderParticipation.new(addOrder_params)
+
+      @addOrder.user_id=1
+      @addOrder.save
+      redirect_to orders_path
     end
 
     def destroy
@@ -23,7 +33,10 @@
       @order = Order.find params[:id]
       @order.update(status: 'finished')
       redirect_to orders_path
-      end
+    end
+
+
+
 
   private
 
@@ -33,5 +46,9 @@
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
   end
+
+    def addOrder_params
+      params.require(:addOrder).permit(:item,:comment,:price,:amount)
+    end
 
 end
