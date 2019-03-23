@@ -5,23 +5,19 @@ class GroupsController < ApplicationController
     def index
         @groups =Group.all
         @group = Group.new
-        
-        
+
     end
 
-    def new 
-        # @group = Group.new(group_params)
-        @group = Group.new
-    end
+  
 
     def create
+
         @user_id=1;
-        puts @user_id
-        @group = Group.new
+        @group = Group.new(group_params)
         @group.user_id=@user_id
         @group.save
-        render plain: params.inspect
-        # redirect_to groups_path
+        # render plain: params.inspect
+        redirect_to groups_path
     end
 
     def show
@@ -45,9 +41,7 @@ class GroupsController < ApplicationController
 
     private 
         def group_params
-            p "==================="
-        #    puts params.require(:group)
-           p "==================="
+            params.require(:group).permit(:name,:user_id)
         end
 
 end
