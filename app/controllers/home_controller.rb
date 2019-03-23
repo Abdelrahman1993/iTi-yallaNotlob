@@ -1,12 +1,13 @@
 class HomeController < ApplicationController
     def home
-        # @orders = Order.all
-        # @orders = Order.find(:all, :order => "id desc").
-        # @orders = Order.all( :order => "id desc").reverse
-        @orders = Order.all.order("id desc")
-        # ().order("id desc").limit(4).order("id asc")
 
-        @friends = Friendship.all
+        @lastOrder = Order.where(user_id: current_user.id).order("id asc").last(5)
+
+        @orderFriend = Order.where(
+            user_id: Friendship.select("friend_id")
+            .where(user_id: current_user.id)
+        ).order("id asc").last(4)
+
         @users = User.all
     end
 end

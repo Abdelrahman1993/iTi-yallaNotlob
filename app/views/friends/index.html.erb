@@ -3,28 +3,20 @@
     <div class="container">
         <h3 class="">Friends</h3>
         <div class="input-group mb-3">
-        <%= form_for @friend ,url: {controller: "friends", action: "create"} do |f| %>
-            <%= f.label :id %>
+        <%= form_for @friend , class: 'w-100' ,url: {controller: "friends", action: "create"} do |f| %>
+            <%= f.label :Email %>
+            <div class="input-group-append w-100">
             <%= f.text_field :friend_id , id:'fID' , class: 'form-control' %>
-            <div class="input-group-append">
+            
             <%= f.submit "Add friend" , class:"btn btn-light" %>
             <% end %>
+            </div>
             </div>
         </div>
 
         <div id="friends">
             <div class="container">
                 <div class="row ">
-                
-                   
-
-                    
-                    
-                    
-                    
-
-                
-                  
                 <% current_user.friends.each do |friend| %>
                     <div class="user col-3 text-center m-0">
                     <% if friend.friend.pic %>

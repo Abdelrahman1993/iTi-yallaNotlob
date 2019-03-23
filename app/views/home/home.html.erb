@@ -1,56 +1,47 @@
-
     <%= render 'navbar' %>
     <div class="container">
         <div class="row justify-content-around text-center">
             <div class="col-5 block">
                 <div class="title">
                     <h5 class="titleText">Latest Orders</h5>
-
                 </div>
               <div >
-                <%
-                  userId=1;
-                  flag=0;
-                %>
+                      <%
+                        @lastOrder.each do |order|
+                      %>
+                      <%
+                          if order.user_id === current_user.id
+                      %>
+                  <p>
+                          <%= link_to order.category, order_path(order) %>
 
-                <% @orders.each do |order| %>
-                  <%if order.user_id === userId && flag < 3 %>
-
-                  <p><%= order.category %> on <%= order.date %> </p>
-                  <%flag = flag+1; %>
-                  <% end %>
-                <% end %>
-
+                          on
+                          <%= order.date %>
+                  </p>
+                      <%
+                          end
+                         end
+                      %>
               </div>
             </div>
             <div class="col-5 block">
                 <div class=" title">
-                        <h5 class="titleText">Friends Activities</h5>
+                    <h5 class="titleText">
+                      Friends Activities
+                    </h5>
                 </div>
               <div>
-                <%
-                  flagFrined=0;
-                %>
-                <% @friends.each do |friend| %>
-                  <% @orders.each do |order|%>
-                    <%
-                    if order.user_id === friend.friend_id && friend.user_id === userId && flagFrined < 5 %>
+                        <% @orderFriend.each do |order|%>
                       <p>
-                        <%friendName = User.find(friend.friend_id) %>
-                        <%#= friendName %>
-                        <%= friendName.name %>
-                          has created anorder for
-                        <%= order.category %>
-                          from
-                        <%= order.resturant %>
+                              <%= User.find_by_id(order.user_id).name %>
+                                has created anorder for
+                              <%= link_to order.category, orders_path %>
+                                from
+                              <%= order.resturant %>
                       </p>
-                    <%
-                      flagFrined = flagFrined + 1;
-                    end
-                  end
-                end
-
-                  %>
+                          <%
+                        end
+                        %>
               </div>
             </div>
         </div>

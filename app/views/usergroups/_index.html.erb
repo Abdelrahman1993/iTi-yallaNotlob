@@ -1,0 +1,14 @@
+ 
+ 
+    <div class="col-8">
+  
+      <%= @groupUsers = UserGroup.where(group_id: 11) %>
+     <%= @groupUsers.each do |groupUser| %>  
+            
+            <a href="#" class="d-block">
+            <%= User.find_by(id: groupUser.user_id).name %>
+            </a>
+            <a href="#" class="rmUserFromGroup">remove user</a>
+
+        <% end %>
+    </div>

@@ -14,6 +14,13 @@ Rails.application.routes.draw do
 # namespace :users do
 #   resources :friends
 # end
+  resources :users
+  
+  resources :groups do
+    resources :users
+  end
+
+  
 
   get 'signup' , to:"users#signup"
   get 'signin' , to:"users#signin"
@@ -21,6 +28,7 @@ Rails.application.routes.draw do
   root 'home#home'
   
   
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
