@@ -20,7 +20,12 @@
                 <td><%= @joined.where(order_id: order.id).count %></td>
                 <td><%=order.status%></td>
                 <td>
-                    <button class=""><i class="far fa-eye"></i> view </button>
+                    <%= button_to order_path(order), 
+                    method: :get,
+                    form: {style: 'display:inline-block;margin:0'} do %>
+                        <i class='far fa-eye'></i>View
+                        <% end %>
+
                     <%if order.status == "waiting" %>
                     <%= button_to order_path(order), 
                 method: :put,
