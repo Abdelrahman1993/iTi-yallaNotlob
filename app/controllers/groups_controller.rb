@@ -1,17 +1,13 @@
 class GroupsController < ApplicationController
    
- 
-   
     def index
         @groups =Group.all
         @group = Group.new
-
     end
 
   
 
     def create
-
         @user_id=1;
         @group = Group.new(group_params)
         @group.user_id=@user_id
