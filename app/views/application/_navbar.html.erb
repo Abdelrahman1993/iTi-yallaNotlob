@@ -21,17 +21,20 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <%= link_to "notification",  orders_path, :class => 'nav-link' %>
+      <img height=30 id="notificationIcon" class="profile mr-2 mt-1" src="<%= asset_path('notifications.png') %>">
+      <h5 id="notificationsCount">2</h5>
+      
       </li>
+      <div id="notificationsBox"></div>
       
       <li class="nav-item">
       <% if current_user.image %>
-        <img src="<%= current_user.image %>" style="border-radius:50%">
+        <img src="<%= current_user.image %>" style="border-radius:50%; width:60px">
       <% else %>
         <img height=40 class="profile m-auto" src="<%= asset_path('default.png') %>">
       <% end %>
       </li>
-
+      
       <li class="nav-item">
         <a class="nav-link" href="#"><%= current_user.name %></a>
       </li>

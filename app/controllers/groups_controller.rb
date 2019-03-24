@@ -1,46 +1,53 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
-    
-    def index
-        @groups =Group.all
-        @group = Group.new
-        @user=User.new
-       
-    end
+  def index
+    @groups = Group.where(user_id: current_user.id)
+    @group = Group.new
+    @user = User.new
+  end
 
-    def create
-        # render plain: params.inspect
-      
-        @group = Group.new(group_params)
-        @group.user_id = current_user.id
-        @group.save
-        # render plain: params.inspect
-        redirect_to groups_path
-    end
+  def create
+    @group = Group.new(group_params)
+    @group.user_id = current_user.id
+    @group.save
+    redirect_to groups_path
+  end
 
+  def show
+    @groups = Group.all
+    @group = Group.new
+    @groupId = Group.find(params[:id])
+    $test =  @groupId.id
+    p '---------'
+    p @groupId.id
+  end
 
-    def show  
-        @groups =Group.all
-        @group = Group.new
-        @groupId = Group.find(params[:id])  
-        $test =  @groupId.id
-        p"---------"
-        p @groupId.id
-    end
+  # def edit
 
-    # def edit
+  # end
 
-    # end
+  # def update
 
-    # def update
+  # end
 
-    # end
+  def destroy
+    @groupId = Group.find(params[:id])
+    @users = UserGroup.where(group_id: @groupId.id)
+    @users.each(&:destroy)
+    @groupId.destroy
+    redirect_to groups_path
+  end
 
-    def destroy
-      @groupId = Group.find(params[:id])
-      @users = UserGroup.where(group_id: @groupId.id)
-      @users.each do |user|
-        user.destroy
+  def addUserGroup
+    @usergroup = UserGroup.new
+    @usergroup.user_id = User.find_by(name: params[:name]).id
+    @usergroup.group_id = $test
+    @usergroup.save
+    #     # render plain: params.inspect
+    redirect_to groups_path
       end
+<<<<<<< HEAD
       @groupId.destroy
       redirect_to groups_path
     end
@@ -87,6 +94,18 @@ class GroupsController < ApplicationController
         def group_params
             params.require(:group).permit(:name,:user_id)
         end
+=======
 
+  def deleteUserGroup
+    @userGroup = UserGroup.find(params[:id])
+    @userGroup.destroy
+    redirect_to groups_path
+  end
+>>>>>>> e52e031b56339d493e98e85e7b40d896d06fe602
 
+  private
+
+  def group_params
+    params.require(:group).permit(:name, :user_id)
+  end
 end
