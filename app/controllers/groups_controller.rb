@@ -9,9 +9,9 @@ class GroupsController < ApplicationController
 
     def create
         # render plain: params.inspect
-        @user_id=1;
+      
         @group = Group.new(group_params)
-        @group.user_id=@user_id
+        @group.user_id = current_user.id
         @group.save
         # render plain: params.inspect
         redirect_to groups_path
@@ -48,10 +48,6 @@ class GroupsController < ApplicationController
     
 
     def addUserGroup
-        # @userId = User.where(name: name)
-        # usergroup_params[:name]
-        #  link_to group_path(group) , method: :get, class: group_path(group) do 
-        # @groupId = Group.find(params[:id])
         @usergroup = UserGroup.new
         @usergroup.user_id = User.find_by(name: params[:name]).id
         @usergroup.group_id=$test

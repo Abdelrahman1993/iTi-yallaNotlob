@@ -34,8 +34,8 @@
               <tr>
                 <td>
                   <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
-                    <h5 class="groupName" onclick="displayGroup(<%= group.name %>)"><%= group.name %></h5>
-                    <%$groupName = group.name%>
+                    <h5 class="groupName"><%= group.name %></h5>
+               
                   <% end %>
                 </td>
                 <td class="pr-0">
@@ -51,17 +51,17 @@
           </tbody>
         </table>
       </div>
-
-      <div class="col-7">
+      <div class="col-7" id="singleGroup">
         <div class="row mt-3">
           <div class="col">
-            <h3 id="groupTitle"><%= $groupName  %></h3>
+        
+            <h3 id="groupTitle"><%= Group.find_by(id: params[:id]).name %></h3>
           </div>
         </div>
         <%= form_tag({controller: "groups", action: "addUserGroup"}, method: "post") do %>
           <div class="row mt-3">
             <div class="col-6">
-              <%= text_field_tag(:name) %>
+              <%= text_field_tag :name,"", class: 'form-control',placeholder: 'enter Name\'s friend' %>
             </div>
             <div class="col-6">
               <%= submit_tag("Add", :type => 'submit', class:"btn btn-light") %>
