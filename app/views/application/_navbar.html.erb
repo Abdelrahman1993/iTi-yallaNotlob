@@ -25,7 +25,11 @@
       </li>
       
       <li class="nav-item">
+      <% if current_user.image %>
         <img src="<%= current_user.image %>" style="border-radius:50%">
+      <% else %>
+        <img height=40 class="profile m-auto" src="<%= asset_path('default.png') %>">
+      <% end %>
       </li>
 
       <li class="nav-item">
