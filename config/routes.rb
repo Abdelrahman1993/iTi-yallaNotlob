@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   
   
+  
   get 'signup' , to:"users#signup"
   get 'signin' , to:"users#signin"
 
