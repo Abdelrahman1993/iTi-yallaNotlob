@@ -15,12 +15,21 @@ class OrdersController < ApplicationController
   end
 
   def create
+    p '======================='
+    p params
+
     @order = Order.new
     @order.resturant = params[:restaurantName]
     @order.category = params[:category]
     @order.status = 'waiting'
     @order.user_id = current_user.id
     invited_users = []
+    uploaded_io = params[:order][:menu]
+    random_number = Time.now.to_s
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename + random_number), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    @order.menu = "/public/uploads/#{uploaded_io.original_filename + random_number}"
     if @order.save
       order_id = @order.id
       groups = params[:groups].split(',')
@@ -43,9 +52,6 @@ class OrdersController < ApplicationController
       end
 
   end
-    p '==============================='
-    p invited_users
-    p '==============================='
 
     @order_invitation = UserOrderInvitation.new
     # end

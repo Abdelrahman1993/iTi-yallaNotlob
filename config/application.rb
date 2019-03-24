@@ -17,7 +17,7 @@ module YallaNotlob
     # the framework and any gems in your application.
   end
 end
-
+config.middleware.use Rack::TempfileReaper
 Rails.application.config.assets.precompile += ['orderDetails.js', 'orderDetails.css']
 Rails.application.config.assets.precompile += ['addOrder.js', 'order.css']
 Rails.application.config.assets.precompile += ['signin.css']
