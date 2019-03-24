@@ -1,5 +1,12 @@
 <%= render 'navbar' %>
 <div class="container-fluid">
+
+                    <%= button_to new_order_path(), 
+                    method: :get,
+                    form: {style: 'display:inline-block;margin-left:86%;margin-top:2%;margin-botton:3%'} do %>
+                        <i class='fas fa-plus'></i> New order
+                        <% end %>
+
     <table class="table table-hover text-center">
         <thead>
             <tr>

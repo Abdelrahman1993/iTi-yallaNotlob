@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :orders
   resources :groups
+  resources :user_order_invitations
+
 
   resources :users
   
