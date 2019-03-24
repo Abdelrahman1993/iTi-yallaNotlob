@@ -10,6 +10,8 @@ class User < ApplicationRecord
     has_many :friends, foreign_key: :user_id,class_name: "Friendship"
 
     has_many :friendships
+    # belongs_to :groups
+    belongs_to :user_groups
     has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 
 
