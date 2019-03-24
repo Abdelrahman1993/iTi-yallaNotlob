@@ -1,10 +1,10 @@
+const loadJs = ()=>{
 
 let friendInvite = document.getElementById("friendInvite");
 let addFriend = document.getElementById("addFriend");
 let fieldset = document.getElementsByClassName("the-fieldset")[0];
 let errorMsg = document.getElementById("errorMsg");
 let friendsArr = [];
-
 addFriend.addEventListener("click", () => {
     let friendName = friendInvite.value;
     friendInvite.value = "";
@@ -41,7 +41,6 @@ addFriend.addEventListener("click", () => {
         friendDiv.appendChild(friendImg);
         friendDiv.appendChild(dataDiv);
         fieldset.appendChild(friendDiv);
-
         removeBtn.addEventListener("click", (event) => {
             let index = friendsArr.indexOf(event.target.parentElement.parentElement.childNodes[1].innerHTML);
             friendsArr.splice(index, 1);
@@ -50,3 +49,4 @@ addFriend.addEventListener("click", () => {
         });
     }
 });
+}

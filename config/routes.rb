@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
+mount ActionCable.server => "/cable"
 
 
   # devise_for :users
-  resources :orders
+  resources :orders do
+  resources :user_order_participation , path: 'orderdata'
+  end
+
+
   resources :groups
-  
+  resources :user_order_invitations
+
+  # resources :groups
   resources :friends
 
 
@@ -32,7 +38,15 @@ Rails.application.routes.draw do
 
   root 'home#home'
   
+  get 'friends', to: 'friends#view'
+
+  get 'friends/add'
+
+
+
+
   get '/groups/:id', to: 'groups#index', as: 'groupId'
+  # get 'groups/:id/users/:id' to: 'users#destroy'
   
   post 'groups/addUserGroup', to: 'groups#addUserGroup'
   # get "/groups/:id", to: "groups#index"

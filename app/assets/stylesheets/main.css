@@ -1,0 +1,19 @@
+#notificationsCount{
+margin-top:-35px;
+color:#E84700
+}
+#notificationIcon:hover{
+    cursor: pointer;
+}
+#notificationsBox{
+    position: absolute;
+    display: none;
+    margin-top:30px;
+    margin-left: -290px;
+    width: 320px;
+    min-height: 100px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px; 
+    padding: 10px;
+}
