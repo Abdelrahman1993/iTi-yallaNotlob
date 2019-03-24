@@ -1,10 +1,23 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  resources :orders
-  # resources :groups
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  # resources :users
+
+  # devise_for :users
+  resources :orders
+  resources :groups
+  
+  resources :friends
+
+
+  resources :users do
+    resources :friends
+  end
+
+# namespace :users do
+#   resources :friends
+# end
+  resources :users
   
   resources :groups do
     resources :users
@@ -18,9 +31,6 @@ Rails.application.routes.draw do
 
   root 'home#home'
   
-  get 'friends', to: 'friends#view'
-
-  get 'friends/add'
   get '/groups/:id', to: 'groups#index', as: 'groupId'
   
   post 'groups/addUserGroup', to: 'groups#addUserGroup'
