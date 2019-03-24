@@ -29,10 +29,17 @@
           <td><%= order.amount %></td>
           <td><%= order.price %></td>
           <td><%= order.comment %></td>
-          <td><button type="button" class="btn btn-outline-danger btn-sm remove-item" onclick="return this.parentNode.parentNode.remove();">Remove</button></td>
-        </tr>
-        </tbody>
+          <td>
+
+          <%= link_to order_path(order) , method: :delete, data: { confirm: 'Are you sure?' }, class: order_path(order) do %>
+            <i class="fas fa-user-times fa-lg"></i>
           <% end %>
+          </td>
+<!--          <td><button type="button" class="btn btn-outline-danger btn-sm remove-item" onclick="return this.parentNode.parentNode.remove();">Remove</button></td>-->
+        </tr>
+
+          <% end %>
+        </tbody>
       </table>
     </div>
 
@@ -44,7 +51,7 @@
         <div class="invited col-sm-6">
           <!-- Button to Open the Modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            View 10 invited friends
+            invited friends
           </button>
 
           <!-- The Modal -->
@@ -60,42 +67,19 @@
 
                 <!-- Modal body -->
                 <div class="modal-body row">
+                <%
+                  @orderInvited.each do |orderInv|
+                %>
                   <div class="card col-sm-2 mx-2" style="width:150px">
                     <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
                     <div class="card-body">
-                      <h5 class="card-title">John Doe</h5>
+                      <h5 class="card-title">
+                        <%= orderInv.user.name %>
+                      </h5>
                       <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
                     </div>
                   </div>
-                  <div class="card col-sm-2 mx-2" style="width:150px">
-                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
-                    <div class="card-body">
-                      <h5 class="card-title">John Doe</h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
-                    </div>
-                  </div>
-                  <div class="card col-sm-2 mx-2" style="width:150px">
-                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
-                    <div class="card-body">
-                      <h5 class="card-title">John Doe</h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
-                    </div>
-                  </div>
-                  <div class="card col-sm-2 mx-2" style="width:150px">
-                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
-                    <div class="card-body">
-                      <h5 class="card-title">John Doe</h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
-                    </div>
-                  </div>
-                  <div class="card col-sm-2 mx-2" style="width:150px">
-                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
-                    <div class="card-body">
-                      <h5 class="card-title">John Doe</h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
-                    </div>
-                  </div>
-
+                  <% end %>
                 </div>
 
                 <!-- Modal footer -->
@@ -109,7 +93,7 @@
         <div class="joined col-sm-6">
           <!-- Button to Open the Modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
-            View 9 Joined friends
+            Joined friends
           </button>
 
           <!-- The Modal -->
@@ -123,9 +107,20 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                  Modal body 222222..
+                <div class="modal-body row">
+                <%
+                  @orderPartic.each do |orderPar|
+                %>
+                  <div class="card col-sm-2 mx-2" style="width:150px">
+                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= orderPar.user.name %>
+                      </h5>
+                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
+                    </div>
+                  </div>
+                  <%end %>
                 </div>
 
                 <!-- Modal footer -->
@@ -146,25 +141,25 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-sm-12">
-      <% form_for  @addOrder do |f| %>
-        <div class="form-row">
-          <div class="col-sm-3">
-            <%= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
-          </div>
-          <div class="col-sm-2">
-            <%= f.input :amount, :as => "number" , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
-          </div>
-          <div class="col-sm-2">
-            <%= f.input :price, :as => "number" , id: 'item_price', class: 'form-control', placeholder: 'Price' %>
-          </div>
-          <div class="col-sm-3">
-            <%= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
-          </div>
-          <div class="col-sm-1">
-            <%= f.submit "Add" , class:"btn btn-primary mb-2"  %>
-          </div>
-        </div>
-        <% end %>
+      <%# form_for  @addOrder do |f| %>
+<!--        <div class="form-row">-->
+<!--          <div class="col-sm-3">-->
+            <%#= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
+<!--          </div>-->
+<!--          <div class="col-sm-2">-->
+            <%#= f.input :amount, :as => "number" , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
+<!--          </div>-->
+<!--          <div class="col-sm-2">-->
+            <%#= f.input :price, :as => "number" , id: 'item_price', class: 'form-control', placeholder: 'Price' %>
+<!--          </div>-->
+<!--          <div class="col-sm-3">-->
+            <%#= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
+<!--          </div>-->
+<!--          <div class="col-sm-1">-->
+            <%#= f.submit "Add" , class:"btn btn-primary mb-2"  %>
+<!--          </div>-->
+<!--        </div>-->
+        <%# end %>
     </div>
   </div>
 </div> <!--  end of container -->
