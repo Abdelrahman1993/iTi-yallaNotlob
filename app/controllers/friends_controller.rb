@@ -24,18 +24,25 @@ class FriendsController < ApplicationController
     # end
     
     @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]["id"]
+    
     @allFriends = Friendship.where(user_id: current_user.id).as_json
     # debugger
-    
+    # 
+    @flag = true
     if current_user.id != @selectedUserId
       @allFriends.each do |friend|
         if friend["friend_id"] == @selectedUserId
-          abort("can't add this friend")
+          @flag = false
         
         else
-          @friend = Friendship.new(:user_id => current_user.id, :friend_id => @selectedUserId)
+          @flag = true
+          
         end 
       end
+      if @flag
+        @friend = Friendship.new(:user_id => current_user.id, :friend_id => @selectedUserId)
+      end
+
     end
     
 
