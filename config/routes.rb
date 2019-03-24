@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
 
   # devise_for :users
-  resources :orders
+  resources :orders do
+    resources :orderdata, controller: 'user_order_participation'
+    # delete 'delete/:id(.:format)', :to => 'user_order_participation#destroy'
+  end
+
+
   resources :groups
 
   resources :users
@@ -23,7 +28,8 @@ Rails.application.routes.draw do
   get 'friends', to: 'friends#view'
 
   get 'friends/add'
-  
+
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

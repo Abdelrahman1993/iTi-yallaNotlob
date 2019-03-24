@@ -10,7 +10,7 @@
     def show
       @orderParticipation = UserOrderParticipation.where(order_id: params[:id])
       @addOrder = UserOrderParticipation.new
-      @orderInvited = UserOrderInvitation.where(order_id: 1)
+      @orderInvited = UserOrderInvitation.group(:user_id).where('user_id <> ?', current_user.id).where(order_id: 1)
       @orderPartic = UserOrderParticipation
                    .where(order_id: 1)
                    .group(:user_id)
@@ -20,17 +20,9 @@
 
     end
 
-    def create
-      @addOrder = UserOrderParticipation.new(addOrder_params)
 
-      @addOrder.user_id=1
-      @addOrder.save
-      redirect_to orders_path
-    end
 
     def destroy
-      # @order = Order.find(params[:id])
-      # @order.destroy
 
       @orderItem = UserOrderParticipation.find(params[:id])
       @orderItem.destroy
@@ -55,9 +47,7 @@
     @invited = UserOrderInvitation
   end
 
-    def addOrder_params
-      params.require(:addOrder).permit(:item,:comment,:price,:amount)
-    end
+
     #
     def invitOrder_params
       params.require(:orderInvited).permit(:id)

@@ -28,14 +28,24 @@
           <td><%= order.item %></td>
           <td><%= order.amount %></td>
           <td><%= order.price %></td>
-          <td><%= order.comment %></td>
-          <td>
+          <td><%= order.id %></td>
+          <%if order.user.name === current_user.name %>
 
-          <%= link_to order_path(order) , method: :delete, data: { confirm: 'Are you sure?' }, class: order_path(order) do %>
-            <i class="fas fa-user-times fa-lg"></i>
-          <% end %>
+          <td>
+            <%= button_to "delete", {:controller => :user_order_participation,
+                         :action => 'destroy', :id => order.id }, :method => :delete,
+                          :class =>'btn btn-outline-danger btn-sm' %>
           </td>
-<!--          <td><button type="button" class="btn btn-outline-danger btn-sm remove-item" onclick="return this.parentNode.parentNode.remove();">Remove</button></td>-->
+          <%else %>
+
+          <td>
+            <button type="button" class='btn btn-outline-dark btn-sm'>
+              hello
+            </button>
+
+          </td>
+          <% end %>
+
         </tr>
 
           <% end %>
@@ -117,7 +127,6 @@
                       <h5 class="card-title">
                         <%= orderPar.user.name %>
                       </h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
                     </div>
                   </div>
                   <%end %>
@@ -141,25 +150,26 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-sm-12">
-      <%# form_for  @addOrder do |f| %>
-<!--        <div class="form-row">-->
-<!--          <div class="col-sm-3">-->
-            <%#= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
-<!--          </div>-->
-<!--          <div class="col-sm-2">-->
-            <%#= f.input :amount, :as => "number" , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
-<!--          </div>-->
-<!--          <div class="col-sm-2">-->
-            <%#= f.input :price, :as => "number" , id: 'item_price', class: 'form-control', placeholder: 'Price' %>
-<!--          </div>-->
-<!--          <div class="col-sm-3">-->
-            <%#= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
-<!--          </div>-->
-<!--          <div class="col-sm-1">-->
-            <%#= f.submit "Add" , class:"btn btn-primary mb-2"  %>
-<!--          </div>-->
-<!--        </div>-->
-        <%# end %>
+      <%= form_with scope: :login,id: 'signup', local: true do |f| %>
+      <%# form_with scope: :  do |f| %>
+        <div class="form-row">
+          <div class="col-sm-3">
+            <%= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
+          </div>
+          <div class="col-sm-2">
+            <%= f.number_field :amount , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
+          </div>
+          <div class="col-sm-2">
+            <%= f.number_field :price,  id: 'item_price', class: 'form-control', placeholder: 'Price' %>
+          </div>
+          <div class="col-sm-3">
+            <%= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
+          </div>
+          <div class="col-sm-1">
+            <%= f.submit "Add" , class:"btn btn-primary mb-2"  %>
+          </div>
+        </div>
+        <% end %>
     </div>
   </div>
 </div> <!--  end of container -->
