@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
    
+    # before_action :set_group, only: [:show, :destroy ]
     def index
         @groups =Group.all
         @group = Group.new
@@ -18,8 +19,13 @@ class GroupsController < ApplicationController
     end
 
 
-    def show
-      @group = Group.find(params[:id])       
+    def show  
+        @groups =Group.all
+        @group = Group.new
+        @groupId = Group.find(params[:id])  
+        $test =  @groupId.id
+        p"---------"
+        p @groupId.id
     end
 
     # def edit
@@ -31,23 +37,29 @@ class GroupsController < ApplicationController
     # end
 
     def destroy
-
-      @group = Group.find(params[:id])
-      @users = UserGroup.where(group_id: @group.id)
+      @groupId = Group.find(params[:id])
+      @users = UserGroup.where(group_id: @groupId.id)
       @users.each do |user|
         user.destroy
       end
-      @group.destroy
+      @groupId.destroy
       redirect_to groups_path
     end
 
     def addUserGroup
-        #    @userId = User.where(name: name)
+        # @userId = User.where(name: name)
         # usergroup_params[:name]
-            @usergroup=UserGroup.new(usergroup_params)
-
-            # render plain: params.inspect
-            # redirect_to groups_path
+        #  link_to group_path(group) , method: :get, class: group_path(group) do 
+        # @groupId = Group.find(params[:id])
+        p '--------' 
+        p $test
+        p'-----------'
+        @usergroup = UserGroup.new
+        @usergroup.user_id = User.find_by(name: params[:name]).id
+        @usergroup.group_id=$test
+        @usergroup.save
+        #     # render plain: params.inspect
+        #     redirect_to groups_path
         end
 
     private 
@@ -55,8 +67,8 @@ class GroupsController < ApplicationController
             params.require(:group).permit(:name,:user_id)
         end
 
-        def usergroup_params
-            params.require(:group).permit(:name)
+        def set_group
+            @groupId = Group.find(params[:id])
         end
 
 end
