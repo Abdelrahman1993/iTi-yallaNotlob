@@ -17,11 +17,13 @@ class FriendsController < ApplicationController
   end
 
   def create
-    if User.where(email: friend_params[:friend_id]).as_json[0]["id"]
+    # if (User.where(email: friend_params[:friend_id]).as_json[0]["id"])
+    # @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]["id"]
+    # else
+    #   abort("this is no a user")
+    # end
+    
     @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]["id"]
-    else
-      abort("this is no a user")
-    end
     @allFriends = Friendship.where(user_id: current_user.id).as_json
     # debugger
     
@@ -29,8 +31,7 @@ class FriendsController < ApplicationController
       @allFriends.each do |friend|
         if friend["friend_id"] == @selectedUserId
           abort("can't add this friend")
-        elsif User.exists?(id: @selectedUserId)
-          abort("this is no a user")
+        
         else
           @friend = Friendship.new(:user_id => current_user.id, :friend_id => @selectedUserId)
         end 

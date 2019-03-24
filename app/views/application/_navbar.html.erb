@@ -23,9 +23,11 @@
       <li class="nav-item">
         <%= link_to "notification",  orders_path, :class => 'nav-link' %>
       </li>
+      
       <li class="nav-item">
-        <%= link_to "photo",  orders_path, :class => 'nav-link' %>
+        <img src="<%= current_user.image %>" style="border-radius:50%">
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="#"><%= current_user.name %></a>
       </li>
