@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :category
       t.text :menu
       t.string :status
-      t.timestamp :date
+      t.timestamps
     end
     add_reference :orders, :user, foreign_key: true
     # then add to the model

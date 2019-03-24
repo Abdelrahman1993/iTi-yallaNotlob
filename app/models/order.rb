@@ -3,4 +3,6 @@ class Order < ApplicationRecord
         waiting: "waiting",
         finished: "finished"
       }
+
+
 end

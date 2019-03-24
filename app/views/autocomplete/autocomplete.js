@@ -5,17 +5,7 @@ let friendsBox = document.getElementsByClassName("invited")[0];
 //this array has the name of invited friends
 let friendsArr = [];
 //this array has the name that shoud be from database to caan do auto complete
-let availableFriends = [
-    "motaz",
-    "abd-el-rahman",
-    "mo3tasm",
-    "aya",
-    "sammanaaaaaaaaaaa",
-    "abdsssssssss",
-    "mo3saaaaaaa",
-    "ayssssssssss",
-    "samvvvvvvvvvvvvvv"
-];
+let availableFriends = ["motaz","ali"];
 //function to make auto complete that take the input and the source array
 $(function() {
     availableFriends;

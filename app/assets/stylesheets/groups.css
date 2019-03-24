@@ -14,7 +14,7 @@ body{
     min-height: 60vh;
     margin-left: 5%;
     background-color: #f4f5f7;
-    display: none;
+    display: block;
 }
 .rmUserFromGroup{
     font-size: 14px;
