@@ -25,9 +25,10 @@
                 <td><%=order.resturant%></td>
                 <td><%= @invited.where(order_id: order.id).count %></td>
                 <td><%= @joined.where(order_id: order.id).count %></td>
-                <td><%=order.status%></td>
+              <td><%=order.status%></td>
                 <td>
-                    <%= button_to order_path(order), 
+<!--                  link_to order.category, order_path(order)-->
+                    <%= button_to order_user_order_participation_index_path(order),
                     method: :get,
                     form: {style: 'display:inline-block;margin:0'} do %>
                         <i class='far fa-eye'></i>View

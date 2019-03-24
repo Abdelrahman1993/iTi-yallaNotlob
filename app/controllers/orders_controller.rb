@@ -51,6 +51,23 @@ class OrdersController < ApplicationController
         invited_user.save
       end
 
+
+    def destroy
+
+      @orderItem = UserOrderParticipation.find(params[:id])
+      @orderItem.destroy
+      redirect_to orders_path, id:params[:order_id]
+      end
+
+    def update
+      @order = Order.find params[:id]
+      @order.update(status: 'finished')
+      redirect_to orders_path
+    end
+
+
+
+
   end
 
     @order_invitation = UserOrderInvitation.new
@@ -77,4 +94,10 @@ class OrdersController < ApplicationController
     end
 
   private
+
+    #
+    def invitOrder_params
+      params.require(:orderInvited).permit(:id)
+    end
+
 end
