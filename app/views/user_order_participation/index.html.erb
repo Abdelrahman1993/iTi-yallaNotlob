@@ -29,25 +29,19 @@
           <td><%= order.amount %></td>
           <td><%= order.price %></td>
           <td><%= order.id %></td>
-          <%if order.user.name === current_user.name %>
-
           <td>
+        <%if order.user.name === current_user.name %>
             <%= button_to "delete", {:controller => :user_order_participation,
                          :action => 'destroy', :id => order.id }, :method => :delete,
                           :class =>'btn btn-outline-danger btn-sm' %>
+        <%else %>
+          <button type="button" class='btn btn-outline-dark btn-sm'>
+            hello
+          </button>
+
+        <% end %>
           </td>
-          <%else %>
-
-          <td>
-            <button type="button" class='btn btn-outline-dark btn-sm'>
-              hello
-            </button>
-
-          </td>
-          <% end %>
-
         </tr>
-
           <% end %>
         </tbody>
       </table>
@@ -150,23 +144,27 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col-sm-12">
-      <%= form_with scope: :login,id: 'signup', local: true do |f| %>
+
+      <%= form_tag({controller: "user_order_participation", action: "create"}, method: "post") do  %>
       <%# form_with scope: :  do |f| %>
         <div class="form-row">
           <div class="col-sm-3">
-            <%= f.text_field :item , id: 'item_name', class: 'form-control', placeholder: 'Item' %>
+            <%#= text_field_tag :name,"", class: 'form-control',placeholder: 'enter Name\'s friend' %>
+            <%= text_field_tag :item,"", class: 'form-control', placeholder: 'Item' %>
           </div>
           <div class="col-sm-2">
-            <%= f.number_field :amount , id: 'item_amount', class: 'form-control', placeholder: 'Amount' %>
+            <%= number_field_tag :amount,"", class: 'form-control', placeholder: 'Amount' %>
+            <%#= hidden_field_tag :params[:id],"", class: 'form-control', placeholder: 'Amount' %>
           </div>
           <div class="col-sm-2">
-            <%= f.number_field :price,  id: 'item_price', class: 'form-control', placeholder: 'Price' %>
+            <%= number_field_tag :price,"", class: 'form-control', placeholder: 'Price' %>
           </div>
           <div class="col-sm-3">
-            <%= f.text_field :comment , id: 'item_comment', class: 'form-control', placeholder: 'Comment' %>
+            <%= text_field_tag :comment,"", class: 'form-control', placeholder: 'Comment' %>
           </div>
-          <div class="col-sm-1">
-            <%= f.submit "Add" , class:"btn btn-primary mb-2"  %>
+          <div class="col-sm-2">
+            <%= submit_tag("Add", :type => 'submit', class:"btn btn-primary mb-2") %>
+            <%#= submit "Add" , class:""  %>
           </div>
         </div>
         <% end %>

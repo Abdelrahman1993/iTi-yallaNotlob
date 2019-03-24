@@ -9,6 +9,7 @@ class UserOrderParticipationController < ApplicationController
                        .where(order_id: params[:order_id])
                        .group(:user_id)
                        .where('user_id <> ?', current_user.id)
+    # @addOrder = UserOrderParticipation.new
   end
 
 def destroy
@@ -19,15 +20,30 @@ def destroy
   end
 
   def create
-  @addOrder = UserOrderParticipation.new(addOrder_params)
+  @addOrder = UserOrderParticipation.new
+  puts "===================================================================="
 
-  @addOrder.user_id=1
-  @addOrder.save
-  redirect_to orders_path
+  puts params[:item]
+
+  @addOrder.user_id = current_user.id
+  @addOrder.item = params[:item]
+  @addOrder.order_id = params[:order_id]
+  @addOrder.price = params[:price]
+  @addOrder.amount = params[:amount]
+  @addOrder.comment = params[:comment]
+  puts @addOrder
+  if @addOrder.save
+
+    # render plain: params.inspect
+  end
+  # redirect_to groups_path
+
 end
   private
   def addOrder_params
     params.require(:addOrder).permit(:item,:comment,:price,:amount)
+        # .permit(:name,:user_id)
+    # params.require(:addOrder).permit(:item,:comment,:price,:amount)
   end
 
 

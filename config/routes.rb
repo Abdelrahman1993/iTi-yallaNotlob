@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   # devise_for :users
   resources :orders do
-    resources :orderdata, controller: 'user_order_participation'
+  resources :user_order_participation , path: 'orderdata'
+  # resources :orderdata, controller: 'user_order_participation'
     # delete 'delete/:id(.:format)', :to => 'user_order_participation#destroy'
   end
 
