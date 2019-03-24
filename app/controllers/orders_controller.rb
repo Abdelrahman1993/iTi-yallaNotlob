@@ -16,15 +16,40 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new
-    @order_invitation = UserOrderInvitation.new
-    groups = params[:groups].split(',')
-    users = params[:users].split(',')
-    
-    p "==============================="
-    p users
-    p groups
-    redirect_to orders_path
+    @order.resturant = params[:restaurantName]
+    @order.category = params[:category]
+    @order.status = 'waiting'
+    @order.user_id = current_user.id
+    invited_users = []
+    if @order.save
+      order_id = @order.id
+      groups = params[:groups].split(',')
+      groups.each do |group|
+        user_groups = UserGroup.select('user_id').where(group_id: group).as_json
+        user_groups.each do |user|
+          invited_users.push(user['user_id'])
+        end
+      end
+      users = params[:users].split(',')
+      users.each do |user|
+        invited_users.push(user.to_i)
+      end
+      invited_users.uniq!
+      invited_users.each do |user|
+        invited_user = UserOrderInvitation.new
+        invited_user.order_id = order_id
+        invited_user.user_id = user
+        invited_user.save
+      end
 
+  end
+    p '==============================='
+    p invited_users
+    p '==============================='
+
+    @order_invitation = UserOrderInvitation.new
+    # end
+    redirect_to orders_path
   end
 
   def show
@@ -46,6 +71,4 @@ class OrdersController < ApplicationController
     end
 
   private
-
-
 end
