@@ -35,6 +35,7 @@
                 <td>
                   <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
                     <h5 class="groupName" onclick="displayGroup(<%= group.name %>)"><%= group.name %></h5>
+                    <%$groupName = group.name%>
                   <% end %>
                 </td>
                 <td class="pr-0">
@@ -50,10 +51,11 @@
           </tbody>
         </table>
       </div>
+
       <div class="col-7">
         <div class="row mt-3">
           <div class="col">
-            <h3 id="groupTitle">.</h3>
+            <h3 id="groupTitle"><%= $groupName  %></h3>
           </div>
         </div>
         <%= form_tag({controller: "groups", action: "addUserGroup"}, method: "post") do %>
