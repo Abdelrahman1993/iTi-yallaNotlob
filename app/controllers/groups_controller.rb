@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
-   
-    # before_action :set_group, only: [:show, :destroy ]
+    
     def index
         @groups =Group.all
         @group = Group.new
@@ -46,29 +45,31 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     end
 
+    
+
     def addUserGroup
         # @userId = User.where(name: name)
         # usergroup_params[:name]
         #  link_to group_path(group) , method: :get, class: group_path(group) do 
         # @groupId = Group.find(params[:id])
-        p '--------' 
-        p $test
-        p'-----------'
         @usergroup = UserGroup.new
         @usergroup.user_id = User.find_by(name: params[:name]).id
         @usergroup.group_id=$test
         @usergroup.save
         #     # render plain: params.inspect
-        #     redirect_to groups_path
+        redirect_to groups_path
         end
+    
+        def deleteUserGroup
+            @userGroup=UserGroup.find(params[:id])
+            @userGroup.destroy
+            redirect_to groups_path
 
+        end
     private 
         def group_params
             params.require(:group).permit(:name,:user_id)
         end
 
-        def set_group
-            @groupId = Group.find(params[:id])
-        end
 
 end

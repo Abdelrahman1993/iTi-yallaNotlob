@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # devise_for :users
   resources :orders
-  resources :groups
+  # resources :groups
   
   resources :friends
 
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   root 'home#home'
   
   get '/groups/:id', to: 'groups#index', as: 'groupId'
+  # get 'groups/:id/users/:id' to: 'users#destroy'
   
   post 'groups/addUserGroup', to: 'groups#addUserGroup'
   # get "/groups/:id", to: "groups#index"
