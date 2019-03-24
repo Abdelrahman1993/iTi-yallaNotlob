@@ -12,18 +12,18 @@ class UserOrderParticipationController < ApplicationController
     # @addOrder = UserOrderParticipation.new
   end
 
-def destroy
-
+  def destroy
   @orderItem = UserOrderParticipation.find(params[:id])
   @orderItem.destroy
-  redirect_to order_orderdata_path;
+  # redirect_to orders_user_order_participation_path;
+  end
+  def deleteUserInvited
+
   end
 
   def create
   @addOrder = UserOrderParticipation.new
-  puts "===================================================================="
 
-  puts params[:item]
 
   @addOrder.user_id = current_user.id
   @addOrder.item = params[:item]
@@ -33,11 +33,8 @@ def destroy
   @addOrder.comment = params[:comment]
   puts @addOrder
   if @addOrder.save
-
-    # render plain: params.inspect
+    redirect_to "/orders/" + params[:order_id] + "/orderdata"
   end
-  # redirect_to groups_path
-
 end
   private
   def addOrder_params

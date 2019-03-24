@@ -21,7 +21,7 @@
               <td><%=order.status%></td>
                 <td>
 <!--                  link_to order.category, order_path(order)-->
-                    <%= button_to order_orderdata_path(order),
+                    <%= button_to order_path(order),
                     method: :get,
                     form: {style: 'display:inline-block;margin:0'} do %>
                         <i class='far fa-eye'></i>View
