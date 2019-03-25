@@ -9,17 +9,12 @@
                       <%
                         @lastOrder.each do |order|
                       %>
-                      <%
-                          if order.user_id === current_user.id
-                      %>
                   <p>
-                          <%= link_to order.category, order_path(order) %>
-
+                          <%=order.category %>
                           on
-                          <%#= order.date %>
+                          <%=  order.created_at.strftime("%Y-%d-%h") %>
                   </p>
                       <%
-                          end
                          end
                       %>
               </div>
@@ -33,11 +28,8 @@
               <div>
                         <% @orderFriend.each do |order|%>
                       <p>
-                              <%= User.find_by_id(order.user_id).name %>
-                                has created anorder for
-                              <%= link_to order.category, orders_path %>
-                                from
-                              <%= order.resturant %>
+                              <%= User.find_by_id(order.user_id).name + " has created anorder for "%>
+                              <%= order.category + " from " + order.resturant %>
                       </p>
                           <%
                         end

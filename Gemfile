@@ -32,15 +32,17 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'activestorage-validator'
 
 gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'htmlbeautifier'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+# activate this in production
+gem "aws-sdk-s3", require: false 
+gem 'mini_magick', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
