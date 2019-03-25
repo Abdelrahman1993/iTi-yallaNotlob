@@ -9,6 +9,8 @@ mount ActionCable.server => "/cable"
   resources :user_order_participation , path: 'orderdata'
   end
 
+  post '/orders/:order_id/orderdata/deleteUserInvited/:id/:orderId' , to: 'user_order_participation#deleteUserInvited'
+
 
   resources :groups
   resources :user_order_invitations

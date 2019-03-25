@@ -2,7 +2,8 @@
 
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id: current_user.id) # this will be replaced by logged in user id
+    @orders = Order.where(user_id: current_user.id).last(100) # this will be replaced by logged in user id
+    p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
   end

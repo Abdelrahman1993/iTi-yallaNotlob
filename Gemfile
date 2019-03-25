@@ -6,6 +6,7 @@ gem 'devise'
 gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+# gem 'webpacker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use mysql as the database for Active Record
@@ -38,7 +39,8 @@ gem 'jquery-rails'
 gem 'htmlbeautifier'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "aws-sdk-s3", require: false
+# activate this in production
+gem "aws-sdk-s3", require: false 
 gem 'mini_magick', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

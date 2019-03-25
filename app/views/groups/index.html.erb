@@ -30,7 +30,8 @@
             </tr>
           </thead>
           <tbody id="myGroups">
-            <% @groups.each do |group| %>
+
+          <% @groups.each do |group| %>
             <tr>
               <td>
                 <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
@@ -46,7 +47,7 @@
                 <% end %>
               </td>
             </tr>
-            <% end %>
+          <% end %>
           </tbody>
         </table>
       </div>
