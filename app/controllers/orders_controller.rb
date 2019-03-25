@@ -2,7 +2,8 @@
 
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id: current_user.id) # this will be replaced by logged in user id
+    @orders = Order.where(user_id: current_user.id).last(100) # this will be replaced by logged in user id
+    p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
   end
@@ -56,7 +57,7 @@ class OrdersController < ApplicationController
 
       @orderItem = UserOrderParticipation.find(params[:id])
       @orderItem.destroy
-      redirect_to orders_path, id:params[:order_id]
+      redirect_to orders_path
       end
 
     def update

@@ -24,13 +24,12 @@
         %>
         <tr>
           <th scope="row"><%= order.user.name %></th>
-<!--          <td><%#= orderPar.user.name %></td>-->
           <td><%= order.item %></td>
           <td><%= order.amount %></td>
           <td><%= order.price %></td>
-          <td><%= order.id %></td>
+          <td><%= order.comment %></td>
           <td>
-        <%if order.user.name === current_user.name %>
+        <%if order.user.id === current_user.id %>
             <%= button_to "delete", {:controller => :user_order_participation,
                          :action => 'destroy', :id => order.id }, :method => :delete,
                           :class =>'btn btn-outline-danger btn-sm' %>
@@ -46,11 +45,17 @@
         </tbody>
       </table>
     </div>
-
+    <%
+      "+++++++++++++++++++++++++++++++++++++"
+    %>
     <div class="col-sm-6">
       <div class="oredr-img">
+        <img class="img-fluid rounded" src="<%= @orderImg.menu %>">
         <img class="img-fluid rounded" src="<%= asset_path('food_menue.jpg') %>">
       </div>
+    </div>
+    <%# end %>
+    <div class="container mt-1">
       <div class="invited-joined mt-3 row">
         <div class="invited col-sm-6">
           <!-- Button to Open the Modal -->
@@ -80,7 +85,12 @@
                       <h5 class="card-title">
                         <%= orderInv.user.name %>
                       </h5>
-                      <a href="#" class="btn btn-outline-danger btn-sm">Remove</a>
+                      <%= form_tag({controller: "user_order_participation",
+                          action: "deleteUserInvited",:id =>orderInv.user.id,
+                          :orderId => orderInv.id }, method: "post") do %>
+                            <% submit_tag("remove", :type => 'submit',
+                             class:"btn btn-outline-danger btn-sm") %>
+                      <% end %>
                     </div>
                   </div>
                   <% end %>
@@ -146,26 +156,31 @@
     <div class="col-sm-12">
 
       <%= form_tag({controller: "user_order_participation", action: "create"}, method: "post") do  %>
-      <%# form_with scope: :  do |f| %>
         <div class="form-row">
           <div class="col-sm-3">
-            <%#= text_field_tag :name,"", class: 'form-control',placeholder: 'enter Name\'s friend' %>
-            <%= text_field_tag :item,"", class: 'form-control', placeholder: 'Item' %>
+            <%= text_field_tag :item,"", class: 'form-control',
+             pattern: "[a-zA-Z0-9]*",placeholder: 'Item',:required => true %>
           </div>
+
           <div class="col-sm-2">
-            <%= number_field_tag :amount,"", class: 'form-control', placeholder: 'Amount' %>
-            <%#= hidden_field_tag :params[:id],"", class: 'form-control', placeholder: 'Amount' %>
+            <%= number_field_tag :amount,"", class: 'form-control',
+                placeholder: 'Amount',:required => true, :min => 1 %>
           </div>
+
           <div class="col-sm-2">
-            <%= number_field_tag :price,"", class: 'form-control', placeholder: 'Price' %>
+            <%= number_field_tag :price,"", class: 'form-control',
+                placeholder: 'Price',:required => true, :min => 3 %>
           </div>
+
           <div class="col-sm-3">
-            <%= text_field_tag :comment,"", class: 'form-control', placeholder: 'Comment' %>
+            <%= text_field_tag :comment,"", pattern: "[a-zA-Z0-9]*",
+                class: 'form-control', placeholder: 'Comment' %>
           </div>
+
           <div class="col-sm-2">
             <%= submit_tag("Add", :type => 'submit', class:"btn btn-primary mb-2") %>
-            <%#= submit "Add" , class:""  %>
           </div>
+
         </div>
         <% end %>
     </div>
