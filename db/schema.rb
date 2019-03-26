@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_180706) do
   create_table "user_order_invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "order_id"
+    t.integer "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_user_order_invitations_on_order_id"
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_180706) do
     t.text "comment"
     t.float "price"
     t.integer "amount"
+    t.integer "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_user_order_participations_on_order_id"
