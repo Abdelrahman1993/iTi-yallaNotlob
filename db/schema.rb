@@ -30,8 +30,7 @@ ActiveRecord::Schema.define(version: 2019_03_24_143253) do
     t.string "category"
     t.text "menu"
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.timestamp "date"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
