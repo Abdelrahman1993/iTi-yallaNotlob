@@ -1,8 +1,10 @@
 <%= render 'navbar' %>
-<table>
-    <% current_user..each do |invetation| %>
-    <tr>
-        <td><%= invetation%></td>
-    </tr>
-    <% done %>
-</table>
+
+<div>
+    <p><%= current_user.UserOrderInvitations[0].order.user.name %> invited you to 
+    <%= link_to current_user.UserOrderInvitations[0].order.category,
+     order_user_order_participation_index_path(current_user.UserOrderInvitations[0].order.id)%>
+     from  <%= current_user.UserOrderInvitations[0].order.resturant %>
+    </p>
+</div>
+

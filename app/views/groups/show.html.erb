@@ -1,4 +1,6 @@
 <%= render 'navbar' %>
+
+
 <div class="jumbotron py-5 m-0">
   <div class="container">
     <div class="row">
@@ -35,7 +37,6 @@
                 <td>
                   <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
                     <h5 class="groupName"><%= group.name %></h5>
-               
                   <% end %>
                 </td>
                 <td class="pr-0">
@@ -54,46 +55,68 @@
       <div class="col-7" id="singleGroup">
         <div class="row mt-3">
           <div class="col">
-        
-            <h3 id="groupTitle"><%= Group.find_by(id: params[:id]).name %></h3>
-          </div>
-        </div>
-        <%= form_tag({controller: "groups", action: "addUserGroup"}, method: "post") do %>
-          <div class="row mt-3">
-            <div class="col-6">
-              <%= text_field_tag :name,"", class: 'form-control',placeholder: 'enter Name\'s friend' %>
-            </div>
-            <div class="col-6">
-              <%= submit_tag("Add", :type => 'submit', class:"btn btn-light") %>
+            <% $group = Group.find_by(id: params[:id],user_id: current_user.id) %>
+            <%if(!$group)%>
+              <h2>Group Not Found !</h2>
+            <%else %>
+              <h3 id="groupTitle"><%= $group.name %></h3>
             </div>
           </div>
-        <% end %>
-        <div class="row py-3">
-          <% @groupUsers = UserGroup.where(group_id: $test)
+          <% @userFriends= Friendship.where(user_id: current_user.id) %>
+          <%= form_tag({controller: "groups", action: "addUserGroup"}, method: "post") do %>
+            <div class="row mt-3">
+              <div class="col-6">
+                <select id="dropdown" class="ui fluid search dropdown" multiple="">
+                  <% @userFriends.each do |user| %>
+                    <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
+                  <%end%>
+                </select>
+                <input type="hidden" id="friends" name="friends" value="">
+              </div>
+              <div class="col-6">
+                <%= submit_tag("Add", :type => 'submit', class:"btn btn-light") %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row py-3">
+            <% @groupUsers = UserGroup.where(group_id: $test)
                                 @groupUsers.each do |groupUser| %>
-            <div class="col-4 mt-2">
-              <div class="row">
-                <div class="col-4">
-                  <% if current_user.image %>
-                    <img src="<%= current_user.image %>" style="border-radius:50%">
-                  <% else %>
-                    <img height=40 class="profile m-auto" src="<%= asset_path('default.png') %>">
+              <div class="col-4 mt-2">
+                <div class="row">
+                  <div class="col-4">
+                    <% if current_user.image %>
+                      <img src="<%= current_user.image %>" style="border-radius:50%">
+                    <% else %>
+                      <img height=40 class="profile m-auto" src="<%= asset_path('default.png') %>">
+                    <% end %>
+                  </li>
+                </div>
+                <div class="col-8">
+                  <a href="#" class="d-block">
+                    <%= User.find_by(id: groupUser.user_id).name %>
+                  </a>
+                  <%= link_to group_user_path(groupUser.user_id) , method: :delete, data: { confirm: 'Are you sure?' }, class: group_user_path(groupUser.user_id) do %>
+                    <h6>Remove User</h6>
                   <% end %>
-                </li>
-              </div>
-              <div class="col-8">
-                <a href="#" class="d-block">
-                  <%= User.find_by(id: groupUser.user_id).name %>
-                </a>
-                <%= link_to group_user_path(groupUser.user_id) , method: :delete, data: { confirm: 'Are you sure?' }, class: group_user_path(groupUser.user_id) do %>
-                  <h6>Remove User</h6>
-                <% end %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        <%end %>
       </div>
     </div>
   </div>
 </div>
 </div>
+<script>
+  $('.ui.dropdown')
+        .dropdown({
+     onAdd: function (value, text, $selectedItem) {
+                let img = $(`[data-name=\"${text}\"`).data("img")
+                console.log(img)
+                const friends = document.getElementById("friends");
+                    friends.value += `${value},`
+     console.log(friends.value);
+     }
+       });
+</script>
