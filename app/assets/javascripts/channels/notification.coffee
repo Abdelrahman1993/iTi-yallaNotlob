@@ -6,9 +6,8 @@ App.notification = App.cable.subscriptions.create "NotificationChannel",
     console.log("unfortunetly disconnected")
 
   received: (data) ->
-  # document.getelementbyid("notificationsBox").innerhtml = data.message;
-  
-    # alert(data.message)
+    console.log(data);
+    alert(data.message)
     
 
   send_msg: (data) ->
