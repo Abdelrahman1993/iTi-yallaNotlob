@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
     def destroy
 
             @group_id = params[:id]

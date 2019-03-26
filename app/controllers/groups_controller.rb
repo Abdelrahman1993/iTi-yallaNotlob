@@ -8,18 +8,45 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    @groups = Group.where(user_id: current_user.id)
+  
+    @groupName=@group.name
     @group.user_id = current_user.id
-    @group.save
-    redirect_to groups_path
+    if(@group.save)
+      redirect_to groups_path
+    else
+      $Error=[]
+      $Error.push( @group.errors.full_messages);
+      p "=============================="
+      # p $nameErr
+      p "=============================="
+
+      redirect_to groups_path
+    end
+     
+  
+
+  
   end
 
   def show
-    @groups = Group.all
+    @groups = Group.where(user_id: current_user.id)
     @group = Group.new
-    @groupId = Group.find(params[:id])
-    $test =  @groupId.id
-    p '---------'
-    p @groupId.id
+
+# debugger
+    if(UserGroup.where(user_id: current_user.id).where(group_id: params[:id]))
+      @groupId = Group.find_by(id: params[:id])
+      if(@groupId)
+        $test =  @groupId.id
+        p '---------'
+      end
+      p '------======================================---'
+      p @groupId;
+     
+    
+    end
+
+
   end
 
   # def edit
@@ -39,42 +66,30 @@ class GroupsController < ApplicationController
   end
 
  def addUserGroup
-        @usergroup = UserGroup.new
-        @user = User.find_by(name: params[:name])
 
-        if @user
-          if @user.name == current_user.name
-            redirect_to groups_path
+        @friends = params[:friends].split(',')
+
+        @friends.each do |friend|
+      
+          @usergroup = UserGroup.new
+          @usergroup.user_id = friend.to_i
+          @usergroup.group_id=$test
+          if @usergroup.save
+              redirect_to groups_path
           else
-            if UserGroup.find_by(user_id: @user.id,group_id: $test)
-              redirect_to groups_path
-             else
-              @usergroup.user_id = @user.id
-              @usergroup.group_id=$test
-              @usergroup.save
-              redirect_to groups_path
-             end
+            p "===================="
+            p "error in saving"
+            p "====================="
+            $Error.push(@usergroup.errors.full_messages)
+            redirect_to groups_path
           end
-           
-        else
-            puts "-------------"
-            render html: "
-            <div style='background-color:#e6fff9;border:2px;border-raduis:5px;width:60%;margin:0 auto;'>
-            <h1 style='margin-left:40%'>ERROR</h1>
-            <ul style='margin-left:15%;font-size:30px'><strong>#{params[:name]}</strong> is Not Found Please enter Found Name!</ul>
-            <a style='margin-left:35%;font-size:30px' href='http://localhost:3000/groups/'>back to group page</a>
-            </div>
-            ".html_safe
-            puts "error in finding user"
-       
-            
-        end
-       # render plain: params.inspect
+      end
     end
     
    
     private 
         def group_params
-            params.require(:group).permit(:name,:user_id)
-        end
+            params.require(:group).permit(:name)
+        end   
+
 end

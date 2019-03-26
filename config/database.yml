@@ -20,7 +20,7 @@ default: &default
 #  password:
 #  socket:  /opt/lampp/var/mysql/mysql.sock
   username: root
-  password: root
+  password: 
   socket:  /var/run/mysqld/mysqld.sock
 
 development:

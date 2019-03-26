@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_220912) do
+ActiveRecord::Schema.define(version: 2019_03_26_180706) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_220912) do
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
+    t.index ["user_id", "name"], name: "index_groups_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_220912) do
     t.bigint "user_id"
     t.bigint "group_id"
     t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_user_groups_on_user_id_and_group_id", unique: true
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
