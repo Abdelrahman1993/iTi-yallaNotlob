@@ -7,6 +7,8 @@ class CreateUserOrderParticipations < ActiveRecord::Migration[5.2]
       t.text :comment
       t.float :price
       t.integer :amount
+      t.integer :seen
+
 
       t.timestamps
     end

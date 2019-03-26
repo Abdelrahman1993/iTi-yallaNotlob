@@ -7,4 +7,8 @@ class Order < ApplicationRecord
   has_one_attached :menu
   validates :menu, presence: true, blob: { content_type: :image } 
   validates :resturant, :category, :menu, :user_id, presence: true
+
+  belongs_to :user
+  has_many :UserOrderInvitations
+  has_many :UserOrderParticipations
 end
