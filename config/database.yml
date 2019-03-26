@@ -14,37 +14,18 @@ default: &default
   ###### Database is now online ############
   #if you want to access the DB go to https://remotemysql.com/phpmyadmin/index.php  username: eHshF8BNEd,  password: quKc48XLeO
   adapter: mysql2
-#<<<<<<< HEAD
-#  encoding: utf8
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  username: root
-#  password:
-#  socket:  /opt/lampp/var/mysql/mysql.sock
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  socket:  /opt/lampp/var/mysql/mysql.sock
 #  username: root
 #  password: root
 #  socket:  /var/run/mysqld/mysqld.sock
-#   encoding: utf8
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-# #  username: root
-# #  password:
-# #  socket:  /opt/lampp/var/mysql/mysql.sock
-#   username: root
-#   password: root
-#   socket:  /var/run/mysqld/mysqld.sock
-  
-#=======
-#  encoding: utf8
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#>>>>>>> 1d00a43c2dba214555cdc5d9aa2a2a77aa175d5f
-  host: remotemysql.com
-  username: eHshF8BNEd
-  password: quKc48XLeO
-  port: 3306
-  database: eHshF8BNEd
 
 development:
   <<: *default
-  database: eHshF8BNEd
+  database: yallaNotlob_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

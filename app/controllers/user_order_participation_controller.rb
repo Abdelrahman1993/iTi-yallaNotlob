@@ -3,10 +3,11 @@ class UserOrderParticipationController < ApplicationController
 
   def index
     @orderParticipation = UserOrderParticipation.where(order_id: params[:order_id])
+    # debugger
     @order=Order.find(params[:order_id])
     @addOrder = UserOrderParticipation.new
     @orderInvited = UserOrderInvitation
-    .where('user_id <> ?', current_user.id).where(order_id: params[:order_id])
+    .where('user_id <> ?', current_user.id).group(:user_id).where(order_id: params[:order_id])
     @orderPartic = UserOrderParticipation
                        .where(order_id: params[:order_id])
                        .group(:user_id)
