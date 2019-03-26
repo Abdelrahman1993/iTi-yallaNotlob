@@ -14,6 +14,9 @@ class User < ApplicationRecord
     has_many :orders
     has_many :friends, foreign_key: :user_id,class_name: "Friendship"
 
+    has_many :UserOrderInvitations
+    has_many :UserOrderParticipations
+
     has_many :friendships
     # belongs_to :groups
     # belongs_to :user_groups

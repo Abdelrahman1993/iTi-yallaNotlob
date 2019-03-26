@@ -14,15 +14,8 @@ default: &default
   ###### Database is now online ############
   #if you want to access the DB go to https://remotemysql.com/phpmyadmin/index.php  username: eHshF8BNEd,  password: quKc48XLeO
   adapter: mysql2
-#   encoding: utf8
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-# #  username: root
-# #  password:
-# #  socket:  /opt/lampp/var/mysql/mysql.sock
-#   username: root
-#   password: root
-#   socket:  /var/run/mysqld/mysqld.sock
-  
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>  
   host: remotemysql.com
   username: eHshF8BNEd
   password: quKc48XLeO
