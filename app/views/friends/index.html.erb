@@ -1,5 +1,6 @@
 
      <%= render 'navbar' %>
+     @user = User.where.not(id: current_user.id)
     <div class="container">
         <h3 class="">Friends</h3>
         <div class="input-group mb-3">

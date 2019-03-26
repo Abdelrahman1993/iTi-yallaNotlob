@@ -1,6 +1,6 @@
 <%= render 'navbar' %>
 <%
-    @user = User.where.not(id: current_user.id)
+    @friends = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
 <%if @order.errors.any? %>
