@@ -8,8 +8,8 @@ config.action_mailer.smtp_settings = {
   domain: "example.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV["GMAIL_USERNAME"],
-  password: ENV["GMAIL_PASSWORD"]
+  user_name: 'yalanotlobiti@gmail.com',
+  password: 'yalanotlobiti39'
 }
 
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

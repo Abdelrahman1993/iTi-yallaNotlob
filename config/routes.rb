@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'notifications/index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 mount ActionCable.server => "/cable"
 
@@ -33,7 +34,7 @@ mount ActionCable.server => "/cable"
   end
 
   
-  
+  resources :notifications
   
   get 'signup' , to:"users#signup"
   get 'signin' , to:"users#signin"
