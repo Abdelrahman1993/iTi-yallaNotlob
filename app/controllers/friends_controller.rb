@@ -26,8 +26,10 @@ class FriendsController < ApplicationController
     users = params[:users].split(',')
     unless users.empty?
       users.each do |user|
-        @friend = Friendship.new(user_id: current_user.id, friend_id: user)
-        @friend.save
+        if user != current_user.id
+          @friend = Friendship.new(user_id: current_user.id, friend_id: user)
+          @friend.save
+        end
       end
       redirect_to user_friends_path(current_user.id) if @friend.save
       # @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]['id']

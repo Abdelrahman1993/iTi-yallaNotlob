@@ -42,6 +42,8 @@ class OrdersController < ApplicationController
         invited_user.order_id = order_id
         invited_user.user_id = user
         invited_user.save
+        p"==============================="
+        p invited_user.errors.full_messages
       end
       redirect_to orders_path
       # end

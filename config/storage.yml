@@ -2,12 +2,11 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-amazon:
-  service: S3
-  access_key_id: <%= ENV['BUCKETEER_AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'] %>
-  region: <%= ENV['BUCKETEER_AWS_REGION'] %>
-  bucket: <%= ENV['BUCKETEER_BUCKET_NAME'] %>
+cloudinary:
+  service: Cloudinary
+  cloud_name: dcznemaeb
+  api_key: '796567819921927'
+  api_secret: 8viuD_yhsx5pjY817V9bw56AiIM
 
 local:
   service: Disk
