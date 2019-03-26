@@ -7,7 +7,10 @@ gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'yarn', '~> 0.1.1'
-gem "therubyracer"
+# gem "therubyracer"
+# gem 'harmony'
+# gem 'envjs'
+#gem 'johnson'
 
 # gem 'webpacker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
