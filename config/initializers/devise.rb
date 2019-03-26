@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'b5a105e1562f5e0aef9adfe7137b60774c8df4baaad83a769508f348a074faf1a9bcf2b410fdaf9c371ad9dad570cea3cae2df07a0f6bfa450fec55658757caf'
+  #config.secret_key = 'b5a105e1562f5e0aef9adfe7137b60774c8df4baaad83a769508f348a074faf1a9bcf2b410fdaf9c371ad9dad570cea3cae2df07a0f6bfa450fec55658757caf'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -297,7 +297,7 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
   config.omniauth :facebook, "397229457741304", "fa4f7ae976309c68af042711e7c8caa4", callback_url: "http://localhost:3000/users/auth/facebook/callback"
-  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], scope: 'userinfo.email,userinfo.profile'
+  config.omniauth :google_oauth2,'509347037024-cncr5srkudq5l3f0s7q34sul04b7i0s1.apps.googleusercontent.com','lobgdIgsYLfPYrPDfZG98chl' , scope: 'userinfo.email,userinfo.profile'
   # provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 
 
