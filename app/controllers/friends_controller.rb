@@ -54,7 +54,6 @@ class FriendsController < ApplicationController
 
       # end
 
-      redirect_to user_friends_path(current_user.id) if @friend.save
       end
   end
 
