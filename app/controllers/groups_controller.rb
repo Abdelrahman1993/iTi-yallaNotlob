@@ -38,6 +38,7 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+<<<<<<< HEAD
  def addUserGroup
         @usergroup = UserGroup.new
         @user = User.find_by(name: params[:name])
@@ -59,12 +60,31 @@ class GroupsController < ApplicationController
         else
             puts "-------------"
             render html: "
+=======
+def addUserGroup
+  @usergroup = UserGroup.new
+  @user = User.find_by(name: params[:name])
+  if @user
+    if UserGroup.find_by(user_id: @user.id,group_id: $test)
+      redirect_to groups_path
+    else
+      @usergroup.user_id = @user.id
+      @usergroup.group_id=$test
+      @usergroup.save
+      redirect_to groups_path
+    end
+
+  else
+    puts "-------------"
+    render html: "
+>>>>>>> 9f42dc7ca2123fb3cb658d7ea7470866b13024cd
             <div style='background-color:#e6fff9;border:2px;border-raduis:5px;width:60%;margin:0 auto;'>
             <h1 style='margin-left:40%'>ERROR</h1>
             <ul style='margin-left:15%;font-size:30px'><strong>#{params[:name]}</strong> is Not Found Please enter Found Name!</ul>
             <a style='margin-left:35%;font-size:30px' href='http://localhost:3000/groups/'>back to group page</a>
             </div>
             ".html_safe
+<<<<<<< HEAD
             puts "error in finding user"
        
             
@@ -77,4 +97,36 @@ class GroupsController < ApplicationController
         def group_params
             params.require(:group).permit(:name,:user_id)
         end
+=======
+    puts "error in finding user"
+
+
+  end
+  # render plain: params.inspect
+  # redirect_to groups_path
+end
+
+# def deleteUserGroup
+#     @userGroup=UserGroup.find(params[:id])
+#     @userGroup.destroy
+#     redirect_to groups_path
+
+# end
+private
+  def group_params
+    params.require(:group).permit(:name,:user_id)
+  end
+
+    def deleteUserGroup
+      @userGroup = UserGroup.find(params[:id])
+      @userGroup.destroy
+      redirect_to groups_path
+    end
+
+private
+
+def group_params
+  params.require(:group).permit(:name, :user_id)
+>>>>>>> 9f42dc7ca2123fb3cb658d7ea7470866b13024cd
+end
 end

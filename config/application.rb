@@ -1,5 +1,4 @@
 require_relative 'boot'
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -23,5 +22,6 @@ Rails.application.config.assets.precompile += ['addOrder.js', 'order.css']
 Rails.application.config.assets.precompile += ['signin.css']
 Rails.application.config.assets.precompile += ['signup.css', 'home.css', 'friends.css', 'friends.js']
 Rails.application.config.assets.precompile += ['groups.js', 'groups.css']
+Rails.application.config.assets.precompile += ['main.js', 'main.css']
 
 
