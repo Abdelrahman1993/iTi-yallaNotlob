@@ -30,25 +30,7 @@
             </tr>
           </thead>
           <tbody id="myGroups">
-<<<<<<< HEAD
-            <% @groups.each do |group| %>
-              <tr>
-                <td>
-                  <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
-                    <h5 class="groupName" ><%= group.name %></h5>
-                  <% end %>
-                </td>
-                <td class="pr-0">
-                  <%= link_to group_path(group) , method: :get, class: group_path(group) do %>
-                    <i class="fas fa-user-plus fa-lg pr-4"></i>
-                  <% end %>
-                  <%= link_to group_path(group) , method: :delete, data: { confirm: 'Are you sure?' }, class: group_path(group) do %>
-                    <i class="fas fa-user-times fa-lg "></i>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-=======
+
 
           <% @groups.each do |group| %>
             <tr>
@@ -67,7 +49,6 @@
               </td>
             </tr>
           <% end %>
->>>>>>> 9f42dc7ca2123fb3cb658d7ea7470866b13024cd
           </tbody>
         </table>
       </div>
