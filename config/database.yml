@@ -14,35 +14,23 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-<<<<<<< HEAD
 #  username: root
 #  password:
 #  socket:  /opt/lampp/var/mysql/mysql.sock
   username: root
   password: root
   socket:  /var/run/mysqld/mysqld.sock
-=======
-  host: remotemysql.com
-  username: eHshF8BNEd
-  password: quKc48XLeO
-  port: 3306
-  database: eHshF8BNEd
-#  username: abdo
-#  password: abdo9111993
-#  socket:  /var/run/mysqld/mysqld.sock
-
->>>>>>> 2ca0cf41d2c903f4cb809ad076ebcc3123e110ae
 
 development:
   <<: *default
-  database: eHshF8BNEd
+  database: yallaNotlob_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: eHshF8BNEd
+  database: yallaNotlob_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
