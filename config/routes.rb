@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 mount ActionCable.server => "/cable"
 
+
   # devise_for :users
   resources :orders do
   resources :user_order_participation , path: 'orderdata'
   end
+
+  post '/orders/:order_id/orderdata/deleteUserInvited/:id/:orderId' , to: 'user_order_participation#deleteUserInvited'
 
 
   resources :groups

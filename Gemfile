@@ -5,6 +5,11 @@ ruby '2.6.0'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'yarn', '~> 0.1.1'
+
+
+# gem 'webpacker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use mysql as the database for Active Record
@@ -29,15 +34,17 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'activestorage-validator'
 
 gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'htmlbeautifier'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+# activate this in production
+gem "aws-sdk-s3", require: false 
+gem 'mini_magick', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
