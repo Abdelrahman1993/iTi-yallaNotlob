@@ -5,7 +5,7 @@ class Order < ApplicationRecord
     finished: 'finished'
   }
   has_one_attached :menu
-  # validates :menu, presence: true, blob: { content_type: :image } 
+  validates :menu, presence: true, blob: { content_type: :image } 
   validates :resturant, :category, :user_id, presence: true
 
   belongs_to :user
