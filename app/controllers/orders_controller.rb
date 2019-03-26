@@ -47,7 +47,6 @@ class OrdersController < ApplicationController
       # end
     else
       render :new
-      p '=====================:'
     end
   end
 
