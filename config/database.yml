@@ -16,16 +16,31 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  username: root
-#  password:
-#  socket:  /opt/lampp/var/mysql/mysql.sock
   username: root
-  password: 
-  socket:  /var/run/mysqld/mysqld.sock
+  password:
+  socket:  /opt/lampp/var/mysql/mysql.sock
+#  username: root
+#  password: root
+#  socket:  /var/run/mysqld/mysqld.sock
+#   encoding: utf8
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+# #  username: root
+# #  password:
+# #  socket:  /opt/lampp/var/mysql/mysql.sock
+#   username: root
+#   password: root
+#   socket:  /var/run/mysqld/mysqld.sock
+  
+#  host: remotemysql.com
+#  username: eHshF8BNEd
+#  password: quKc48XLeO
+#  port: 3306
+#  database: eHshF8BNEd
+#>>>>>>> 8c9a6fafbacfa702d82892d6c27899f4a7963e72
 
 development:
   <<: *default
-  database: yallaNotlob_development
+  database: eHshF8BNEd
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -15,7 +15,6 @@
 
 # Ignore uploaded files in development
 /storage/*
-/config/database.yml
 !/storage/.keep
 
 /node_modules
