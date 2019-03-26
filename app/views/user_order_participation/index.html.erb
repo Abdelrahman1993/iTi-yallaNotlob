@@ -55,7 +55,7 @@
     <div class="container mt-1">
       <div class="invited-joined mt-3 row">
         <div class="invited col-sm-6">
-          <!-- Button to Open the Modal -->
+<!--           Button to Open the Modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
             invited friends
           </button>
@@ -66,56 +66,50 @@
               <div class="modal-content">
 
                 <!-- Modal Header -->
-<!--                <div class="modal-header">-->
-<!--                  <h4 class="modal-title">Invited Friends</h4>-->
-<!--                  <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                </div>-->
+                <div class="modal-header">
+                  <h4 class="modal-title">Invited Friends</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
                 <!-- Modal body -->
-<!--                <div class="modal-body row">-->
-                  <%#
-<!--                  @orderInvited.each do |orderInv|-->
+                <div class="modal-body row">
+                  <%
+                  @orderInvited.each do |orderInv|
                 %>
-<!--                  <div class="card col-sm-2 mx-2" style="width:150px">-->
+                  <div class="card col-sm-2 mx-2" style="width:150px">
 
-                    <%# if !orderInv.user.image.nil? %>
-<!--                    <img class="card-img-top" src="<%#= orderInv.user.image %>" alt="Card image" style="width:100%">-->
-                    <%#else%>
-<!--                    <img class="card-img-top" src="<%#= asset_path('default.png') %>" alt="Card image"-->
-<!--                      style="width:100%">-->
+                    <% if !orderInv.user.image.nil? %>
+                    <img class="card-img-top" src="<%= orderInv.user.image %>" alt="Card image" style="width:100%">
+                    <%else%>
+                    <img class="card-img-top" src="<%= asset_path('default.png') %>" alt="Card image"
+                      style="width:100%">
 
-                    <%#end%>
-<!--                    <div class="card-body">-->
-<!--                      <h5 class="card-title">-->
-                        <%
-                        # orderInv.user.name
-                        %>
-<!--                      </h5>-->
-                      <%
-#                 form_tag({controller: "user_order_participation",-->
-#                           action: "deleteUserInvited",:id =>orderInv.user.id,-->
-#                           :orderId => orderInv.id }, method: "post") do
-              %>
-                            <%
-#                 submit_tag("remove", :type => 'submit',-->
-#                              class:"btn btn-outline-danger btn-sm")
-              %>
-                      <%# end %>
-<!--                    </div>-->
-<!--                  </div>-->
-                  <%# end %>
-<!--                </div>-->
+                    <%end%>
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= orderInv.user.name %>
+                      </h5>
+                      <%= form_tag({controller: "user_order_participation",
+                          action: "deleteUserInvited",:id =>orderInv.user_id,
+                          :orderId => orderInv.id }, method: "post") do %>
+                            <% submit_tag("remove", :type => 'submit',
+                             class:"btn btn-outline-danger btn-sm") %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
 
-                 Modal footer
+                <!-- Modal footer -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>  end of invited
+        </div><!--  end of invited -->
         <div class="joined col-sm-6">
-           Button to Open the Modal -->
+          <!-- Button to Open the Modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
             Joined friends
           </button>
@@ -133,18 +127,18 @@
 
                 <div class="modal-body row">
                   <%
-                  # @orderPartic.each do |orderPar|
+                  @orderPartic.each do |orderPar|
                 %>
                   <div class="card col-sm-2 mx-2" style="width:150px">
-<!--                    <img class="card-img-top" src="<%#= asset_path('food_menue.jpg') %>" alt="Card image"-->
+                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image"
                       style="width:100%">
                     <div class="card-body">
                       <h5 class="card-title">
-                        <%#= orderPar.user.name %>
+                        <%= orderPar.user.name %>
                       </h5>
                     </div>
                   </div>
-                  <%#end %>
+                  <%end %>
                 </div>
 
                 <!-- Modal footer -->
