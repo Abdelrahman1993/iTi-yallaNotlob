@@ -38,8 +38,8 @@ config.action_mailer.default_url_options = { :host => 'yourhostsite.herokuapp.co
 
   # Compress JavaScripts and CSS.
   ##################################################
-  #config.assets.js_compressor = :uglifier
-  config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = Uglifier.new(harmony: true)
 
   ###################################################
   # config.assets.css_compressor = :sass
