@@ -75,14 +75,11 @@ class GroupsController < ApplicationController
           @usergroup.user_id = friend.to_i
           @usergroup.group_id=$test
           if @usergroup.save
-              redirect_to groups_path
           else
-            p "===================="
-            p "error in saving"
-            p "====================="
             $Error.push(@usergroup.errors.full_messages)
-            redirect_to groups_path
           end
+          redirect_to groups_path
+
       end
     end
     

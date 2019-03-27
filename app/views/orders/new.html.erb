@@ -72,7 +72,6 @@
         .dropdown({
             onAdd: function (value, text, $selectedItem) {
                 let img = $(`[data-name=\"${text}\"`).data("img")
-                console.log(img)
                 const groups = document.getElementById("groups");
                 const users = document.getElementById("users");
                 if (text.slice(-6, -1) === "Group") {
