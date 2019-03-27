@@ -1,6 +1,6 @@
 <%= render 'navbar' %>
 <%
-    @user = User.where.not(id: current_user.id)
+    @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
 <%if @order.errors.any? %>
@@ -19,11 +19,6 @@
         <% end %>
     </ul>
 </div>
-
-
-
-
-
 <% end%>
 
 <div>
@@ -42,7 +37,7 @@
             <h4> you can write frind name or group </h4>
             <select id="dropdown" class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
-                <option data-name= "<%= user.name%>" data-img = "<%= user.image%>" value="<%= user.id%>"><%= user.name%></option>
+                <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
                 <%end%>
                 <% @group.each do |group| %>
                 <option value="<%= group.id%>"><%= group.name%> (Group) </option>

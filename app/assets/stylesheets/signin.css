@@ -1,11 +1,12 @@
 body{
-  background-image: url("https://www.wallpaperup.com/uploads/wallpapers/2018/02/01/1199275/5db621453e2ca2a3561652dc29531cfa.jpg") !important;
-  background-size: cover;
+  /* background-image: url("https://www.wallpaperup.com/uploads/wallpapers/2018/02/01/1199275/5db621453e2ca2a3561652dc29531cfa.jpg") !important; */
+  /* background-size: cover; */
+  /* background-size: cover; */
   height: 100%;
   /* background: #5D2065 !important; */
 }
 .login-form {
-  width: 400px;
+  width: 500px;
   margin: 50px auto;
   background-color: blue;
   border-radius: 25px;
@@ -13,7 +14,7 @@ body{
 }
 .login-form form {
   margin-bottom: 15px;
-  background: #5D202E;
+  background: #FFF;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
   height: 500px;
@@ -31,4 +32,9 @@ body{
 .btn {
   font-size: 15px;
   font-weight: bold;
+}
+.reset-form{
+  width:50%;
+  margin: auto;
+  
 }
