@@ -3,7 +3,7 @@
     @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
-<%if @order.errors.any? %>
+<%if @order.errors.any? || $OrderError!="" %>
 <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
@@ -16,6 +16,10 @@
         <%else%>
         <li><%= message %></li>
         <%end%>
+        <%end%>
+        <%if $OrderError!=""%>
+        <li><%= $OrderError %></li>
+        <% $OrderError="";%>
         <% end %>
     </ul>
 </div>

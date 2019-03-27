@@ -1,4 +1,18 @@
 <%= render 'navbar' %>
+<%if $UserError!=""%>
+<div class="ui error message" style="font-size:14px">
+    <i class="close icon"></i>
+    <div class="header">
+        There were some errors with your submission
+    </div>
+    <ul class="list" style="font-size:13px">
+        <li><%= $UserError %></li>
+        </ul>
+</div>
+</div>
+
+<%$UserError=""%>
+<%end%>
 <% @user = User.where.not(id: current_user.id) %>
 <div class="container">
     <h3 class="">Friends</h3>

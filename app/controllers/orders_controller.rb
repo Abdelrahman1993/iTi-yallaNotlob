@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     suppress(Exception) do
       @order.menu = params[:order][:menu]
     end
+    if (! (params[:users].empty?&&params[:groups].empty?))
     if @order.save
       order_id = @order.id
       groups = params[:groups].split(',')
@@ -42,14 +43,16 @@ class OrdersController < ApplicationController
         invited_user.order_id = order_id
         invited_user.user_id = user
         invited_user.save
-        p"==============================="
-        p invited_user.errors.full_messages
       end
       redirect_to orders_path
       # end
     else
       render :new
     end
+  else
+    $OrderError="Please insert some friends"
+    redirect_to new_order_path
+  end
   end
 
   def destroy
