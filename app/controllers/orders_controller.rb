@@ -2,7 +2,7 @@
 
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id: current_user.id).last(100) # this will be replaced by logged in user id
+    @orders = Order.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 8) # this will be replaced by logged in user id
     p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation

@@ -11,4 +11,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :UserOrderInvitations
   has_many :UserOrderParticipations
+  self.per_page = 10
+  WillPaginate.per_page = 10
+
 end
