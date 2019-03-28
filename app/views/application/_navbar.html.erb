@@ -23,13 +23,15 @@
       <li class="nav-item">
       <img height=30 id="notificationIcon" class="profile mr-2 mt-1" src="<%= asset_path('notifications.png') %>">
       <h5 id="notificationsCount">0</h5>
-      
       </li>
       <div id="notificationsBox">
-        <ul id="notifications">
-        
-        <%= link_to "All notifications",  notifications_path, :class => 'mx-auto' %>
-        </ul>
+        <div>
+          <ul id="notifications">
+          </ul>
+        </div>
+        <div class="text-center">
+          <%= link_to "All notifications",  notifications_path, :class => 'mx-auto' %>
+        </div>
       </div>
       
       <li class="nav-item">

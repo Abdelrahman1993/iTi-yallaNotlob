@@ -7,7 +7,6 @@ App.notification = App.cable.subscriptions.create "NotificationChannel",
 
   received: (data) ->
     console.log(data);
-    alert(data.message)
     
 
   send_msg: (data) ->

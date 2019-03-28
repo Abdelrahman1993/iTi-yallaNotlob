@@ -24,7 +24,7 @@
 <div>
     <div class="row">
         <div class="col-lg-4">
-            <%= form_for @order do |f| %>
+            <%= form_for @order , :html => { :onsubmit => "submitInvitations()" } do |f| %>
             <h1>Add Order</h1>
             <select class="browser-default custom-select" name="category">
                 <option value="Breakfast">Breakfast</option>
@@ -43,12 +43,12 @@
                 <option value="<%= group.id%>"><%= group.name%> (Group) </option>
                 <%end%>
             </select>
-            <input type="hidden" id="users" name="users" value="">
+            <input type="hidden" id="users" name="users" data-names="" value="">
             <input type="hidden" id="groups" name="groups" value="">
             <span id="errorMsg"></span> <br>
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
-            <input class="btn btn-primary" type="submit" value="Publish" />
+            <input class="btn btn-primary" id="submitOrder" type="submit" value="Publish" />
             <%end%>
         </div>
         <div class="col-lg-6 form-group" style="margin-top: 2%">
@@ -78,7 +78,9 @@
                 if (text.slice(-6, -1) === "Group") {
                     groups.value += `${value},`
                 } else {
-                    users.value += `${value},`
+                    users.value += `${value},`;
+                    users.dataset.names += `${text},`
+                    console.log(users.value)
                 }
                 let friendInvite = document.getElementById("friendInvite");
                 let addFriend = document.getElementById("addFriend");
@@ -129,4 +131,8 @@
                 }
             }
         });
+
+
+
+        
 </script>
