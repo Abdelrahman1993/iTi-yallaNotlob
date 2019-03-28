@@ -40,8 +40,8 @@
             <h4> you can write frind name or group </h4>
             <select id="dropdown" class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
-                <option class = "usersNotify" data-name="<%=user.friend.id.to_s+user.friend.name%>" data-img="<%= user.friend.image%>"
-                    value="<%= user.friend.id%>"><%= user.friend.name+" "+user.friend.id.to_s%></option>
+                <option class = "usersNotify" data-name="<%=user.friend.id%>" data-img="<%= user.friend.image%>"
+                    value="<%= user.friend.id%>"><%= user.friend.name%></option>
                 <%end%>
                 <% @group.each do |group| %>
                 <%random = rand(1000000..9999999)%>%>
@@ -49,7 +49,7 @@
                     value="<%=group.id+random%>" data-userNames="
                     <%groups = UserGroup.where(group_id: group.id)%>
                    <% groups.each do |group|%>
-                   <%= group.user.id.to_s+group.user.name+"," %>
+                   <%= group.user.id+"," %>
                     <% end %>
 ">
                     <%=+group.name %> (Group)  </option>
