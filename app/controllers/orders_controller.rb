@@ -23,22 +23,17 @@ class OrdersController < ApplicationController
     suppress(Exception) do
       @order.menu = params[:order][:menu]
     end
-    if (! (params[:users].empty?&&params[:groups].empty?))
+    if (! (params[:users].empty?))
     if @order.save
       order_id = @order.id
-      groups = params[:groups].split(',')
-      groups.each do |group|
-        user_groups = UserGroup.select('user_id').where(group_id: group).as_json
-        user_groups.each do |user|
-          invited_users.push(user['user_id'])
-        end
-      end
       users = params[:users].split(',')
       users.each do |user|
         invited_users.push(user.to_i)
       end
       invited_users.uniq!
       invited_users.each do |user|
+        p "======================";
+        p user;
         invited_user = UserOrderInvitation.new
         invited_user.order_id = order_id
         invited_user.user_id = user
