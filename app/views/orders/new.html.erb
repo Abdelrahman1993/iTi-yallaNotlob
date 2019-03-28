@@ -3,7 +3,7 @@
     @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
-<%if @order.errors.any? || $OrderError!="" %>
+<%if @order.errors.any? || $OrderError=="Please insert some friends" %>
 <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
@@ -17,7 +17,7 @@
         <li><%= message %></li>
         <%end%>
         <%end%>
-        <%if $OrderError!=""%>
+        <%if $OrderError=="Please insert some friends"%>
         <li><%= $OrderError %></li>
         <% $OrderError="";%>
         <% end %>
@@ -41,10 +41,12 @@
             <h4> you can write frind name or group </h4>
             <select id="dropdown" class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
-                <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
+                <option data-name="<%= user.friend.name%>" data-img="<%= user.friend.image%>"
+                    value="<%= user.friend.id%>"><%= user.friend.name+" "+user.friend.id.to_s%></option>
                 <%end%>
                 <% @group.each do |group| %>
-                <option value="<%= group.id%>"><%= group.name%> (Group) </option>
+                <option class="groupUsers" data-users=<%= UserGroup.where(group_id: group.id).pluck(:user_id) %>
+                    value="<%=group.id+rand(1000000..9999999)%>"><%= group.name%> (Group) </option>
                 <%end%>
             </select>
             <input type="hidden" id="users" name="users" value="">
@@ -66,6 +68,11 @@
     </div>
 </div>
 <script>
+    const groupUsers = document.getElementsByClassName("groupUsers");
+    let data = [];
+    [...groupUsers].forEach((group) => {
+        data.push(group.dataset.users)
+    })
     $('.message .close')
         .on('click', function () {
             $(this).fadeOut("normal", function () {
@@ -75,11 +82,20 @@
     $('.ui.dropdown')
         .dropdown({
             onAdd: function (value, text, $selectedItem) {
+                console.log(value, " ", text, " ", $selectedItem);
                 let img = $(`[data-name=\"${text}\"`).data("img")
                 const groups = document.getElementById("groups");
                 const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value += `${value},`
+                if (text.includes("Group")) {
+                    let groupUsersIds = groupUsers.dataset;
+                    data.forEach(element => {
+                        console.log(element);
+                        [...element].forEach((id)=>{
+                            if (!isNaN(id)) {
+                            users.value += `${id},`;
+                        }
+                        })
+                    });
                 } else {
                     users.value += `${value},`
                 }
@@ -96,20 +112,15 @@
                 friendDiv.style.marginTop = "2%";
                 friendDiv.style.textAlign = "center";
                 let friendImg = document.createElement("img");
-                if(img){
+                if (img) {
                     friendImg.setAttribute("src", img)
+                } else {
+                    friendImg.setAttribute("src", "<%= asset_path('default.png') %>");
                 }
-                else{
-                    friendImg.setAttribute("src","<%= asset_path('default.png') %>");
-                }
-
-
-
                 friendImg.setAttribute("width", "100%");
                 friendImg.setAttribute("class", "card-img-top");
                 let dataDiv = document.createElement("div");
                 dataDiv.setAttribute("class", "card-body");
-
                 let friend = document.createElement("a");
                 friend.setAttribute("href", "#");
                 friend.setAttribute("class", "card-title");

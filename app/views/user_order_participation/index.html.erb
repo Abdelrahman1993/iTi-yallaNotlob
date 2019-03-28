@@ -30,7 +30,7 @@
           <td><%= order.price %></td>
           <td><%= order.comment %></td>
           <td>
-        <%if order.user.id === current_user.id %>
+        <%if order.user.id == current_user.id %>
             <%= button_to "delete", {:controller => :user_order_participation,
                          :action => 'destroy', :id => order.id }, :method => :delete,
                           :class =>'btn btn-outline-danger btn-sm' %>
