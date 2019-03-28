@@ -32,8 +32,6 @@ class OrdersController < ApplicationController
       end
       invited_users.uniq!
       invited_users.each do |user|
-        p "======================";
-        p user;
         invited_user = UserOrderInvitation.new
         invited_user.order_id = order_id
         invited_user.user_id = user

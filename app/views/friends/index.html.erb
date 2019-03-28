@@ -73,5 +73,12 @@
   </div>
 </div>
 <script>
-addFriend()
-</script>
+    $('.ui.dropdown')
+       .dropdown({
+           onAdd: function (value, text, $selectedItem) {
+               const users = document.getElementById("users");
+               users.value += `${value},`
+           }
+       })
+   console.log("looooooooool") 
+ </script>
