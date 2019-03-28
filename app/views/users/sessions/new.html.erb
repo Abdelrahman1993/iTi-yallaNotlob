@@ -4,7 +4,7 @@
 <div class="login-form">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <h2 class="text-center text-primary font-weight-bold font-italic text-capitalize">WELCOME</h2>
+  <h2 class="text-center font-weight-bold font-italic text-capitalize welcome">WELCOME</h2>
 
   <div class="form-group">
     <%= f.email_field :email, autofocus: true, placeholder:"email", :class => "form-control input-lg" %>
