@@ -1,5 +1,4 @@
 body{
-  overflow: hidden;
 
   display: block;
   position: relative;
@@ -33,7 +32,7 @@ body::after {
   border-radius: 25px;
   margin: 0 auto;
   padding: 30px 0;
-  height: 1000px;
+  height: 100vh;
   
 }
 .login-form form {
