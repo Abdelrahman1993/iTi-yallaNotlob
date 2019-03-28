@@ -1,7 +1,10 @@
 body {
-  background: #dfe7e9;
+  /* background: #dfe7e9;
   font-family: 'Roboto', sans-serif;
+  background-size: cover; */
+
 }
+
 .form-control {
   font-size: 16px;
   transition: all 0.4s;

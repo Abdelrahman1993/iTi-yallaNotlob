@@ -1,5 +1,6 @@
 
 
+
 <div class="login-form">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
@@ -21,7 +22,7 @@
   <% end %> -->
 
   <div class="form-group">
-    <%= f.submit "Log in", :class => "btn btn-primary btn-lg" %>
+    <%= f.submit "Log in", :class => "btn btn-primary btn-lg btn-block" %>
   </div>
 
   <div class="form-group">
@@ -38,4 +39,6 @@
   <%= render "users/shared/links" %>
   <% end %>
 </div>
+
+
 
