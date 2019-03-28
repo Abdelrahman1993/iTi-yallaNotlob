@@ -18,6 +18,7 @@ body{
     display: block;
     position: relative;
     background-color: #555;
+
 }
 body::after {
     content: "";
