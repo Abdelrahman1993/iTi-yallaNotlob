@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_180706) do
+ActiveRecord::Schema.define(version: 2019_03_28_081902) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_180706) do
     t.bigint "user_id"
     t.bigint "friend_id"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
@@ -117,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_180706) do
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "groups", "users"
   add_foreign_key "orders", "users"
-  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "groups", on_delete: :cascade
   add_foreign_key "user_groups", "users"
   add_foreign_key "user_order_invitations", "orders", on_delete: :cascade
   add_foreign_key "user_order_invitations", "users"

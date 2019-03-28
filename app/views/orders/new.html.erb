@@ -3,24 +3,27 @@
     @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
-<%if @order.errors.any? %>
-<div class="ui error message" style="font-size:14px">
+<%if @order.errors.any? || $OrderError.length > 0 %>
+  <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
-        There were some errors with your submission
+      There were some errors with your submission
     </div>
     <ul class="list" style="font-size:13px">
-        <% @order.errors.full_messages.each do |message| %>
+      <% @order.errors.full_messages.each do |message| %>
         <%if (message == "Menu translation missing: en.activerecord.errors.models.order.attributes.menu.content_type")%>
-        <li><%= "file type is not accepted please upload an image" %></li>
+          <li><%= "file type is not accepted please upload an image" %></li>
         <%else%>
-        <li><%= message %></li>
+          <li><%= message %></li>
         <%end%>
-        <% end %>
+      <%end%>
+      <%if $OrderError!=""%>
+        <li><%= $OrderError %></li>
+        <% $OrderError="";%>
+      <% end %>
     </ul>
-</div>
+  </div>
 <% end%>
-
 <div>
     <div class="row">
         <div class="col-lg-4">
@@ -48,91 +51,81 @@
             <span id="errorMsg"></span> <br>
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
-            <input class="btn btn-primary" id="submitOrder" type="submit" value="Publish" />
-            <%end%>
+            <input class="btn btn-primary" type="submit" value="Publish" />
+          <%end%>
         </div>
         <div class="col-lg-6 form-group" style="margin-top: 2%">
-            <fieldset class="the-fieldset">
-                <legend class="the-legend"> Friends invited :</legend>
-
-            </fieldset>
-
+          <fieldset class="the-fieldset">
+            <legend class="the-legend"> Friends invited :</legend>
+          </fieldset>
         </div>
-
+      </div>
     </div>
-</div>
-<script>
-    $('.message .close')
-        .on('click', function () {
-            $(this).fadeOut("normal", function () {
-                $(this).parent().remove();
-            });
-        });
-    $('.ui.dropdown')
-        .dropdown({
-            onAdd: function (value, text, $selectedItem) {
-                let img = $(`[data-name=\"${text}\"`).data("img")
-                console.log(img)
-                const groups = document.getElementById("groups");
-                const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value += `${value},`
-                } else {
-                    users.value += `${value},`;
-                    users.dataset.names += `${text},`
-                    console.log(users.value)
-                }
-                let friendInvite = document.getElementById("friendInvite");
-                let addFriend = document.getElementById("addFriend");
-                let fieldset = document.getElementsByClassName("the-fieldset")[0];
-                let errorMsg = document.getElementById("errorMsg");
-                let friendDiv = document.createElement("div");
-                friendDiv.setAttribute("class", "card")
-                friendDiv.setAttribute("data-added", text)
-                friendDiv.style.width = "170px";
-                friendDiv.style.cssFloat = "left";
-                friendDiv.style.marginLeft = "3%";
-                friendDiv.style.marginTop = "2%";
-                friendDiv.style.textAlign = "center";
-                let friendImg = document.createElement("img");
-                if(img){
-                    friendImg.setAttribute("src", img)
-                }
-                else{
-                    friendImg.setAttribute("src","<%= asset_path('default.png') %>");
-                }
-
-
-
-                friendImg.setAttribute("width", "100%");
-                friendImg.setAttribute("class", "card-img-top");
-                let dataDiv = document.createElement("div");
-                dataDiv.setAttribute("class", "card-body");
-
-                let friend = document.createElement("a");
-                friend.setAttribute("href", "#");
-                friend.setAttribute("class", "card-title");
-                friend.setAttribute("class", "friendName");
-                friend.style.textAlign = "center";
-                friend.appendChild(document.createTextNode(text));
-                dataDiv.appendChild(friend);
-                friendDiv.appendChild(friendImg);
-                friendDiv.appendChild(dataDiv);
-                fieldset.appendChild(friendDiv);
-            },
-            onRemove: function (value, text, $selectedItem) {
-                $(`[data-added=\"${text}\"`).remove()
-                const groups = document.getElementById("groups");
-                const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value = groups.value.replace(`${value},`, "")
-                } else {
-                    users.value = users.value.replace(`${value},`, "")
-                }
-            }
-        });
-
-
-
-        
-</script>
+    <script>
+      $('.message .close')
+          .on('click', function () {
+              $(this).fadeOut("normal", function () {
+                  $(this).parent().remove();
+              });
+          });
+      $('.ui.dropdown')
+          .dropdown({
+              onAdd: function (value, text, $selectedItem) {
+                  let img = $(`[data-name=\"${text}\"`).data("img")
+                  const groups = document.getElementById("groups");
+                  const users = document.getElementById("users");
+                  if (text.slice(-6, -1) === "Group") {
+                      groups.value += `${value},`
+                  } else {
+                      users.value += `${value},`
+                  }
+                  let friendInvite = document.getElementById("friendInvite");
+                  let addFriend = document.getElementById("addFriend");
+                  let fieldset = document.getElementsByClassName("the-fieldset")[0];
+                  let errorMsg = document.getElementById("errorMsg");
+                  let friendDiv = document.createElement("div");
+                  friendDiv.setAttribute("class", "card")
+                  friendDiv.setAttribute("data-added", text)
+                  friendDiv.style.width = "170px";
+                  friendDiv.style.cssFloat = "left";
+                  friendDiv.style.marginLeft = "3%";
+                  friendDiv.style.marginTop = "2%";
+                  friendDiv.style.textAlign = "center";
+                  let friendImg = document.createElement("img");
+                  if(img){
+                      friendImg.setAttribute("src", img)
+                  }
+                  else{
+                      friendImg.setAttribute("src","<%= asset_path('default.png') %>");
+                  }
+      
+      
+      
+                  friendImg.setAttribute("width", "100%");
+                  friendImg.setAttribute("class", "card-img-top");
+                  let dataDiv = document.createElement("div");
+                  dataDiv.setAttribute("class", "card-body");
+      
+                  let friend = document.createElement("a");
+                  friend.setAttribute("href", "#");
+                  friend.setAttribute("class", "card-title");
+                  friend.setAttribute("class", "friendName");
+                  friend.style.textAlign = "center";
+                  friend.appendChild(document.createTextNode(text));
+                  dataDiv.appendChild(friend);
+                  friendDiv.appendChild(friendImg);
+                  friendDiv.appendChild(dataDiv);
+                  fieldset.appendChild(friendDiv);
+              },
+              onRemove: function (value, text, $selectedItem) {
+                  $(`[data-added=\"${text}\"`).remove()
+                  const groups = document.getElementById("groups");
+                  const users = document.getElementById("users");
+                  if (text.slice(-6, -1) === "Group") {
+                      groups.value = groups.value.replace(`${value},`, "")
+                  } else {
+                      users.value = users.value.replace(`${value},`, "")
+                  }
+              }
+          });
+    </script>

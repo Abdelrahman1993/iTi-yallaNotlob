@@ -7,6 +7,8 @@ gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'yarn', '~> 0.1.1'
+gem 'will_paginate', '~> 3.1.1'
+gem "will_paginate_semantic_ui"
 # gem "therubyracer"
 # gem 'harmony'
 # gem 'envjs'

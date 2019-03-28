@@ -9,6 +9,9 @@ class Order < ApplicationRecord
   validates :resturant, :category, :user_id, presence: true
 
   belongs_to :user
-  has_many :UserOrderInvitations
-  has_many :UserOrderParticipations
+  has_many :UserOrderInvitations ,dependent: :delete_all
+  has_many :UserOrderParticipations , dependent: :delete_all
+  self.per_page = 10
+  WillPaginate.per_page = 10
+
 end
