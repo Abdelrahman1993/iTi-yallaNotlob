@@ -35,3 +35,8 @@ body::after {
     z-index: -1;   
   }
 
+  .table tr,
+  .table td {
+     color: white !important;
+     font-size: 1.3em;
+  }

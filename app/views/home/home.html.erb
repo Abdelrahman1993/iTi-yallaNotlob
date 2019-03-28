@@ -6,23 +6,14 @@
         <h5 class="titleText">Latest Orders</h5>
       </div>
       <div >
-        <%
-                        @lastOrder.each do |order|
-                      %>
-        <p class="px-3 text-left">
-          <%=order.category %>
-          on 
-          <%=
-                           order.created_at.strftime("%d-%h")
-                          %>
-          from 
-          <%=
-                            order.resturant
-                          %>
-        </p>
-        <%
-                         end
-                      %>
+        <% @lastOrder.each do |order| %>
+          <p class="px-3 text-left">
+            <strong class="text-info" > <%= order.category %></strong>
+            on  
+            <strong class="text-info"> <%= order.created_at.strftime("%d-%h") %></strong>
+            from <strong class="text-info"> <%= order.resturant %></strong>
+          </p>
+        <%end%>
       </div>
     </div>
     <div class="col-8 block">
@@ -34,13 +25,14 @@
       <div>
         <% @orderFriend.each do |order|%>
           <p class="px-3 text-left">
-            <%= User.find_by_id(order.user_id).name + " has created anorder for "%>
-            <%= order.category + " from " + order.resturant %>
+            <strong class="text-info"> <%= User.find_by_id(order.user_id).name %></strong>
+            <span> has created an order for </span>
+            <strong class="text-info"> <%= order.category %></strong>
+            <span> from </span>
+            <strong class="text-info"><%= order.resturant %></strong>
           </p>
-          <%
-                        end
-                        %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>

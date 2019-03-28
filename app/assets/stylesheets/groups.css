@@ -21,4 +21,10 @@ body{
 }
 .groupName{
     cursor: pointer;
+    font-size: 1.5em;
+    color: white;
+}
+.fr_name{
+    font-size: 1.5em;
+    color: white; 
 }
