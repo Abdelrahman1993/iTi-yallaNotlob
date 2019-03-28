@@ -1,20 +1,22 @@
 <%= render 'navbar' %>
 
 
-<div>
+<div class="p-5">
+<ul>
     <% @allNotifications.each do |notification| %>
     <% if notification['type'] == "inv" %>
-    <p><%= notification['name'] %> invited you to 
+    <li class="py-2"><%= notification['name'] %> invited you to 
     <%= link_to notification['category'],
     order_user_order_participation_index_path(notification['order_id'])%>
      from  <%= notification['restaurant'] %>
-    </p>
+    </li>
     <% elsif notification['type'] == "join" %>
-    <p>
+    <li class="py-2">
     <%= notification['name'] %> joined your
     <%= link_to "order",order_user_order_participation_index_path(notification['order_id'])%>
-    </p>
+    </li>
     <% end %>
-
+       
     <% end %>
+    <ul>
 </div>

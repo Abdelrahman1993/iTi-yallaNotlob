@@ -51,18 +51,18 @@ addFriend.addEventListener("click", () => {
 });
 }
 
-sendInvitation = (receiverId,name) =>
+sendInvitation = (receiverId,senderName) =>
 {
-    let message = "inv,"+receiverId+","+name
+    let message = "inv,"+receiverId+","+senderName
     App.notification.send_msg(message)
 }
 
-submitInvitations=()=>{
+submitInvitations=(senderName)=>{
 let ids = document.getElementById("users").value.split(",").filter(value => value.length >0);
-let names = document.getElementById("users").dataset.names.split(",").filter(value => value.length >0);
+// let names = document.getElementById("users").dataset.names.split(",").filter(value => value.length >0);
 
 ids.forEach(function(id) {
-    sendInvitation(id,names[ids.indexOf(id)]);
+    sendInvitation(id,senderName);
   });
 
 

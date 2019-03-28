@@ -5,8 +5,9 @@ class NotificationsController < ApplicationController
     @keys = [];
     @allNotifications = [];
     @counter=0
-    current_user.orders.each do |myOrder|
-    myOrder.UserOrderInvitations.each do |invitation|
+
+    @myInvitaions = UserOrderInvitation.where(user_id: current_user.id)
+      @myInvitaions.each do |invitation|
       @key = invitation.order.created_at.to_i;
       @allInfo.push({
       "type" => "inv",
@@ -16,8 +17,8 @@ class NotificationsController < ApplicationController
       "restaurant" => invitation.order.resturant,
       "key" => @key})
       @keys.push(@key);
-      end
     end
+
 
     current_user.orders.each do |order|
       order.UserOrderParticipations.each do |participation|
@@ -30,8 +31,9 @@ class NotificationsController < ApplicationController
       @keys.push(@key);
       end
     end
-    @keys = @keys.sort
-    @keys.each do |key|
+
+    @newkeys = @keys.sort.reverse
+    @newkeys.each do |key|
       @allInfo.each do |info|
         if key == info['key']
           @allNotifications.push(info);
