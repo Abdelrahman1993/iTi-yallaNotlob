@@ -3,45 +3,44 @@
     @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
-<%if @order.errors.any? || $OrderError!="" %>
-<div class="ui error message" style="font-size:14px">
+<%if @order.errors.any? || $OrderError.length > 0 %>
+  <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
-        There were some errors with your submission
+      There were some errors with your submission
     </div>
     <ul class="list" style="font-size:13px">
-        <% @order.errors.full_messages.each do |message| %>
+      <% @order.errors.full_messages.each do |message| %>
         <%if (message == "Menu translation missing: en.activerecord.errors.models.order.attributes.menu.content_type")%>
-        <li><%= "file type is not accepted please upload an image" %></li>
+          <li><%= "file type is not accepted please upload an image" %></li>
         <%else%>
-        <li><%= message %></li>
+          <li><%= message %></li>
         <%end%>
-        <%end%>
-        <%if $OrderError!=""%>
+      <%end%>
+      <%if $OrderError!=""%>
         <li><%= $OrderError %></li>
         <% $OrderError="";%>
-        <% end %>
+      <% end %>
     </ul>
-</div>
+  </div>
 <% end%>
-
 <div>
-    <div class="row">
-        <div class="col-lg-4">
-            <%= form_for @order do |f| %>
-            <h1>Add Order</h1>
-            <select class="browser-default custom-select" name="category">
-                <option value="Breakfast">Breakfast</option>
-                <option value="Launch">Launch</option>
-                <option value="Dinner">Dinner</option>
-            </select>
-            <h4> Write the restaurant name</h4>
-            <label for="restaurantName">From : </label>
-            <input class="form-control" type="text" name="restaurantName" value="" /><br>
-            <h4> you can write frind name or group </h4>
-            <select id="dropdown" class="ui fluid search dropdown" multiple="">
-                <% @user.each do |user| %>
-                <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= form_for @order do |f| %>
+        <h1>Add Order</h1>
+        <select class="browser-default custom-select" name="category">
+          <option value="Breakfast">Breakfast</option>
+          <option value="Launch">Launch</option>
+          <option value="Dinner">Dinner</option>
+        </select>
+        <h4> Write the restaurant name</h4>
+        <label for="restaurantName">From : </label>
+        <input class="form-control" type="text" name="restaurantName" value="" /><br>
+        <h4> you can write frind name or group </h4>
+        <select id="dropdown" class="ui fluid search dropdown" multiple="">
+          <% @user.each do |user| %>
+            <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
                 <%end%>
                 <% @group.each do |group| %>
                 <option value="<%= group.id%>"><%= group.name%> (Group) </option>
@@ -53,83 +52,80 @@
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
             <input class="btn btn-primary" type="submit" value="Publish" />
-            <%end%>
+          <%end%>
         </div>
         <div class="col-lg-6 form-group" style="margin-top: 2%">
-            <fieldset class="the-fieldset">
-                <legend class="the-legend"> Friends invited :</legend>
-
-            </fieldset>
-
+          <fieldset class="the-fieldset">
+            <legend class="the-legend"> Friends invited :</legend>
+          </fieldset>
         </div>
-
+      </div>
     </div>
-</div>
-<script>
-    $('.message .close')
-        .on('click', function () {
-            $(this).fadeOut("normal", function () {
-                $(this).parent().remove();
-            });
-        });
-    $('.ui.dropdown')
-        .dropdown({
-            onAdd: function (value, text, $selectedItem) {
-                let img = $(`[data-name=\"${text}\"`).data("img")
-                const groups = document.getElementById("groups");
-                const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value += `${value},`
-                } else {
-                    users.value += `${value},`
-                }
-                let friendInvite = document.getElementById("friendInvite");
-                let addFriend = document.getElementById("addFriend");
-                let fieldset = document.getElementsByClassName("the-fieldset")[0];
-                let errorMsg = document.getElementById("errorMsg");
-                let friendDiv = document.createElement("div");
-                friendDiv.setAttribute("class", "card")
-                friendDiv.setAttribute("data-added", text)
-                friendDiv.style.width = "170px";
-                friendDiv.style.cssFloat = "left";
-                friendDiv.style.marginLeft = "3%";
-                friendDiv.style.marginTop = "2%";
-                friendDiv.style.textAlign = "center";
-                let friendImg = document.createElement("img");
-                if(img){
-                    friendImg.setAttribute("src", img)
-                }
-                else{
-                    friendImg.setAttribute("src","<%= asset_path('default.png') %>");
-                }
-
-
-
-                friendImg.setAttribute("width", "100%");
-                friendImg.setAttribute("class", "card-img-top");
-                let dataDiv = document.createElement("div");
-                dataDiv.setAttribute("class", "card-body");
-
-                let friend = document.createElement("a");
-                friend.setAttribute("href", "#");
-                friend.setAttribute("class", "card-title");
-                friend.setAttribute("class", "friendName");
-                friend.style.textAlign = "center";
-                friend.appendChild(document.createTextNode(text));
-                dataDiv.appendChild(friend);
-                friendDiv.appendChild(friendImg);
-                friendDiv.appendChild(dataDiv);
-                fieldset.appendChild(friendDiv);
-            },
-            onRemove: function (value, text, $selectedItem) {
-                $(`[data-added=\"${text}\"`).remove()
-                const groups = document.getElementById("groups");
-                const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value = groups.value.replace(`${value},`, "")
-                } else {
-                    users.value = users.value.replace(`${value},`, "")
-                }
-            }
-        });
-</script>
+    <script>
+      $('.message .close')
+          .on('click', function () {
+              $(this).fadeOut("normal", function () {
+                  $(this).parent().remove();
+              });
+          });
+      $('.ui.dropdown')
+          .dropdown({
+              onAdd: function (value, text, $selectedItem) {
+                  let img = $(`[data-name=\"${text}\"`).data("img")
+                  const groups = document.getElementById("groups");
+                  const users = document.getElementById("users");
+                  if (text.slice(-6, -1) === "Group") {
+                      groups.value += `${value},`
+                  } else {
+                      users.value += `${value},`
+                  }
+                  let friendInvite = document.getElementById("friendInvite");
+                  let addFriend = document.getElementById("addFriend");
+                  let fieldset = document.getElementsByClassName("the-fieldset")[0];
+                  let errorMsg = document.getElementById("errorMsg");
+                  let friendDiv = document.createElement("div");
+                  friendDiv.setAttribute("class", "card")
+                  friendDiv.setAttribute("data-added", text)
+                  friendDiv.style.width = "170px";
+                  friendDiv.style.cssFloat = "left";
+                  friendDiv.style.marginLeft = "3%";
+                  friendDiv.style.marginTop = "2%";
+                  friendDiv.style.textAlign = "center";
+                  let friendImg = document.createElement("img");
+                  if(img){
+                      friendImg.setAttribute("src", img)
+                  }
+                  else{
+                      friendImg.setAttribute("src","<%= asset_path('default.png') %>");
+                  }
+      
+      
+      
+                  friendImg.setAttribute("width", "100%");
+                  friendImg.setAttribute("class", "card-img-top");
+                  let dataDiv = document.createElement("div");
+                  dataDiv.setAttribute("class", "card-body");
+      
+                  let friend = document.createElement("a");
+                  friend.setAttribute("href", "#");
+                  friend.setAttribute("class", "card-title");
+                  friend.setAttribute("class", "friendName");
+                  friend.style.textAlign = "center";
+                  friend.appendChild(document.createTextNode(text));
+                  dataDiv.appendChild(friend);
+                  friendDiv.appendChild(friendImg);
+                  friendDiv.appendChild(dataDiv);
+                  fieldset.appendChild(friendDiv);
+              },
+              onRemove: function (value, text, $selectedItem) {
+                  $(`[data-added=\"${text}\"`).remove()
+                  const groups = document.getElementById("groups");
+                  const users = document.getElementById("users");
+                  if (text.slice(-6, -1) === "Group") {
+                      groups.value = groups.value.replace(`${value},`, "")
+                  } else {
+                      users.value = users.value.replace(`${value},`, "")
+                  }
+              }
+          });
+    </script>
