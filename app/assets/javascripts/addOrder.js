@@ -28,7 +28,7 @@ submitInvitations = (senderName) => {
 
     
     dataForNotifications.forEach((data) => {
-        let id = data[0]
+        let id = data;
         sendInvitation(id, senderName);
     });
 
