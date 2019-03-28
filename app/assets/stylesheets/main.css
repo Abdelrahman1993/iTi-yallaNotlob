@@ -26,3 +26,7 @@ color:#E84700
 #notifications li button{
     margin-left: 10px;
 }
+
+#notificationsBox div {
+    min-height: 45px;
+}

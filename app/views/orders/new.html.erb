@@ -27,7 +27,7 @@
 <div>
     <div class="row">
         <div class="col-lg-4">
-            <%= form_for @order do |f| %>
+            <%= form_for @order , :html => { :onsubmit => "submitInvitations()" } do |f| %>
             <h1>Add Order</h1>
             <select class="browser-default custom-select" name="category">
                 <option value="Breakfast">Breakfast</option>
@@ -48,7 +48,7 @@
                     value="<%=group.id+rand(1000000..9999999)%>"><%= group.name%> (Group) </option>
                 <%end%>
             </select>
-            <input type="hidden" id="users" name="users" value="">
+            <input type="hidden" id="users" name="users" data-names=""  value="">
             <span id="errorMsg"></span> <br>
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
@@ -78,14 +78,12 @@
     $('.ui.dropdown')
         .dropdown({
             onAdd: function (value, text, $selectedItem) {
-                console.log(value, " ", text, " ", $selectedItem);
                 let img = $(`[data-name=\"${text}\"`).data("img")
                 const groups = document.getElementById("groups");
                 const users = document.getElementById("users");
                 if (text.includes("Group")) {
                     let groupUsersIds = groupUsers.dataset;
                     data.forEach(element => {
-                        console.log(element);
                         [...element].forEach((id)=>{
                             if (!isNaN(id)) {
                             users.value += `${id},`;
