@@ -5,5 +5,4 @@ class UsergroupsController < ApplicationController
      
     end
 
-
 end

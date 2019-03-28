@@ -5,6 +5,8 @@ class FriendsController < ApplicationController
     @users = User.all
     @friends = Friendship.all
     @friend = Friendship.new
+    @allNotifications=fun(current_user)[0..4] ;
+
   end
 
   def add; end

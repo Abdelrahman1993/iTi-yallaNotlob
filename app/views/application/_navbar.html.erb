@@ -27,7 +27,21 @@
       <div id="notificationsBox">
         <div>
           <ul id="notifications">
-          <% @allNotifications %>
+          <% @allNotifications.each do |notification| %>
+            <% if notification['type'] == "inv" %>
+            <li class="py-2"><%= notification['name'] %> invited you to 
+            <%= link_to notification['category'],
+            order_user_order_participation_index_path(notification['order_id'])%>
+             from  <%= notification['restaurant'] %>
+            </li>
+            <% elsif notification['type'] == "join" %>
+            <li class="py-2">
+            <%= notification['name'] %> joined your
+            <%= link_to "order",order_user_order_participation_index_path(notification['order_id'])%>
+            </li>
+            <% end %>
+               
+            <% end %>
           </ul>
         </div>
         <div class="text-center">

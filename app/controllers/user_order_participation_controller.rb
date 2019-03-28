@@ -21,6 +21,9 @@ class UserOrderParticipationController < ApplicationController
                  .select(:user_id).distinct
     @orderImg = Order.find(params[:order_id])
 
+    @allNotifications=fun(current_user)[0..4] ;
+
+
   end
 
   def destroy

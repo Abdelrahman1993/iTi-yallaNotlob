@@ -6,11 +6,16 @@ class OrdersController < ApplicationController
     p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
+
+    @allNotifications=fun(current_user)[0..4] ;
   end
 
   def new
     @order_invitation = UserOrderInvitation.new
     @order = Order.new
+
+    @allNotifications=fun(current_user)[0..4] ;
+
   end
 
   def create
@@ -84,7 +89,6 @@ class OrdersController < ApplicationController
     @order.update(status: 'finished')
     redirect_to orders_path
     end
-
   private
 
   def invitOrder_params
