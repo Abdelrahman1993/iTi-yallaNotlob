@@ -1,5 +1,5 @@
 <%= render 'navbar' %>
-<%if $UserError!=""%>
+<%if $UserError==="Email Field is empty"%>
 <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
@@ -20,7 +20,7 @@
         <%= form_for @friend , class: 'w-100' ,url: {controller: "friends", action: "create"} do |f| %>
         <%= f.label :Email %>
         <div class="input-group-append" style="width: 800px;">
-            <select id="dropdown" class="ui fluid search dropdown" multiple="">
+            <select class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
                 <option data-name="<%= user.name%>" data-img="<%= user.image%>" value="<%= user.id%>"><%= user.email%>
                 </option>
@@ -58,12 +58,5 @@
     </div>
 </div>
 <script>
- $('.ui.dropdown')
-        .dropdown({
-            onAdd: function (value, text, $selectedItem) {
-                let img = $(`[data-name=\"${text}\"`).data("img")
-                const users = document.getElementById("users");
-                    users.value += `${value},`
-                }
-            })
+addFriend()
 </script>
