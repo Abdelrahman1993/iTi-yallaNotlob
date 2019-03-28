@@ -7,24 +7,23 @@
 <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
-        There were some errors with your submission
+      There were some errors with your submission
     </div>
     <ul class="list" style="font-size:13px">
-        <% @order.errors.full_messages.each do |message| %>
+      <% @order.errors.full_messages.each do |message| %>
         <%if (message == "Menu translation missing: en.activerecord.errors.models.order.attributes.menu.content_type")%>
-        <li><%= "file type is not accepted please upload an image" %></li>
+          <li><%= "file type is not accepted please upload an image" %></li>
         <%else%>
-        <li><%= message %></li>
+          <li><%= message %></li>
         <%end%>
         <%end%>
         <%if $OrderError=="Please insert some friends"%>
         <li><%= $OrderError %></li>
         <% $OrderError="";%>
-        <% end %>
+      <% end %>
     </ul>
-</div>
+  </div>
 <% end%>
-
 <div>
     <div class="row">
         <div class="col-lg-4">
@@ -50,21 +49,18 @@
                 <%end%>
             </select>
             <input type="hidden" id="users" name="users" value="">
-            <input type="hidden" id="groups" name="groups" value="">
             <span id="errorMsg"></span> <br>
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
             <input class="btn btn-primary" type="submit" value="Publish" />
-            <%end%>
+          <%end%>
         </div>
         <div class="col-lg-6 form-group" style="margin-top: 2%">
-            <fieldset class="the-fieldset">
-                <legend class="the-legend"> Friends invited :</legend>
-
-            </fieldset>
-
+          <fieldset class="the-fieldset">
+            <legend class="the-legend"> Friends invited :</legend>
+          </fieldset>
         </div>
-
+      </div>
     </div>
 </div>
 <script>

@@ -29,7 +29,7 @@ default: &default
   # database: eHshF8BNEd
 #  username: root
 #  password: root
-#  socket:  /var/run/mysqld/mysqld.sock
+  # socket:  /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
