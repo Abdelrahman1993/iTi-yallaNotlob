@@ -55,9 +55,9 @@
     <div class="row ">
       <% current_user.friends.each do |friend| %>
         <div class="user col-3 text-center m-0">
-          <% if friend.friend.pic %>
+          <% if friend.friend.image %>
               <img height=70 class="profile m-auto"
-                    src="<%= asset_path(friend.friend.pic) if friend.friend.pic  %>">
+                    src="<%= asset_path(friend.friend.image) if friend.friend.image  %>">
           <% else %>
                 <img height=70 class="profile m-auto" src="<%= asset_path('default.png') %>">
           <% end %>

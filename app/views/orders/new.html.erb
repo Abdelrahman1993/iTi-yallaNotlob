@@ -49,7 +49,7 @@
                     value="<%=group.id+random%>" data-userNames="
                     <%groups = UserGroup.where(group_id: group.id)%>
                    <% groups.each do |group|%>
-                   <%= group.user.id+"," %>
+                   <%= group.user.id.to_s+"," %>
                     <% end %>
 ">
                     <%=+group.name %> (Group)  </option>
