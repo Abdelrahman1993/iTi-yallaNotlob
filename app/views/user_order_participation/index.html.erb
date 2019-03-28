@@ -1,4 +1,23 @@
 <%= render 'navbar' %>
+
+<%if $ErrorOrder.length > 0 %>
+  <div class="ui error message" style="font-size:14px">
+    <i class="close icon"></i>
+    <div class="header">
+      There were some errors
+    </div>
+    <ul class="list" style="font-size:13px">
+      <%# $x = 0%>
+      <% $ErrorOrder.each do |e| %>
+          <li>
+            <%= e %>
+          </li>
+        <% end %>
+    </ul>
+  </div>
+<% end%>
+
+<% $ErrorOrder="" %>
 <div class="container">
   <div class="page-header mt-5">
     <h1>Order Details</h1>
@@ -30,20 +49,27 @@
           <td><%= order.price %></td>
           <td><%= order.comment %></td>
           <td>
-        <%if order.user.id === current_user.id %>
-            <%= button_to "delete", {:controller => :user_order_participation,
-                         :action => 'destroy', :id => order.id }, :method => :delete,
-                          :class =>'btn btn-outline-danger btn-sm' %>
-              <%else %>
-              <button type="button" class='btn btn-outline-dark btn-sm'>
-                hello
-              </button>
+          <%if Order.find(params[:order_id]).status != "finished" %>
+                  <%if order.user.id === current_user.id %>
+                    <%= button_to "delete", {:controller => :user_order_participation,
+                                 :action => 'destroy', :id => order.id }, :method => :delete,
+                                  :class =>'btn btn-outline-danger btn-sm' %>
+                      <%else %>
+                      <button type="button" class='btn btn-outline-dark btn-sm'>
+                        hello
+                      </button>
 
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <%# end %>
+            <% else %>
+                  <button type="button" class='btn btn-outline-dark btn-sm'>
+                    done
+                  </button>
+            <%end %>
         </tbody>
+            <% end %>
       </table>
     </div>
     <div class="col-sm-6">
@@ -51,7 +77,6 @@
         <%= image_tag @order.menu, :width=>"700" %>
       </div>
     </div>
-    <%# end %>
     <div class="container mt-1">
       <div class="invited-joined mt-3 row">
         <div class="invited col-sm-6">
@@ -77,11 +102,12 @@
                   @orderInvited.each do |orderInv|
                 %>
                   <div class="card col-sm-2 mx-2" style="width:150px">
+                    <%if UserOrderParticipation.where(order_id: params[:order_id],user_id: orderInv.user_id)[0].nil? %>
 
                     <% if !orderInv.user.image.nil? %>
                     <img class="card-img-top" src="<%= orderInv.user.image %>" alt="Card image" style="width:100%">
                     <%else%>
-                    <img class="card-img-top" src="<%= asset_path('default.png') %>" alt="Card image"
+                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image"
                       style="width:100%">
 
                     <%end%>
@@ -89,13 +115,16 @@
                       <h5 class="card-title">
                         <%= orderInv.user.name %>
                       </h5>
-                      <%= form_tag({controller: "user_order_participation",
-                          action: "deleteUserInvited",:id =>orderInv.user_id,
-                          :orderId => orderInv.id }, method: "post") do %>
-                            <% submit_tag("remove", :type => 'submit',
-                             class:"btn btn-outline-danger btn-sm") %>
+                      <%if Order.find(params[:order_id]).status != "finished" %>
+                            <%= form_tag({controller: "user_order_participation",
+                                action: "deleteUserInvited",:id =>orderInv.user_id,
+                                :orderId => orderInv.id }, method: "post") do %>
+                                  <% submit_tag("remove", :type => 'submit',
+                                   class:"btn btn-outline-danger btn-sm") %>
+                            <% end %>
                       <% end %>
                     </div>
+                  <% end %>
                   </div>
                   <% end %>
                 </div>
@@ -130,8 +159,12 @@
                   @orderPartic.each do |orderPar|
                 %>
                   <div class="card col-sm-2 mx-2" style="width:150px">
-                    <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image"
-                      style="width:100%">
+                    <% if !orderPar.user.image.nil? %>
+                      <img class="card-img-top" src="<%= orderInv.user.image %>" alt="Card image" style="width:100%">
+                    <%else%>
+                      <img class="card-img-top" src="<%= asset_path('food_menue.jpg') %>" alt="Card image"
+                           style="width:100%">
+                      <% end %>
                     <div class="card-body">
                       <h5 class="card-title">
                         <%= orderPar.user.name %>
@@ -159,8 +192,11 @@
 
 <div class="container">
   <div class="row mt-5">
-      <%= form_tag({controller: "user_order_participation", action: "create"}, method: "post") do  %>
-        <div class="row col-sm-12">
+  <%if Order.find(params[:order_id]).status != "finished" %>
+
+      <%= form_tag({controller: "user_order_participation", action: "create"}, method: "post", :onsubmit => "informJoined('#{@order.user_id.to_s}','#{current_user.name}','#{@order.category}','#{@order.id.to_s}' )") do  %>
+      <input type="hidden" id="joinInfo" name="joinInfo" value="">  
+      <div class="row col-sm-12">
           <div class="col-sm-3">
             <%= text_field_tag :item,"", class: 'form-control',
              pattern: "[a-zA-Z0-9]*",placeholder: 'Item',:required => true %>
@@ -182,5 +218,14 @@
         </div>
       </div>
       <% end %>
+    <%else %>
+<!--      order donennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+<!--      order donennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+<!--      order donennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+<!--      order donennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+      <div class="row col-sm-12">
+      <h2>order done</h2>
+      </div>
+    <%end %>
     </div>
 </div> <!--  end of container -->

@@ -9,5 +9,9 @@ class HomeController < ApplicationController
         ).order("id asc").last(4)
 
         @users = User.all
+
+        @allNotifications=fun(current_user)[0..4] ;
+    
     end
+    
 end

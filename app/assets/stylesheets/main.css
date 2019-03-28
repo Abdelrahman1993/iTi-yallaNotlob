@@ -9,8 +9,8 @@ color:#E84700
     position: absolute;
     display: none;
     margin-top:30px;
-    margin-left: -360px;
-    width: 390px;
+    margin-left: -380px;
+    width: 410px;
     min-height: 100px;
     background-color: #fff;
     border: 1px solid #000;
@@ -25,4 +25,10 @@ color:#E84700
 }
 #notifications li button{
     margin-left: 10px;
+}
+#notificationsBox{
+    z-index: 999;
+}
+#notificationsBox div {
+    min-height: 45px;
 }
