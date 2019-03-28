@@ -51,27 +51,29 @@
     </div>
   </div>
 </div>
-<div id="friends">
-  <div class="container">
-    <div class="row ">
-      <% current_user.friends.each do |friend| %>
-        <div class="user col-3 text-center m-0">
-          <% if friend.friend.image %>
-              <img height=70 class="profile m-auto"
-                    src="<%= asset_path(friend.friend.image) if friend.friend.image  %>">
-          <% else %>
-                <img height=70 class="profile m-auto" src="<%= asset_path('default.png') %>">
-          <% end %>
-          <h5><%= friend.friend.name %></h5>
-              <button class="btn btn-danger">
-            <%= link_to 'Remove', friend_path(friend),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } ,:class => 'text-light'%>
-          </button>
+<div class="container">
+    <div id="friends">
+    <div class="container">
+        <div class="row ">
+        <% current_user.friends.each do |friend| %>
+            <div class="user col-3 text-center m-0">
+            <% if friend.friend.image %>
+                  <img height=70 class="profile m-auto"
+                        src="<%= asset_path(friend.friend.image) if friend.friend.image  %>">
+            <% else %>
+                    <img height=70 class="profile m-auto" src="<%= asset_path('default.png') %>">
+            <% end %>
+            <h5><%= friend.friend.name %></h5>
+                <button class="btn btn-danger">
+                <%= link_to 'Remove', friend_path(friend),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } ,:class => 'text-light'%>
+            </button>
+            </div>
+        <% end %>
         </div>
-      <% end %>
     </div>
-  </div>
+    </div>
 </div>
 <script>
     $('.ui.dropdown')

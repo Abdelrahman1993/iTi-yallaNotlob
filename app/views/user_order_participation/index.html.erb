@@ -19,14 +19,14 @@
 
 <% $ErrorOrder="" %>
 <div class="container">
-  <div class="page-header mt-5">
+  <div class="page-header">
     <h1>Order Details</h1>
   </div>
 </div>
-<div class="row">
+<div class="row m-0">
 <div class="container mt-1">
-  <div class="row">
-    <div class="col-sm-6 table-responsive-lg mw-100" style="overflow-y: auto;overflow-x: auto;max-height: 400px">
+  <div class="row m-0">
+    <div class="col-sm-8 table-responsive-lg mw-100" style="overflow-y: auto;overflow-x: auto;max-height: 300px">
       <table class="table table-bordered ">
         <thead class="thead-dark">
           <tr>
@@ -72,9 +72,9 @@
             <% end %>
       </table>
     </div>
-    <div class="col-sm-6">
-      <div class="oredr-img">
-        <%= image_tag @order.menu, :width=>"700" %>
+    <div class="col-sm-4">
+      <div class="oredr-img text-center">
+        <%= image_tag @order.menu, :height=>"300" %>
       </div>
     </div>
     <div class="container mt-1">

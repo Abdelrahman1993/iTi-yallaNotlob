@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+body{
+    color: white;
+    display: block;
+    position: relative;
+    background-color: #555;
+}
+body::after {
+    content: "";
+    background: blue url("https://image.freepik.com/free-photo/empty-wooden-table-top-with-blurred-coffee-shop_7188-1337.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.5;
+  
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+
