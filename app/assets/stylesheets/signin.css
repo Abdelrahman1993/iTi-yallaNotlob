@@ -1,6 +1,7 @@
 body{
   overflow: hidden;
-
+  color: wheat; 
+  font-size: 1.2em;
   display: block;
   position: relative;
   background-color: #555;
