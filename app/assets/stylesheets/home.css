@@ -17,3 +17,8 @@
     vertical-align: middle;
     color: black;
 }
+
+.active, .btn:hover {
+    background-color: #666;
+    color: white;
+}

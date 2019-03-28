@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id="myNav" class="navbar navbar-expand-lg navbar-light bg-light">
 <%= link_to "Otlobli",  root_path, :class => 'navbar-brand' %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div id="myNav" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-        <%= link_to "Home",  root_path, :class => 'nav-link' %>
+        <%= link_to "Home",  root_path, :class => 'nav-link active' %>
       </li>
       <li class="nav-item">
         <%= link_to "Friends",  user_friends_path(current_user.id), :class => 'nav-link' %>
@@ -54,3 +54,15 @@
 
   </div>
 </nav>
+<script>
+    // Add active class to the current button (highlight it)
+    let header = document.getElementById("myNav");
+    let btns = header.getElementsByClassName("btn");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+            let current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    }
+</script>
