@@ -27,17 +27,9 @@ $(document).ready(function () {
 
 
 
-sendInvitation = (receiverId,name,orderLink) =>
-{
-    let message = "inv,"+receiverId+","+name+","+orderLink
-    App.notification.send_msg(message)
-}
 
-informJoined = (receiverId,name,meal,orderLink)=>
-{
-    let message = "join,"+receiverId+","+name+","+meal+","+orderLink
-    App.notification.send_msg(message)
-}
+
+
 
 
 let count = 0;
@@ -51,13 +43,9 @@ App.notification.received = (data)=>{
         let joinLink = document.createElement('a')
         joinLink.setAttribute('target','_blank')
         
-        joinLink.setAttribute('href', message[3]);
+        joinLink.setAttribute('href',`/orders/${message[3]}/orderdata`);
         joinLink.innerHTML = 'Join'
-        joinLink.addEventListener('click', function clickEvent(){
-            let name = document.getElementById('name').innerHTML;
-            informJoined(message[2],name,'Breakfast',message[3])
-            joinLink.removeEventListener('click',clickEvent)
-        })
+        
         let joinBtn = document.createElement('button');
 
         let container = document.getElementById("notifications");
@@ -69,11 +57,12 @@ App.notification.received = (data)=>{
 
         count++;
         document.getElementById('notificationsCount').innerHTML=count;
-        // console.log(data);
+        
     }else if(message[0] === 'join'){
+        console.log(message);
         let newNotificationMessage = document.createTextNode(message[1]+" Joined to your ")
         let joinLink = document.createElement('a')
-        joinLink.setAttribute('href', message[3]);
+        joinLink.setAttribute('href',`/orders/${message[3]}/orderdata` );
         joinLink.innerHTML = 'order'
         let newNotifications = document.createElement('li');
        

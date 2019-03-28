@@ -13,8 +13,8 @@ class GroupsController < ApplicationController
     @groupName=@group.name
     @group.user_id = current_user.id
     if(! @group.save)
-      $Error=[]
-      $Error.push( @group.errors.full_messages);
+      $GroupError=[]
+      $GroupError.push( @group.errors.full_messages[0].to_s);
     end
     redirect_to groups_path
   end
@@ -33,11 +33,19 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @groupId = Group.find(params[:id])
-    @users = UserGroup.where(group_id: @groupId.id)
-    @users.each(&:destroy)
-    @groupId.destroy
+    @group = Group.find(params[:id])
+    @users = UserGroup.where(group_id: @group.id)
+    @users.each do |user|
+      user.destroy
+    end
+    @group.destroy
     redirect_to groups_path
+
+    # @groupId = Group.find(params[:id])
+    # @users = UserGroup.where(group_id: @groupId.id)
+    # @users.each(&:destroy)
+    # @groupId.destroy
+    # redirect_to groups_path
   end
 
  def addUserGroup
@@ -45,15 +53,17 @@ class GroupsController < ApplicationController
         @friends = params[:friends].split(',')
         @friends.each do |friend|
           @usergroup = UserGroup.new
-          @usergroup.user_id = friend.to_i
+          @usergroup.user_id = friend
           @usergroup.group_id=$test
-          if ! @usergroup.save
-            $Error = [];
-            $Error.push(@usergroup.errors.full_messages)
+          if(!@usergroup.save)
+            p "======================"
+             p "aaaaaaaaaaaaaaaaaaaaaaaa"
+            $GroupError = [];
+            $GroupError.push(@usergroup.errors.full_messages[0].to_s)
           end
       end
     else
-      $GroupError="Please add some users"
+      $GroupError.push("Please add some users")
     end
       redirect_to groups_path
     end
