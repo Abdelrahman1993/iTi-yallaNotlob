@@ -59,8 +59,6 @@ class GroupsController < ApplicationController
           @usergroup.user_id = friend
           @usergroup.group_id=$test
           if(!@usergroup.save)
-            p "======================"
-             p "aaaaaaaaaaaaaaaaaaaaaaaa"
             $GroupError = [];
             $GroupError.push(@usergroup.errors.full_messages[0].to_s)
           end
