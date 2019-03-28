@@ -3,6 +3,7 @@
     min-height: 400px;
     max-height: 400px;
     background: rgba(185, 227, 255, 0.2);
+    border-radius: 30px;
 }
 
 .user{

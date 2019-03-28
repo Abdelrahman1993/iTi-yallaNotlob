@@ -1,7 +1,8 @@
+
 <div class="signup-form">
   <%= form_with scope: :login,id: 'signup', local: true do |form| %>
 
-    <h2 class="text-center">Create an Account</h2>
+    <h2 class="text-center create-acount">Create an Account</h2>
     <p class="hint-text">Sign up with your social media account or email address</p>
     <div class="social-btn text-center">
       <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i> Facebook</a>
@@ -33,5 +34,6 @@
   <% end %>
   <div class="text-center">Already have an account?<%= link_to ' Login here' , signin_path %> </div>
 </div>
+
 
 

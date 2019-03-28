@@ -1,20 +1,25 @@
-body{
-  /* background-image: url("https://www.wallpaperup.com/uploads/wallpapers/2018/02/01/1199275/5db621453e2ca2a3561652dc29531cfa.jpg") !important; */
-  /* background-size: cover; */
-  /* background-size: cover; */
-  height: 100%;
-  /* background: #5D2065 !important; */
+
+.welcome{
+  color: #17a2b8
 }
+.create-acount{
+  color: #17a2b8
+}
+
+
+
+
 .login-form {
   width: 500px;
-  margin: 50px auto;
-  background-color: blue;
   border-radius: 25px;
+  margin: 0 auto;
+  padding: 30px 0;
+  height: 100vh;
   
 }
 .login-form form {
   margin-bottom: 15px;
-  background: #FFF;
+  background: rgb(9, 82, 95);
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
   height: 500px;

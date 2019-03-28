@@ -16,8 +16,8 @@
         <%else%>
           <li><%= message %></li>
         <%end%>
-      <%end%>
-      <%if $OrderError!=""%>
+        <%end%>
+        <%if $OrderError=="Please insert some friends"%>
         <li><%= $OrderError %></li>
         <% $OrderError="";%>
       <% end %>
@@ -26,8 +26,8 @@
 <% end%>
 <div>
     <div class="row">
-        <div class="col-lg-4">
-            <%= form_for @order , :html => { :onsubmit => "submitInvitations()" } do |f| %>
+        <div class="col-lg-4"> 
+            <%= form_for @order , :html => { :onsubmit => "submitInvitations('#{current_user.name}')" } do |f| %>
             <h1>Add Order</h1>
             <select class="browser-default custom-select" name="category">
                 <option value="Breakfast">Breakfast</option>
@@ -40,19 +40,26 @@
             <h4> you can write frind name or group </h4>
             <select id="dropdown" class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
-                <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
+                <option class = "usersNotify" data-name="<%=user.friend.id%>" data-img="<%= user.friend.image%>"
+                    value="<%= user.friend.id%>"><%= user.friend.name%></option>
                 <%end%>
                 <% @group.each do |group| %>
-                <option value="<%= group.id%>"><%= group.name%> (Group) </option>
+                <%random = rand(1000000..9999999)%>%>
+                <option id="<%=group.id+random%>" data-users="<%= UserGroup.where(group_id: group.id).pluck(:user_id) %>"
+                    value="<%=group.id+random%>" data-userNames="
+                    <%groups = UserGroup.where(group_id: group.id)%>
+                   <% groups.each do |group|%>
+                   <%= group.user.id.to_s+"," %>
+                    <% end %>
+">
+                    <%=+group.name %> (Group)  </option>
                 <%end%>
             </select>
-            <input type="hidden" id="users" name="users" data-names="" value="">
-            <input type="hidden" id="groups" name="groups" value="">
+            <input type="hidden" id="users" name="users" data-names=""  value="">
             <span id="errorMsg"></span> <br>
             <label for="menuImg"> Menu Image : </label>
             <%= f.file_field :menu , {class: "form-control" , accept: "image/*" }  %>
-
-            <input class="btn btn-primary" type="submit" value="Publish" />
+            <input class="btn btn-primary ordersBtn" type="submit" value="Publish" />
           <%end%>
                
         </div>
@@ -65,6 +72,7 @@
     </div>
 </div>
 <script>
+    const usersNotify = document.getElementsByClassName("usersNotify");
     $('.message .close')
         .on('click', function () {
             $(this).fadeOut("normal", function () {
@@ -75,15 +83,19 @@
         .dropdown({
             onAdd: function (value, text, $selectedItem) {
                 let img = $(`[data-name=\"${text}\"`).data("img")
-                console.log(img)
                 const groups = document.getElementById("groups");
                 const users = document.getElementById("users");
-                if (text.slice(-6, -1) === "Group") {
-                    groups.value += `${value},`
+                if (text.includes("Group")) {
+                    let group = document.getElementById(`${value}`);
+                    let groupUsers = group.dataset.users;
+                    [...groupUsers].forEach(userId => {
+                        console.log(userId)
+                        if(!isNaN(userId)&&userId!==" "){
+                            users.value += `${userId},`
+                        }
+                    });
                 } else {
-                    users.value += `${value},`;
-                    users.dataset.names += `${text},`
-                    console.log(users.value)
+                    users.value += `${value},`
                 }
                 let friendInvite = document.getElementById("friendInvite");
                 let addFriend = document.getElementById("addFriend");
@@ -111,7 +123,6 @@
                 friendImg.setAttribute("class", "card-img-top");
                 let dataDiv = document.createElement("div");
                 dataDiv.setAttribute("class", "card-body");
-
                 let friend = document.createElement("a");
                 friend.setAttribute("href", "#");
                 friend.setAttribute("class", "card-title");

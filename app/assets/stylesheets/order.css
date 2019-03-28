@@ -28,7 +28,7 @@ a{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
 }
-.btn.btn-primary{
+.ordersBtn{
     width: 100px;
     margin: 7px -50px;
     position: relative;

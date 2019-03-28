@@ -1,42 +1,38 @@
     <%= render 'navbar' %>
-    <div class="container">
-        <div class="row justify-content-around text-center">
-            <div class="col-5 block">
-                <div class="title">
-                    <h5 class="titleText">Latest Orders</h5>
-                </div>
-              <div >
-                      <%
-                        @lastOrder.each do |order|
-                      %>
-                  <p>
-                          <%=order.category %>
-                          on
-                          <%=
-                           order.created_at.strftime("%Y-%d-%h")
-                          %>
-                  </p>
-                      <%
-                         end
-                      %>
-              </div>
-            </div>
-            <div class="col-5 block">
-                <div class=" title">
-                    <h5 class="titleText">
-                      Friends Activities
-                    </h5>
-                </div>
-              <div>
-                        <% @orderFriend.each do |order|%>
-                      <p>
-                              <%= User.find_by_id(order.user_id).name + " has created anorder for "%>
-                              <%= order.category + " from " + order.resturant %>
-                      </p>
-                          <%
-                        end
-                        %>
-              </div>
-            </div>
-        </div>
+<div class="container">
+  <div class="row justify-content-around text-center">
+    <div class="col-3 block">
+      <div class="title">
+        <h5 class="titleText">Latest Orders</h5>
+      </div>
+      <div >
+        <% @lastOrder.each do |order| %>
+          <p class="px-3 text-left">
+            <strong class="text-info" > <%= order.category %></strong>
+            on  
+            <strong class="text-info"> <%= order.created_at.strftime("%d-%h") %></strong>
+            from <strong class="text-info"> <%= order.resturant %></strong>
+          </p>
+        <%end%>
+      </div>
     </div>
+    <div class="col-8 block">
+      <div class=" title">
+        <h5 class="titleText">
+          Friends Activities
+        </h5>
+      </div>
+      <div>
+        <% @orderFriend.each do |order|%>
+          <p class="px-3 text-left">
+            <strong class="text-info"> <%= User.find_by_id(order.user_id).name %></strong>
+            <span> has created an order for </span>
+            <strong class="text-info"> <%= order.category %></strong>
+            <span> from </span>
+            <strong class="text-info"><%= order.resturant %></strong>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

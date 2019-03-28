@@ -19,6 +19,8 @@
 }
 
 .active, .btn:hover {
-    background-color: #666;
+    background-color: #1e70bf;
     color: white;
+    border-radius: 10px;
+
 }

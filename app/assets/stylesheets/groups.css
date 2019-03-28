@@ -1,19 +1,19 @@
 body{
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #E8EBEF;
 }
 .tablesList{
     border: 1px solid #000;
     border-radius: 10px;
     min-height: 60vh;
-    background-color: #f4f5f7;
+    background-color: rgb(9, 82, 95);
 }
 #singleGroup{
     border: 1px solid #000;
     border-radius: 10px;
     min-height: 60vh;
     margin-left: 5%;
-    background-color: #f4f5f7;
+    background-color:rgb(9, 82, 95);;
     display: block;
 }
 .rmUserFromGroup{
@@ -21,4 +21,10 @@ body{
 }
 .groupName{
     cursor: pointer;
+    font-size: 1.5em;
+    color: white;
+}
+.fr_name{
+    font-size: 1.5em;
+    color: white; 
 }

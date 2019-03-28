@@ -6,11 +6,16 @@ class OrdersController < ApplicationController
     p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
+
+    @allNotifications=fun(current_user)[0..4] ;
   end
 
   def new
     @order_invitation = UserOrderInvitation.new
     @order = Order.new
+
+    @allNotifications=fun(current_user)[0..4] ;
+
   end
 
   def create
@@ -23,16 +28,9 @@ class OrdersController < ApplicationController
     suppress(Exception) do
       @order.menu = params[:order][:menu]
     end
-    if (! (params[:users].empty?&&params[:groups].empty?))
+    if (! (params[:users].empty?))
     if @order.save
       order_id = @order.id
-      groups = params[:groups].split(',')
-      groups.each do |group|
-        user_groups = UserGroup.select('user_id').where(group_id: group).as_json
-        user_groups.each do |user|
-          invited_users.push(user['user_id'])
-        end
-      end
       users = params[:users].split(',')
       users.each do |user|
         invited_users.push(user.to_i)
@@ -84,7 +82,6 @@ class OrdersController < ApplicationController
     @order.update(status: 'finished')
     redirect_to orders_path
     end
-
   private
 
   def invitOrder_params

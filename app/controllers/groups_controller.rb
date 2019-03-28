@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
     @groups = Group.where(user_id: current_user.id)
     @group = Group.new
     @user = User.new
+    @allNotifications=fun(current_user)[0..4] ;
   end
 
   def create
@@ -20,6 +21,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @allNotifications=fun(current_user)[0..4] ;
+
     @groups = Group.where(user_id: current_user.id)
     @group = Group.new
 
@@ -56,8 +59,6 @@ class GroupsController < ApplicationController
           @usergroup.user_id = friend
           @usergroup.group_id=$test
           if(!@usergroup.save)
-            p "======================"
-             p "aaaaaaaaaaaaaaaaaaaaaaaa"
             $GroupError = [];
             $GroupError.push(@usergroup.errors.full_messages[0].to_s)
           end
@@ -68,7 +69,6 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     end
     
-   
     private 
         def group_params
             params.require(:group).permit(:name)

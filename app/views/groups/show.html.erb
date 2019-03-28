@@ -1,7 +1,6 @@
 <%= render 'navbar' %>
 
-
-<div class="jumbotron py-5 m-0">
+<div class=" py-5 m-0">
   <div class="container">
     <div class="row">
       <div class="col-4">
@@ -83,7 +82,7 @@
                                 @groupUsers.each do |groupUser| %>
               <div class="col-4 mt-2">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-3">
                     <% if current_user.image %>
                       <img src="<%= current_user.image %>" style="border-radius:50%">
                     <% else %>
@@ -91,8 +90,8 @@
                     <% end %>
                   </li>
                 </div>
-                <div class="col-8">
-                  <a href="#" class="d-block">
+                <div class="col-9">
+                  <a href="#" class="d-block fr_name">
                     <%= User.find_by(id: groupUser.user_id).name %>
                   </a>
                   <%= link_to group_user_path(groupUser.user_id) , method: :delete, data: { confirm: 'Are you sure?' }, class: group_user_path(groupUser.user_id) do %>
