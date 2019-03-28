@@ -1,5 +1,6 @@
 <%= render 'navbar' %>
-<%if $Error %>
+<%suppress(Exception) do%> 
+<%if !$Error.empty? || $GroupError!="" %>
   <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
@@ -13,12 +14,16 @@
           </li>
         <% end %>
       <% end %>
+      <%if $GroupError!=""%>
+      <%= $GroupError %>
+<%$GroupError=""%>
+      <%end%>
     </ul>
   </div>
 <% end%>
+<% end%>
 
-<% $Error=false %>
-
+<%$Error=[]%>
 <div class="jumbotron py-5 m-0">
   <div class="container">
     <div class="row">

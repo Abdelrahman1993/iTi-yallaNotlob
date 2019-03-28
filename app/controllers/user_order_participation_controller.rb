@@ -1,27 +1,31 @@
 class UserOrderParticipationController < ApplicationController
 
-
   def index
+    @prevlige = UserOrderInvitation.where(order_id: params[:order_id],user_id: current_user.id);
+    @orderOwner = Order.find_by(id: params[:order_id],user_id: current_user.id);
+
+    # if (@orderOwner.nil? || @prevlige.nil?)
+    #   puts "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    # else
+    #   redirect_to "/404.html"
+    # end
+
     @orderParticipation = UserOrderParticipation.where(order_id: params[:order_id])
-    # debugger
     @order=Order.find(params[:order_id])
     @addOrder = UserOrderParticipation.new
     @orderInvited = UserOrderInvitation.where(order_id: params[:order_id])
-                      # .where('user_id <> ?',UserOrderParticipation.where(order_id: params[:order_id],))
-    # .where('user_id <> ?', current_user.id)
-    # .group(:user_id)
+    $ErrorOrder="";
 
     @orderPartic = UserOrderParticipation
-                       .where(order_id: params[:order_id])
-                       .group(:user_id)
-                       # .where('user_id <> ?', current_user.id)
+                 .where(order_id: params[:order_id])
+                 .select(:user_id).distinct
     @orderImg = Order.find(params[:order_id])
 
   end
 
   def destroy
-  @orderItem = UserOrderParticipation.find(params[:id])
-  @orderItem.destroy
+    @orderItem = UserOrderParticipation.find(params[:id])
+    @orderItem.destroy
   redirect_to order_user_order_participation_index_path;
   end
 
@@ -33,7 +37,6 @@ class UserOrderParticipationController < ApplicationController
 
   def create
     @orderStatus = Order.find(params[:order_id])
-    # $ErrorOrder=[]
     if @orderStatus.status == 'waiting'
         @addOrder = UserOrderParticipation.new
         @addOrder.user_id = current_user.id
@@ -52,7 +55,6 @@ class UserOrderParticipationController < ApplicationController
     redirect_to order_user_order_participation_index_path;
 
   end
-
 
   private
   def addOrder_params

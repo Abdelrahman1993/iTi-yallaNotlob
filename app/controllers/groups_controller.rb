@@ -12,21 +12,11 @@ class GroupsController < ApplicationController
   
     @groupName=@group.name
     @group.user_id = current_user.id
-    if(@group.save)
-      redirect_to groups_path
-    else
+    if(! @group.save)
       $Error=[]
       $Error.push( @group.errors.full_messages);
-      p "=============================="
-      # p $nameErr
-      p "=============================="
-
-      redirect_to groups_path
     end
-     
-  
-
-  
+    redirect_to groups_path
   end
 
   def show
@@ -38,24 +28,9 @@ class GroupsController < ApplicationController
       @groupId = Group.find_by(id: params[:id])
       if(@groupId)
         $test =  @groupId.id
-        p '---------'
       end
-      p '------======================================---'
-      p @groupId;
-     
-    
     end
-
-
   end
-
-  # def edit
-
-  # end
-
-  # def update
-
-  # end
 
   def destroy
     @groupId = Group.find(params[:id])
@@ -66,24 +41,21 @@ class GroupsController < ApplicationController
   end
 
  def addUserGroup
-
+  if !params[:friends].empty?
         @friends = params[:friends].split(',')
-
         @friends.each do |friend|
-      
           @usergroup = UserGroup.new
           @usergroup.user_id = friend.to_i
           @usergroup.group_id=$test
-          if @usergroup.save
-              redirect_to groups_path
-          else
-            p "===================="
-            p "error in saving"
-            p "====================="
+          if ! @usergroup.save
+            $Error = [];
             $Error.push(@usergroup.errors.full_messages)
-            redirect_to groups_path
           end
       end
+    else
+      $GroupError="Please add some users"
+    end
+      redirect_to groups_path
     end
     
    

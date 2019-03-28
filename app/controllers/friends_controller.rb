@@ -24,14 +24,17 @@ class FriendsController < ApplicationController
     # end
 
     users = params[:users].split(',')
-    unless users.empty?
+    if !users.empty?
       users.each do |user|
         if user != current_user.id
           @friend = Friendship.new(user_id: current_user.id, friend_id: user)
           @friend.save
         end
       end
-      redirect_to user_friends_path(current_user.id) if @friend.save
+      else
+        $UserError="Email Field is empty"
+      end
+      redirect_to user_friends_path(current_user.id)
       # @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]['id']
 
       # @allFriends = Friendship.where(user_id: current_user.id).as_json
@@ -54,8 +57,6 @@ class FriendsController < ApplicationController
 
       # end
 
-      redirect_to user_friends_path(current_user.id) if @friend.save
-      end
   end
 
   private
