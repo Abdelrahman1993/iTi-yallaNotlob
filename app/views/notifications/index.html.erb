@@ -3,7 +3,7 @@
 <div>
     <p><%= current_user.UserOrderInvitations[0].order.user.name %> invited you to 
     <%= link_to current_user.UserOrderInvitations[0].order.category,
-     order_user_order_participation_index_path(current_user.UserOrderInvitations[0].order.id)%>
+    order_user_order_participation_index_path(current_user.UserOrderInvitations[0].order)%>
      from  <%= current_user.UserOrderInvitations[0].order.resturant %>
     </p>
 </div>

@@ -2,7 +2,7 @@
 
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id: current_user.id).last(100) # this will be replaced by logged in user id
+    @orders = Order.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 8) # this will be replaced by logged in user id
     p @orders
     @joined = UserOrderParticipation
     @invited = UserOrderInvitation
@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     suppress(Exception) do
       @order.menu = params[:order][:menu]
     end
+    if (! (params[:users].empty?&&params[:groups].empty?))
     if @order.save
       order_id = @order.id
       groups = params[:groups].split(',')
@@ -47,8 +48,11 @@ class OrdersController < ApplicationController
       # end
     else
       render :new
-      p '=====================:'
     end
+  else
+    $OrderError="Please insert some friends"
+    redirect_to new_order_path
+  end
   end
 
   def destroy

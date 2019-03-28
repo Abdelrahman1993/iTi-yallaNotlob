@@ -12,21 +12,11 @@ class GroupsController < ApplicationController
   
     @groupName=@group.name
     @group.user_id = current_user.id
-    if(@group.save)
-      redirect_to groups_path
-    else
-      $Error=[]
-      $Error.push( @group.errors.full_messages);
-      p "=============================="
-      # p $nameErr
-      p "=============================="
-
-      redirect_to groups_path
+    if(! @group.save)
+      $GroupError=[]
+      $GroupError.push( @group.errors.full_messages[0].to_s);
     end
-     
-  
-
-  
+    redirect_to groups_path
   end
 
   def show
@@ -38,52 +28,44 @@ class GroupsController < ApplicationController
       @groupId = Group.find_by(id: params[:id])
       if(@groupId)
         $test =  @groupId.id
-        p '---------'
       end
-      p '------======================================---'
-      p @groupId;
-     
-    
     end
-
-
   end
 
-  # def edit
-
-  # end
-
-  # def update
-
-  # end
-
   def destroy
-    @groupId = Group.find(params[:id])
-    @users = UserGroup.where(group_id: @groupId.id)
-    @users.each(&:destroy)
-    @groupId.destroy
+    @group = Group.find(params[:id])
+    @users = UserGroup.where(group_id: @group.id)
+    @users.each do |user|
+      user.destroy
+    end
+    @group.destroy
     redirect_to groups_path
+
+    # @groupId = Group.find(params[:id])
+    # @users = UserGroup.where(group_id: @groupId.id)
+    # @users.each(&:destroy)
+    # @groupId.destroy
+    # redirect_to groups_path
   end
 
  def addUserGroup
-
+  if !params[:friends].empty?
         @friends = params[:friends].split(',')
-
         @friends.each do |friend|
-      
           @usergroup = UserGroup.new
-          @usergroup.user_id = friend.to_i
+          @usergroup.user_id = friend
           @usergroup.group_id=$test
-          if @usergroup.save
-              redirect_to groups_path
-          else
-            p "===================="
-            p "error in saving"
-            p "====================="
-            $Error.push(@usergroup.errors.full_messages)
-            redirect_to groups_path
+          if(!@usergroup.save)
+            p "======================"
+             p "aaaaaaaaaaaaaaaaaaaaaaaa"
+            $GroupError = [];
+            $GroupError.push(@usergroup.errors.full_messages[0].to_s)
           end
       end
+    else
+      $GroupError.push("Please add some users")
+    end
+      redirect_to groups_path
     end
     
    

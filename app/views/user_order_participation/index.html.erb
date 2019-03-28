@@ -55,7 +55,7 @@
     <div class="container mt-1">
       <div class="invited-joined mt-3 row">
         <div class="invited col-sm-6">
-          <!-- Button to Open the Modal -->
+<!--           Button to Open the Modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
             invited friends
           </button>
@@ -90,7 +90,7 @@
                         <%= orderInv.user.name %>
                       </h5>
                       <%= form_tag({controller: "user_order_participation",
-                          action: "deleteUserInvited",:id =>orderInv.user.id,
+                          action: "deleteUserInvited",:id =>orderInv.user_id,
                           :orderId => orderInv.id }, method: "post") do %>
                             <% submit_tag("remove", :type => 'submit',
                              class:"btn btn-outline-danger btn-sm") %>

@@ -1,47 +1,72 @@
+<%= render 'navbar' %>
+<%suppress(Exception) do%>
+  <%if $FriendError.length > 0 %>
+    <div class="ui error message" style="font-size:14px">
+      <i class="close icon"></i>
+      <div class="header">
+        There were some errors
+      </div>
+      <ul class="list" style="font-size:13px">
+          <% $FriendError.each do |e| %>
+            <li>
+              <%= e.to_s %>
+            </li>
+          <% end %>
+        <%$FriendError=""%>
+      <%end%>
+    </ul>
+  </div>
+<% end%>
 
-     <%= render 'navbar' %>
-     @user = User.where.not(id: current_user.id)
-    <div class="container">
-        <h3 class="">Friends</h3>
-        <div class="input-group mb-3">
-        <%= form_for @friend , class: 'w-100' ,url: {controller: "friends", action: "create"} do |f| %>
-            <%= f.label :Email %>
-            <div class="input-group-append w-100">
-            <%= f.text_field :friend_id , id:'fID' , class: 'form-control' %>
-            
-            <%= f.submit "Add friend" , class:"btn btn-light" %>
-            <% end %>
-            </div>
-            </div>
-        </div>
-
-        <div id="friends">
-        <button class="btn btn-danger" onClick="sendInvitation(4,'moatasem','https://www.google.com/')">send </button>
-
-            <div class="container">
-                <div class="row ">
-                <% current_user.friends.each do |friend| %>
-                    <div class="user col-3 text-center m-0">
-                    <% if friend.friend.pic %>
-                          <img height=70 class="profile m-auto" src="<%= asset_path(friend.friend.pic) if friend.friend.pic  %>">
-                        <% else %>
-                            <img height=70 class="profile m-auto" src="<%= asset_path('default.png') %>">
-                        <% end %>
-                        <h5><%= friend.friend.name %></h5>
-
-                            <button class="btn btn-danger">
-                        <%= link_to 'Remove', friend_path(friend),
+<%$FriendError=[]%>
+<% @user = User.where.not(id: current_user.id) %>
+<div class="container">
+  <h3 class="">Friends</h3>
+  <div class="input-group mb-3">
+    <%= form_for @friend , class: 'w-100' ,url: {controller: "friends", action: "create"} do |f| %>
+      <%= f.label :Email %>
+      <div class="input-group-append" style="width: 800px;">
+        <select id="dropdown" class="ui fluid search dropdown" multiple="">
+          <% @user.each do |user| %>
+            <option data-name="<%= user.name%>" data-img="<%= user.image%>" value="<%= user.id%>"><%= user.email%>
+            </option>
+          <%end%>
+        </select>
+        <input type="hidden" id="users" name="users" value="">
+        <%= f.submit "Add friend" , class:"btn btn-light" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div id="friends">
+  <div class="container">
+    <div class="row ">
+      <% current_user.friends.each do |friend| %>
+        <div class="user col-3 text-center m-0">
+          <% if friend.friend.pic %>
+              <img height=70 class="profile m-auto"
+                    src="<%= asset_path(friend.friend.pic) if friend.friend.pic  %>">
+          <% else %>
+                <img height=70 class="profile m-auto" src="<%= asset_path('default.png') %>">
+          <% end %>
+          <h5><%= friend.friend.name %></h5>
+              <button class="btn btn-danger">
+            <%= link_to 'Remove', friend_path(friend),
               method: :delete,
               data: { confirm: 'Are you sure?' } ,:class => 'text-light'%>
-              </button>
-                    </div>
-                  <% end %>
-
-
-            
-                </div>
-               
+          </button>
         </div>
+      <% end %>
     </div>
-
- 
+  </div>
+</div>
+<script>
+  $('.ui.dropdown')
+         .dropdown({
+             onAdd: function (value, text, $selectedItem) {
+                 let img = $(`[data-name=\"${text}\"`).data("img")
+                 const users = document.getElementById("users");
+                     users.value += `${value},`
+                 }
+             })
+</script>

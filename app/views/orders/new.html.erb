@@ -1,9 +1,9 @@
 <%= render 'navbar' %>
 <%
-    @user = User.where.not(id: current_user.id)
+    @user = Friendship.where(user_id: current_user.id)
     @group = Group.where(user_id: current_user.id)
 %>
-<%if @order.errors.any? %>
+<%if @order.errors.any? || $OrderError!="" %>
 <div class="ui error message" style="font-size:14px">
     <i class="close icon"></i>
     <div class="header">
@@ -16,14 +16,13 @@
         <%else%>
         <li><%= message %></li>
         <%end%>
+        <%end%>
+        <%if $OrderError!=""%>
+        <li><%= $OrderError %></li>
+        <% $OrderError="";%>
         <% end %>
     </ul>
 </div>
-
-
-
-
-
 <% end%>
 
 <div>
@@ -42,7 +41,7 @@
             <h4> you can write frind name or group </h4>
             <select id="dropdown" class="ui fluid search dropdown" multiple="">
                 <% @user.each do |user| %>
-                <option data-name= "<%= user.name%>" data-img = "<%= user.image%>" value="<%= user.id%>"><%= user.name%></option>
+                <option data-name= "<%= user.friend.name%>" data-img = "<%= user.friend.image%>" value="<%= user.friend.id%>"><%= user.friend.name%></option>
                 <%end%>
                 <% @group.each do |group| %>
                 <option value="<%= group.id%>"><%= group.name%> (Group) </option>
@@ -77,7 +76,6 @@
         .dropdown({
             onAdd: function (value, text, $selectedItem) {
                 let img = $(`[data-name=\"${text}\"`).data("img")
-                console.log(img)
                 const groups = document.getElementById("groups");
                 const users = document.getElementById("users");
                 if (text.slice(-6, -1) === "Group") {

@@ -7,6 +7,8 @@ gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'yarn', '~> 0.1.1'
+gem 'will_paginate', '~> 3.1.1'
+gem "will_paginate_semantic_ui"
 # gem "therubyracer"
 # gem 'harmony'
 # gem 'envjs'
@@ -46,7 +48,8 @@ gem 'htmlbeautifier'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # activate this in production
-gem "aws-sdk-s3", require: false 
+gem 'cloudinary', require: false
+gem 'activestorage-cloudinary-service'
 gem 'mini_magick', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

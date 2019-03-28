@@ -1,21 +1,19 @@
+# frozen_string_literal: true
+
 class FriendsController < ApplicationController
-
-
   def index
     @users = User.all
     @friends = Friendship.all
     @friend = Friendship.new
-
   end
 
-  def add
-  end
+  def add; end
 
   def destroy
     @friend = Friendship.find(params[:id])
-      @friend.destroy
-    
-      redirect_to friends_path
+    @friend.destroy
+
+    redirect_to friends_path
   end
 
   def create
@@ -24,39 +22,50 @@ class FriendsController < ApplicationController
     # else
     #   abort("this is no a user")
     # end
-    
-    @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]["id"]
-    
-    @allFriends = Friendship.where(user_id: current_user.id).as_json
-    # debugger
-    # 
-    @flag = true
-    if current_user.id != @selectedUserId
-      @allFriends.each do |friend|
-        if friend["friend_id"] == @selectedUserId
-          @flag = false
-        
-        else
-          @flag = true
-          
-        end 
-      end
-      if @flag
-        @friend = Friendship.new(:user_id => current_user.id, :friend_id => @selectedUserId)
-      end
 
-    end
-    
-
-    
-    if @friend.save
+    users = params[:users].split(',')
+    if !users.empty?
+      users.each do |user|
+        if user != current_user.id
+          @friend = Friendship.new(user_id: current_user.id, friend_id: user)
+         
+          if(! @friend.save)
+            $FriendError=[]
+            $FriendError.push( @friend.errors.full_messages[0].to_s);
+          end
+        end
+      end
+      else
+        $FriendError.push("Email Field is empty")
+      end
       redirect_to user_friends_path(current_user.id)
-    end
-  end
- 
-  private
-    def friend_params
-      params.require(:friendship).permit(:friend_id)
-    end
+      # @selectedUserId = User.where(email: friend_params[:friend_id]).as_json[0]['id']
 
+      # @allFriends = Friendship.where(user_id: current_user.id).as_json
+      # debugger
+      #
+      # @flag = true
+      # if current_user.id != @selectedUserId
+      #   @allFriends.each do |friend|
+      #     if friend["friend_id"] == @selectedUserId
+      #       @flag = false
+
+      #     else
+      #       @flag = true
+
+      #     end
+      #   end
+      #   if @flag
+      #     @friend = Friendship.new(:user_id => current_user.id, :friend_id => @selectedUserId)
+      #   end
+
+      # end
+
+  end
+
+  private
+
+  def friend_params
+    params.require(:friendship).permit(:friend_id)
+  end
 end
