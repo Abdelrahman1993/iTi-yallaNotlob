@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2019_03_28_081902) do
     t.bigint "user_id"
     t.bigint "friend_id"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
@@ -70,8 +69,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_081902) do
   create_table "user_order_invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "order_id"
-
-    t.integer "seen"
+    t.string "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_user_order_invitations_on_order_id"

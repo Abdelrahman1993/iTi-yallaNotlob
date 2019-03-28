@@ -1,4 +1,16 @@
 <%= render 'navbar' %>
+<%if $UserError=="Email Field is empty"%>
+<div class="ui error message" style="font-size:14px">
+    <i class="close icon"></i>
+    <div class="header">
+        There were some errors with your submission
+    </div>
+    <ul class="list" style="font-size:13px">
+        <li><%= $UserError %></li>
+        </ul>
+</div>
+</div>
+<%end%>
 <%suppress(Exception) do%>
   <%if $FriendError.length > 0 %>
     <div class="ui error message" style="font-size:14px">
@@ -61,12 +73,12 @@
   </div>
 </div>
 <script>
-  $('.ui.dropdown')
-         .dropdown({
-             onAdd: function (value, text, $selectedItem) {
-                 let img = $(`[data-name=\"${text}\"`).data("img")
-                 const users = document.getElementById("users");
-                     users.value += `${value},`
-                 }
-             })
-</script>
+    $('.ui.dropdown')
+       .dropdown({
+           onAdd: function (value, text, $selectedItem) {
+               const users = document.getElementById("users");
+               users.value += `${value},`
+           }
+       })
+   console.log("looooooooool") 
+ </script>
