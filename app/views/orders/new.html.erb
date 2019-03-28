@@ -26,8 +26,8 @@
 <% end%>
 <div>
     <div class="row">
-        <div class="col-lg-4">
-            <%= form_for @order , :html => { :onsubmit => "submitInvitations()" } do |f| %>
+        <div class="col-lg-4"> 
+            <%= form_for @order , :html => { :onsubmit => "submitInvitations('#{current_user.name}')" } do |f| %>
             <h1>Add Order</h1>
             <select class="browser-default custom-select" name="category">
                 <option value="Breakfast">Breakfast</option>

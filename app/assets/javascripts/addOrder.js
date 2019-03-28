@@ -1,11 +1,10 @@
 
-
-sendInvitation = (receiverId, name) => {
-    let message = "inv," + receiverId + "," + name
+sendInvitation = (receiverId,senderName) =>
+{
+    let message = "inv,"+receiverId+","+senderName
     App.notification.send_msg(message)
 }
-
-submitInvitations = () => {
+submitInvitations = (senderName) => {
     const groupUsers = document.getElementsByClassName("groupUsers");
     const usersNotify = document.getElementsByClassName("usersNotify");
 
@@ -27,13 +26,25 @@ submitInvitations = () => {
     // let ids = document.getElementById("users").value.split(",").filter(value => value.length >0);
     // let names = document.getElementById("users").dataset.names.split(",").filter(value => value.length >0);
 
-
+    
     dataForNotifications.forEach((data) => {
         let id = data[0]
-        let name = data.substr(1, data.length)
-        console.log(id,name)
-        sendInvitation(id, name);
+        sendInvitation(id, senderName);
     });
 
 
 }
+
+
+
+
+// submitInvitations=(senderName)=>{
+// let ids = document.getElementById("users").value.split(",").filter(value => value.length >0);
+// // let names = document.getElementById("users").dataset.names.split(",").filter(value => value.length >0);
+
+// ids.forEach(function(id) {
+//     sendInvitation(id,senderName);
+//   });
+
+
+// }

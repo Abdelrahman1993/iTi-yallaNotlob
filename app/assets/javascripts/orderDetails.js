@@ -22,6 +22,5 @@ $("#item_submit").on('click',function(event){
 function informJoined(receiverId,name,meal,orderLink){
     
     let message = "join,"+receiverId+","+name+","+meal+","+orderLink ;
-    alert(message);
     App.notification.send_msg(message) ;
 }

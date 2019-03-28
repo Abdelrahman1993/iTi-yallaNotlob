@@ -38,22 +38,24 @@ App.notification.received = (data)=>{
     let message = data['message'].split(',')
     if(message[0] === 'inv')
     {
+        console.log(message);
+        // message[0]=inv   message[1]= senderName   message[2]=orderID
         let newNotificationMessage = document.createTextNode(message[1]+" has invited you to his order")
         let newNotifications = document.createElement('li');
         let joinLink = document.createElement('a')
-        joinLink.setAttribute('target','_blank')
         
-        joinLink.setAttribute('href',`/orders/${message[3]}/orderdata`);
+        joinLink.setAttribute('href',`/orders/${message[2]}/orderdata`);
         joinLink.innerHTML = 'Join'
         
         let joinBtn = document.createElement('button');
-
+        joinBtn.classList.add("btn","btn-light","px-2","py-1");
+        
         let container = document.getElementById("notifications");
         
         joinBtn.appendChild(joinLink);
         newNotifications.appendChild(newNotificationMessage);
         newNotifications.appendChild(joinBtn);
-        container.appendChild(newNotifications);
+        container.insertBefore(newNotifications, container.firstChild);
 
         count++;
         document.getElementById('notificationsCount').innerHTML=count;
@@ -71,8 +73,7 @@ App.notification.received = (data)=>{
         
         newNotifications.appendChild(newNotificationMessage);
         newNotifications.appendChild(joinLink);
-        container.appendChild(newNotifications);
-
+        container.insertBefore(newNotifications, container.firstChild);
         count++;
         document.getElementById('notificationsCount').innerHTML=count;
     }
