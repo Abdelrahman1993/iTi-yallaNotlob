@@ -9,7 +9,7 @@ config.action_mailer.smtp_settings = {
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: 'yalanotlobiti@gmail.com',
-  password: 'yalanotlobiti39'
+  password: 'twcsmnyodixychoe'
 }
 config.action_mailer.default_url_options = { :host => 'https://yalnotlob.herokuapp.com' }
 
